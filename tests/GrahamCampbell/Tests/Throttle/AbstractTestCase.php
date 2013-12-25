@@ -47,7 +47,6 @@ abstract class AbstractTestCase extends TestCase
     protected function getPackageProviders()
     {
         return array(
-            'GrahamCampbell\HTMLMin\HTMLMinServiceProvider',
             'GrahamCampbell\Throttle\ThrottleServiceProvider'
         );
     }
