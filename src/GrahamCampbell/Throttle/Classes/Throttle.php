@@ -28,7 +28,7 @@ use Illuminate\Foundation\Application;
  * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/develop/LICENSE.md
  * @link       https://github.com/GrahamCampbell/Laravel-Throttle
  */
-class Throttler
+class Throttle
 {
     /**
      * The application instance.
