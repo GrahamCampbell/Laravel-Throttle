@@ -79,6 +79,8 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('throttle');
+        return array(
+            'throttle'
+        );
     }
 }
