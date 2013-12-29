@@ -90,11 +90,10 @@ class Throttler
     {
         $this->app = $app;
         $this->cache = $cache;
-
         $this->route = $route;
         $this->ip = $ip;
         $this->limit = $limit;
-        $this->time = $time
+        $this->time = $time;
     }
 
     /**
@@ -106,7 +105,7 @@ class Throttler
     {
         $this->hit();
 
-        return $this->check()
+        return $this->check();
     }
 
     /**
