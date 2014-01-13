@@ -23,10 +23,10 @@ return array(
     |
     | This defines the throttler class to be used.
     |
-    | Default: 'GrahamCampbell\Throttle\Classes\Throttler'
+    | Default: 'GrahamCampbell\Throttle\Throttlers\CacheThrottler'
     |
     */
 
-    'throttler' => 'GrahamCampbell\Throttle\Classes\Throttler'
+    'throttler' => 'GrahamCampbell\Throttle\Throttlers\CacheThrottler'
 
 );

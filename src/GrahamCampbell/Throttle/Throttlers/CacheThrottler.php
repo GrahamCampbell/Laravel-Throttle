@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-namespace GrahamCampbell\Throttle\Classes;
+namespace GrahamCampbell\Throttle\Throttlers;
 
-use Illuminate\Cache\TaggedCache;
-use Illuminate\Foundation\Application;
+use Illuminate\Cache\StoreInterface;
 
 /**
- * This is the throttler class.
+ * This is the caceh throttler class.
  *
  * @package    Laravel-Throttle
  * @author     Graham Campbell
@@ -28,35 +27,21 @@ use Illuminate\Foundation\Application;
  * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/develop/LICENSE.md
  * @link       https://github.com/GrahamCampbell/Laravel-Throttle
  */
-class Throttler
+class CacheThrottler implements ThrottlerInterface
 {
     /**
-     * The application instance.
+     * The store instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var \Illuminate\Cache\StoreInterface
      */
-    protected $app;
+    protected $store;
 
     /**
-     * The tagged cache instance.
-     *
-     * @var \Illuminate\Cache\TaggedCache
-     */
-    protected $cache;
-
-    /**
-     * The route.
+     * The key.
      *
      * @var string
      */
-    protected $route;
-
-    /**
-     * The client ip.
-     *
-     * @var string
-     */
-    protected $ip;
+    protected $key;
 
     /**
      * The request limit.
@@ -82,16 +67,16 @@ class Throttler
     /**
      * Create a new instance.
      *
-     * @param  \Illuminate\Foundation\Application  $app
-     * @param  \Illuminate\Cache\TaggedCache  $cache
+     * @param  \Illuminate\Cache\StoreInterface  $store
+     * @param  string  $key
+     * @param  int     $limit
+     * @param  int     $time
      * @return void
      */
-    public function __construct(Application $app, TaggedCache $cache, $route, $ip, $limit, $time)
+    public function __construct(StoreInterface $store, $key, $limit, $time)
     {
-        $this->app = $app;
-        $this->cache = $cache;
-        $this->route = $route;
-        $this->ip = $ip;
+        $this->store = $store;
+        $this->key = $key;
         $this->limit = $limit;
         $this->time = $time;
     }
@@ -115,9 +100,9 @@ class Throttler
      */
     public function hit()
     {
-        $this->cache->add($this->ip, 0, $this->time);
+        $this->store->add($this->key, 0, $this->time);
 
-        $this->number = $this->cache->increment($this->ip);
+        $this->number = $this->cache->increment($this->key);
     }
 
     /**
@@ -131,7 +116,7 @@ class Throttler
             return $this->number;
         }
 
-        $count = $this->cache->get($this->ip);
+        $count = $this->store->get($this->key);
 
         if ($count) {
             return $count;
@@ -152,5 +137,15 @@ class Throttler
         }
 
         return true;
+    }
+
+    /**
+     * Get the store instance.
+     *
+     * @return \Illuminate\Cache\StoreInterface
+     */
+    public function getStore()
+    {
+        return $this->store;
     }
 }

@@ -16,8 +16,8 @@
 
 namespace GrahamCampbell\Throttle\Classes;
 
+use Illuminate\Http\Request;
 use Illuminate\Cache\CacheManager;
-use Illuminate\Foundation\Application;
 
 /**
  * This is the throttle class.
@@ -30,13 +30,6 @@ use Illuminate\Foundation\Application;
  */
 class Throttle
 {
-    /**
-     * The application instance.
-     *
-     * @var \Illuminate\Foundation\Application
-     */
-    protected $app;
-
     /**
      * The cache instance.
      *
@@ -54,24 +47,63 @@ class Throttle
     /**
      * Create a new instance.
      *
-     * @param  \Illuminate\Foundation\Application  $app
      * @param  \Illuminate\Cache\CacheManager  $cache
+     * @param  string  $throttler
      * @return void
      */
-    public function __construct(Application $app, CacheManager $cache, $throttler)
+    public function __construct(CacheManager $cache, $throttler)
     {
-        $this->app = $app;
         $this->cache = $cache;
+        $this->throttler = $throttler;
     }
 
-    public function get($route, $request, $limit = 10, $time = 60)
+    /**
+     * Get the throttler.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $limit
+     * @param  int  $time
+     * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
+     */
+    public function get(Request $request, $limit = 10, $time = 60)
     {
-        $app = $this->app;
-        $cache = $this->cache->tags('throttle', $route);
-        $ip = $request->getClientIp();
+        $store = $this->getStore($request);
+        $key = $this->getKey($request);
 
         $throttler = $this->throttler;
 
-        return new $throttler($app, $cache, $route, $ip, $limit, $time);
+        return new $throttler($store, $key, $limit, $time);
+    }
+
+    /**
+     * Get the store.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Cache\StoreInterface
+     */
+    protected function getStore(Request $request)
+    {
+        return $this->cache->tags('throttle', $request->getClientIp());
+    }
+
+    /**
+     * Get the key.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string
+     */
+    protected function getKey(Request $request)
+    {
+        return md5($route->path());
+    }
+
+    /**
+     * Get the cache instance.
+     *
+     * @return \Illuminate\Cache\CacheManager
+     */
+    public function getCache()
+    {
+        return $this->cache;
     }
 }
