@@ -19,7 +19,7 @@ namespace GrahamCampbell\Throttle\Throttlers;
 use Illuminate\Cache\StoreInterface;
 
 /**
- * This is the caceh throttler class.
+ * This is the cache throttler class.
  *
  * @package    Laravel-Throttle
  * @author     Graham Campbell
@@ -102,7 +102,7 @@ class CacheThrottler implements ThrottlerInterface
     {
         $this->store->add($this->key, 0, $this->time);
 
-        $this->number = $this->cache->increment($this->key);
+        $this->number = $this->store->increment($this->key);
     }
 
     /**
