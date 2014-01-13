@@ -37,6 +37,8 @@ class ThrottleTest extends AbstractTestCase
 
         $request = Mockery::mock('Illuminate\Http\Request');
 
+        $throttle->getCache()->shouldReceive('tags')
+            ->with('throttle', '127.0.0.1')->once()->andReturn(Mockery::mock('Illuminate\Cache\StoreInterface'));
         $request->shouldReceive('getClientIp')->once()->andReturn('127.0.0.1');
         $request->shouldReceive('path')->once()->andReturn('http://laravel.com/');
 

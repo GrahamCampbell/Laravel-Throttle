@@ -64,11 +64,10 @@ class ThrottleServiceProvider extends ServiceProvider
     protected function registerThrottle()
     {
         $this->app->bindShared('throttle', function ($app) {
-            $app = $app['app'];
             $cache = $app['cache'];
             $throttler = $app['config']['throttle::throttler'];
 
-            return new Classes\Throttle($app, $cache, $throttler);
+            return new Classes\Throttle($cache, $throttler);
         });
     }
 

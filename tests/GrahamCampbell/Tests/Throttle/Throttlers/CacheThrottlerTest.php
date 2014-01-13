@@ -58,39 +58,39 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->count();
 
-        $this->assetEquals($return, 1);
+        $this->assertEquals($return, 1);
     }
 
     public function testCountCheckTrue()
     {
         $throttler = $this->getThrottler();
         
-        $throttler->getStore()->shouldReceive('get')->once()
+        $throttler->getStore()->shouldReceive('get')->twice()
             ->with('abc')->andReturn(null);
 
         $return = $throttler->count();
 
-        $this->assetEquals($return, 0);
+        $this->assertEquals($return, 0);
 
         $return = $throttler->check();
 
-        $this->assetEquals($return, true);
+        $this->assertEquals($return, true);
     }
 
     public function testCountCheckFalse()
     {
         $throttler = $this->getThrottler();
         
-        $throttler->getStore()->shouldReceive('get')->once()
+        $throttler->getStore()->shouldReceive('get')->twice()
             ->with('abc')->andReturn(11);
 
         $return = $throttler->count();
 
-        $this->assetEquals($return, 11);
+        $this->assertEquals($return, 11);
 
         $return = $throttler->check();
 
-        $this->assetEquals($return, false);
+        $this->assertEquals($return, false);
     }
 
     protected function getThrottler()
@@ -100,6 +100,6 @@ class CacheThrottlerTest extends AbstractTestCase
         $limit = 10;
         $time = 60;
 
-        return new Throttler($store, $key, $limit, $time);
+        return new CacheThrottler($store, $key, $limit, $time);
     }
 }

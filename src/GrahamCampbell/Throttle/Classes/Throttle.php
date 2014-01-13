@@ -94,7 +94,7 @@ class Throttle
      */
     protected function getKey(Request $request)
     {
-        return md5($route->path());
+        return md5($request->path());
     }
 
     /**
