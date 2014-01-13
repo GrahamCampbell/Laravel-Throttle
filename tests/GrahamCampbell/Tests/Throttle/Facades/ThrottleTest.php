@@ -16,8 +16,11 @@
 
 namespace GrahamCampbell\Tests\Throttle\Facades;
 
+use GrahamCampbell\Tests\Throttle\AbstractTestCase;
+use GrahamCampbell\TestBench\Traits\FacadeTestCaseTrait;
+
 /**
- * This is the throttle facade test case class.
+ * This is the throttle facade test class.
  *
  * @package    Laravel-Throttle
  * @author     Graham Campbell
@@ -25,8 +28,10 @@ namespace GrahamCampbell\Tests\Throttle\Facades;
  * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/develop/LICENSE.md
  * @link       https://github.com/GrahamCampbell/Laravel-Throttle
  */
-class ThrottleTest extends AbstractFacadeTestCase
+class ThrottleTest extends AbstractTestCase
 {
+    use FacadeTestCaseTrait;
+
     /**
      * Get the facade accessor.
      *
