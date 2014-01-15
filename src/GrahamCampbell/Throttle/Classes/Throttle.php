@@ -60,15 +60,16 @@ class Throttle
     /**
      * Get the throttler.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  array|\Illuminate\Http\Request  $data
      * @param  int  $limit
      * @param  int  $time
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
-    public function get(Request $request, $limit = 10, $time = 60)
+    public function get($data, $limit = 10, $time = 60)
     {
-        $store = $this->getStore($request);
-        $key = $this->getKey($request);
+        $data = $this->parseData($data);
+        $store = $this->getStore($data['ip']);
+        $key = $this->getKey($data['route']);
 
         $throttler = $this->throttler;
 
@@ -76,25 +77,57 @@ class Throttle
     }
 
     /**
+     * Hit the the throttle.
+     *
+     * @param  array|\Illuminate\Http\Request  $data
+     * @param  int  $limit
+     * @param  int  $time
+     * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
+     */
+    public function hit($data, $limit = 10, $time = 60)
+    {
+        return $this->get($data, $limit, $time)->hit();
+    }
+
+    /**
+     * Parse the data.
+     *
+     * @param  array|\Illuminate\Http\Request  $data
+     * @return array
+     */
+    protected function parseData($data)
+    {
+        if ($data instanceof Request) {
+            $parsed = array('ip' => $request->getClientIp(), 'route' => $request->path());
+        } elseif (is_array($data)) {
+            $parsed = array('ip' => $data['ip'], 'route' => $data['route']);
+        } else {
+            throw new \InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
+        }
+
+        return $parsed;
+    }
+
+    /**
      * Get the store.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $ip
      * @return \Illuminate\Cache\StoreInterface
      */
-    protected function getStore(Request $request)
+    protected function getStore($ip)
     {
-        return $this->cache->tags('throttle', $request->getClientIp());
+        return $this->cache->tags('throttle', $ip);
     }
 
     /**
      * Get the key.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $path
      * @return string
      */
-    protected function getKey(Request $request)
+    protected function getKey($path)
     {
-        return md5($request->path());
+        return md5($path);
     }
 
     /**
