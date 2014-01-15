@@ -35,7 +35,7 @@ Please check the system requirements before installing Laravel Throttle.
 
 To get the latest version of Laravel Throttle, simply require it in your `composer.json` file.  
 
-`"graham-campbell/throttle": "dev-master"`  
+`"graham-campbell/throttle": "*"`  
 
 You'll then need to run `composer install` or `composer update` to download it and have the autoloader updated.  
 
