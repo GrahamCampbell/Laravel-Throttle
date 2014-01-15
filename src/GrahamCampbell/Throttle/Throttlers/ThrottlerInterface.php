@@ -37,7 +37,7 @@ interface ThrottlerInterface
     /**
      * Hit the the throttle.
      *
-     * @return void
+     * @return $this
      */
     public function hit();
 

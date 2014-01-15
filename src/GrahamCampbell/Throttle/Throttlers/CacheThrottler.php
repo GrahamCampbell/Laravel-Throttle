@@ -88,21 +88,21 @@ class CacheThrottler implements ThrottlerInterface
      */
     public function attempt()
     {
-        $this->hit();
-
-        return $this->check();
+        return $this->hit()->check();
     }
 
     /**
      * Hit the the throttle.
      *
-     * @return void
+     * @return $this
      */
     public function hit()
     {
         $this->store->add($this->key, 0, $this->time);
 
         $this->number = $this->store->increment($this->key);
+
+        return $this;
     }
 
     /**
