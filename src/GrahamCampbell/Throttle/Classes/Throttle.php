@@ -98,7 +98,7 @@ class Throttle
     protected function parseData($data)
     {
         if ($data instanceof Request) {
-            $parsed = array('ip' => $request->getClientIp(), 'route' => $request->path());
+            $parsed = array('ip' => $data->getClientIp(), 'route' => $data->path());
         } elseif (is_array($data)) {
             $parsed = array('ip' => $data['ip'], 'route' => $data['route']);
         } else {
