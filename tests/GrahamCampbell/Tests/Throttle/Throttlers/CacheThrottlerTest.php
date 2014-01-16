@@ -26,7 +26,7 @@ use GrahamCampbell\TestBench\Classes\AbstractTestCase;
  * @package    Laravel-Throttle
  * @author     Graham Campbell
  * @copyright  Copyright 2013-2014 Graham Campbell
- * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/develop/LICENSE.md
+ * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md
  * @link       https://github.com/GrahamCampbell/Laravel-Throttle
  */
 class CacheThrottlerTest extends AbstractTestCase
