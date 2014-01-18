@@ -15,8 +15,8 @@ Laravel Throttle
 Laravel Throttle is a rate limiter for [Laravel 4.1](http://laravel.com).  
 
 * Laravel Throttle was created by, and is maintained by [Graham Campbell](https://github.com/GrahamCampbell).  
-* Laravel Throttle uses [Travis CI](https://travis-ci.org/GrahamCampbell/Laravel-Throttle) and [Coveralls](https://coveralls.io/r/GrahamCampbell/Laravel-Throttle) to run additional tests and checks.  
-* Laravel Throttle uses [Scrutinizer CI](https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle) to run additional tests and checks.  
+* Laravel Throttle uses [Travis CI](https://travis-ci.org/GrahamCampbell/Laravel-Throttle) with [Coveralls](https://coveralls.io/r/GrahamCampbell/Laravel-Throttle) to check everything is working.  
+* Laravel Throttle uses [Scrutinizer CI](https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle) and [SensioLabsInsight](https://insight.sensiolabs.com/projects/2d8940a5-38f0-4d35-be65-20b49d1a33c9) to run additional checks.  
 * Laravel Throttle uses [Composer](https://getcomposer.org) to load and manage dependencies.  
 * Laravel Throttle provides a [change log](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/CHANGELOG.md), [releases](https://github.com/GrahamCampbell/Laravel-Throttle/releases), and [api docs](http://grahamcampbell.github.io/Laravel-Throttle).  
 * Laravel Throttle is licensed under the Apache License, available [here](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md).  
