@@ -90,6 +90,19 @@ class Throttle
     }
 
     /**
+     * Clear the the throttle.
+     *
+     * @param  array|\Illuminate\Http\Request  $data
+     * @param  int  $limit
+     * @param  int  $time
+     * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
+     */
+    public function clear($data, $limit = 10, $time = 60)
+    {
+        return $this->get($data, $limit, $time)->clear();
+    }
+
+    /**
      * Parse the data.
      *
      * @param  array|\Illuminate\Http\Request  $data

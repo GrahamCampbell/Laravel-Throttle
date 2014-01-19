@@ -42,6 +42,13 @@ interface ThrottlerInterface
     public function hit();
 
     /**
+     * Clear the the throttle.
+     *
+     * @return $this
+     */
+    public function clear();
+
+    /**
      * Get the throttle hit count.
      *
      * @return int

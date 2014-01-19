@@ -106,6 +106,20 @@ class CacheThrottler implements ThrottlerInterface
     }
 
     /**
+     * Clear the the throttle.
+     *
+     * @return $this
+     */
+    public function clear()
+    {
+        $this->store->put($this->key, 0, $this->time);
+
+        $this->number = 0;
+
+        return $this;
+    }
+
+    /**
      * Get the throttle hit count.
      *
      * @return int

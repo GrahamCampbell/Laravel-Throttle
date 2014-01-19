@@ -63,6 +63,22 @@ class CacheThrottlerTest extends AbstractTestCase
         $this->assertEquals($return, 1);
     }
 
+    public function testCountClear()
+    {
+        $throttler = $this->getThrottler();
+        
+        $throttler->getStore()->shouldReceive('put')->once()
+            ->with('abc', 0, 60)->andReturn(true);
+
+        $return = $throttler->clear();
+
+        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+
+        $return = $throttler->count();
+
+        $this->assertEquals($return, 0);
+    }
+
     public function testCountCheckTrue()
     {
         $throttler = $this->getThrottler();
