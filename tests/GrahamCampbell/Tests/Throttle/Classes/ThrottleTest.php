@@ -31,7 +31,7 @@ use GrahamCampbell\TestBench\Classes\AbstractTestCase;
  */
 class ThrottleTest extends AbstractTestCase
 {
-    public function testGet()
+    public function testGetRequest()
     {
         $throttle = $this->getThrottle();
 
@@ -45,6 +45,37 @@ class ThrottleTest extends AbstractTestCase
         $return = $throttle->get($request, 10, 60);
 
         $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+    }
+
+    public function testGetArray()
+    {
+        $throttle = $this->getThrottle();
+
+        $array = array('ip' => '127.0.0.1', 'route' => 'http://laravel.com/');
+
+        $throttle->getCache()->shouldReceive('tags')
+            ->with('throttle', '127.0.0.1')->once()->andReturn(Mockery::mock('Illuminate\Cache\StoreInterface'));
+
+        $return = $throttle->get($array, 10, 60);
+
+        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+    }
+
+    public function testGetError()
+    {
+        $throttle = $this->getThrottle();
+
+        $array = array('error' => 'test');
+
+        $return = null;
+
+        try {
+            $throttle->get($array, 10, 60);
+        } catch (\Exception $e) {
+            $return = $e;
+        }
+
+        $this->assertInstanceOf('InvalidArgumentException', $return);
     }
 
     public function testHit()

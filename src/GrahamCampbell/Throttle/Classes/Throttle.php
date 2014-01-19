@@ -100,8 +100,12 @@ class Throttle
         if ($data instanceof Request) {
             $parsed = array('ip' => $data->getClientIp(), 'route' => $data->path());
         } elseif (is_array($data)) {
-            $parsed = array('ip' => $data['ip'], 'route' => $data['route']);
-        } else {
+            if (array_key_exists('ip', $data) && array_key_exists('route', $data)) {
+                $parsed = array('ip' => $data['ip'], 'route' => $data['route']);
+            }
+        }
+
+        if (!isset($parsed)) {
             throw new \InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
         }
 
