@@ -126,7 +126,7 @@ class CacheThrottler implements ThrottlerInterface
      */
     public function count()
     {
-        if ($this->number) {
+        if (!is_null($this->number)) {
             return $this->number;
         }
 
