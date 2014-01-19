@@ -47,11 +47,36 @@ class ThrottleTest extends AbstractTestCase
         $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
     }
 
+    public function testHit()
+    {
+        $throttle = $this->getMockedThrottle();
+
+        $request = Mockery::mock('Illuminate\Http\Request');
+
+        $throttler = Mockery::mock('GrahamCampbell\Throttle\Throttlers\CacheThrottler');
+
+        $throttler->shouldReceive('hit')->once()->with()->andReturn($throttler);
+
+        $throttle->shouldReceive('get')->once()->with($request, 10, 60)->andReturn($throttler);
+
+        $return = $throttle->hit($request, 10, 60);
+
+        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+    }
+
     protected function getThrottle()
     {
         $cache = Mockery::mock('Illuminate\Cache\CacheManager');
         $throttler = 'GrahamCampbell\Throttle\Throttlers\CacheThrottler';
 
         return new Throttle($cache, $throttler);
+    }
+
+    protected function getMockedThrottle()
+    {
+        $cache = Mockery::mock('Illuminate\Cache\CacheManager');
+        $throttler = 'GrahamCampbell\Throttle\Throttlers\CacheThrottler';
+
+        return Mockery::mock('GrahamCampbell\Throttle\Classes\Throttle[get]', array($cache, $throttler));
     }
 }
