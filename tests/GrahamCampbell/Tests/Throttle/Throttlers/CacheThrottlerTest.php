@@ -54,7 +54,9 @@ class CacheThrottlerTest extends AbstractTestCase
         $throttler->getStore()->shouldReceive('increment')->once()
             ->with('abc')->andReturn(1);
 
-        $throttler->hit();
+        $return = $throttler->hit();
+
+        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
 
         $return = $throttler->count();
 
