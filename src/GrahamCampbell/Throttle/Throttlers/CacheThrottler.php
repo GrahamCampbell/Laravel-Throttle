@@ -100,12 +100,12 @@ class CacheThrottler implements ThrottlerInterface
     {
         $count = $this->store->get($this->key);
 
-        if (is_int($count)) {
+        if (!is_null($count)) {
             $this->store->increment($this->key);
             $this->number = $count + 1;
         } else {
-            $this->store->put($this->key, 0, $this->time);
-            $this->number = 0;
+            $this->store->put($this->key, 1, $this->time);
+            $this->number = 1;
         }
 
         return $this;
