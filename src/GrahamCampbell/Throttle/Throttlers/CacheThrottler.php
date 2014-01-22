@@ -98,9 +98,15 @@ class CacheThrottler implements ThrottlerInterface
      */
     public function hit()
     {
-        $this->store->add($this->key, 0, $this->time);
+        $count = $this->store->get($this->key);
 
-        $this->number = $this->store->increment($this->key);
+        if (is_int($count)) {
+            $this->store->increment($this->key);
+            $this->number = $count + 1;
+        } else {
+            $this->store->put($this->key, 0, $this->time);
+            $this->number = 0;
+        }
 
         return $this;
     }
