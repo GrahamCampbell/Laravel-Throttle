@@ -36,7 +36,7 @@ class CacheThrottlerTest extends AbstractTestCase
         $throttler = $this->getThrottler();
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc');
-        $throttler->getStore()->shouldReceive('add')->once()->with('abc', 1, 60);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 60);
 
         $return = $throttler->attempt();
 
@@ -48,7 +48,7 @@ class CacheThrottlerTest extends AbstractTestCase
         $throttler = $this->getThrottler();
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc');
-        $throttler->getStore()->shouldReceive('add')->once()->with('abc', 1, 60);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 60);
 
         $return = $throttler->hit();
 
