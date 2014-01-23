@@ -34,11 +34,9 @@ class CacheThrottlerTest extends AbstractTestCase
     public function testAttempt()
     {
         $throttler = $this->getThrottler();
-        
-        $throttler->getStore()->shouldReceive('add')->once()
-            ->with('abc', 0, 60)->andReturn(true);
-        $throttler->getStore()->shouldReceive('increment')->once()
-            ->with('abc')->andReturn(1);
+
+        $throttler->getStore()->shouldReceive('get')->once()->with('abc');
+        $throttler->getStore()->shouldReceive('add')->once()->with('abc', 1, 60);
 
         $return = $throttler->attempt();
 
@@ -48,7 +46,8 @@ class CacheThrottlerTest extends AbstractTestCase
     public function testCountHit()
     {
         $throttler = $this->getThrottler();
-        
+
+        $throttler->getStore()->shouldReceive('get')->once()->with('abc');
         $throttler->getStore()->shouldReceive('add')->once()->with('abc', 1, 60);
 
         $return = $throttler->hit();
@@ -64,8 +63,7 @@ class CacheThrottlerTest extends AbstractTestCase
     {
         $throttler = $this->getThrottler();
         
-        $throttler->getStore()->shouldReceive('put')->once()
-            ->with('abc', 0, 60)->andReturn(true);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 0, 60);
 
         $return = $throttler->clear();
 
@@ -80,8 +78,7 @@ class CacheThrottlerTest extends AbstractTestCase
     {
         $throttler = $this->getThrottler();
         
-        $throttler->getStore()->shouldReceive('get')->twice()
-            ->with('abc')->andReturn(null);
+        $throttler->getStore()->shouldReceive('get')->twice()->with('abc');
 
         $return = $throttler->count();
 
@@ -96,8 +93,7 @@ class CacheThrottlerTest extends AbstractTestCase
     {
         $throttler = $this->getThrottler();
         
-        $throttler->getStore()->shouldReceive('get')->twice()
-            ->with('abc')->andReturn(11);
+        $throttler->getStore()->shouldReceive('get')->twice()->with('abc')->andReturn(11);
 
         $return = $throttler->count();
 
