@@ -98,11 +98,9 @@ class CacheThrottler implements ThrottlerInterface
      */
     public function hit()
     {
-        $count = $this->count() + 1;
+        $this->number = $this->count() + 1;
 
-        $this->store->put($this->key, $count, $this->time);
-
-        $this->number = $count;
+        $this->store->put($this->key, $this->number, $this->time);
 
         return $this;
     }
@@ -114,9 +112,9 @@ class CacheThrottler implements ThrottlerInterface
      */
     public function clear()
     {
-        $this->store->put($this->key, 0, $this->time);
-
         $this->number = 0;
+
+        $this->store->put($this->key, $this->number, $this->time);
 
         return $this;
     }
@@ -132,13 +130,13 @@ class CacheThrottler implements ThrottlerInterface
             return $this->number;
         }
 
-        $count = $this->store->get($this->key);
+        $this->number = $this->store->get($this->key);
 
-        if ($count) {
-            return $count;
+        if (!$this->number) {
+            $this->number = 0;
         }
 
-        return 0;
+        $this->number;
     }
 
     /**
