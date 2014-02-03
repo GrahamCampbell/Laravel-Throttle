@@ -136,7 +136,7 @@ class CacheThrottler implements ThrottlerInterface
             $this->number = 0;
         }
 
-        $this->number;
+        return $this->number;
     }
 
     /**
