@@ -57,7 +57,7 @@ To get started, first publish the package config file:
 
     php artisan config:publish graham-campbell/throttle
 
-There is one config options:
+There is one config option:
 
 **Throttler Class**
 
