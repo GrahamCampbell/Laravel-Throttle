@@ -43,7 +43,7 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('graham-campbell/throttle');
+        $this->package('graham-campbell/throttle', 'graham-campbell/throttle', __DIR__);
     }
 
     /**
@@ -65,7 +65,7 @@ class ThrottleServiceProvider extends ServiceProvider
     {
         $this->app->bindShared('throttle', function ($app) {
             $cache = $app['cache'];
-            $throttler = $app['config']['throttle::throttler'];
+            $throttler = $app['config']['graham-campbell/throttle::throttler'];
 
             return new Classes\Throttle($cache, $throttler);
         });

@@ -40,9 +40,9 @@
         "graham-campbell/testbench": "0.2.*"
     },
     "autoload": {
-        "psr-0": {
-            "GrahamCampbell\\Throttle": "src/",
-            "GrahamCampbell\\Tests\\Throttle": "tests/"
+        "psr-4": {
+            "GrahamCampbell\\Throttle\\": "src/",
+            "GrahamCampbell\\Tests\\Throttle\\": "tests/"
         }
     },
     "extra": {
