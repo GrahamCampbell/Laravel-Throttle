@@ -34,11 +34,7 @@ Laravel Throttle is a rate limiter for [Laravel 4.1](http://laravel.com).
 
 Please check the system requirements before installing Laravel Throttle.
 
-To get the latest version of Laravel Throttle, simply require it in your `composer.json` file.
-
-`"graham-campbell/throttle": "*"`
-
-You'll then need to run `composer install` or `composer update` to download it and have the autoloader updated.
+To get the latest version of Laravel Throttle, simply require `"graham-campbell/throttle": "0.1.*@alpha"` in your `composer.json` file. You'll then need to run `composer install` or `composer update` to download it and have the autoloader updated.
 
 Once Laravel Throttle is installed, you need to register the service provider. Open up `app/config/app.php` and add the following to the `providers` key.
 
