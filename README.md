@@ -2,13 +2,13 @@ Laravel Throttle
 ================
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/GrahamCampbell/Laravel-Throttle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 [![Build Status](https://travis-ci.org/GrahamCampbell/Laravel-Throttle.png)](https://travis-ci.org/GrahamCampbell/Laravel-Throttle)
 [![Coverage Status](https://coveralls.io/repos/GrahamCampbell/Laravel-Throttle/badge.png)](https://coveralls.io/r/GrahamCampbell/Laravel-Throttle)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle/badges/quality-score.png?s=6f8f984d8c0da418482f66edd9b3462ad39ff2d3)](https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/2d8940a5-38f0-4d35-be65-20b49d1a33c9/mini.png)](https://insight.sensiolabs.com/projects/2d8940a5-38f0-4d35-be65-20b49d1a33c9)
 [![Software License](https://poser.pugx.org/graham-campbell/throttle/license.png)](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md)
 [![Latest Version](https://poser.pugx.org/graham-campbell/throttle/v/stable.png)](https://packagist.org/packages/graham-campbell/throttle)
+[![Still Maintained](http://stillmaintained.com/GrahamCampbell/Laravel-Throttle.png)](http://stillmaintained.com/GrahamCampbell/Laravel-Throttle)
 
 
 ## What Is Laravel Throttle?
