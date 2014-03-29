@@ -2,13 +2,12 @@ Laravel Throttle
 ================
 
 
-[![Build Status](https://travis-ci.org/GrahamCampbell/Laravel-Throttle.png)](https://travis-ci.org/GrahamCampbell/Laravel-Throttle)
-[![Coverage Status](https://coveralls.io/repos/GrahamCampbell/Laravel-Throttle/badge.png)](https://coveralls.io/r/GrahamCampbell/Laravel-Throttle)
+[![Build Status](https://img.shields.io/travis/GrahamCampbell/Laravel-Throttle/master.svg)](https://travis-ci.org/GrahamCampbell/Laravel-Throttle)
+[![Coverage Status](https://img.shields.io/coveralls/GrahamCampbell/Laravel-Throttle/master.svg)](https://coveralls.io/r/GrahamCampbell/Laravel-Throttle)
+[![Software License](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md)
+[![Latest Version](https://img.shields.io/github/release/GrahamCampbell/Laravel-Throttle.svg)](https://github.com/GrahamCampbell/Laravel-Throttle/releases)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle/badges/quality-score.png?s=6f8f984d8c0da418482f66edd9b3462ad39ff2d3)](https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/2d8940a5-38f0-4d35-be65-20b49d1a33c9/mini.png)](https://insight.sensiolabs.com/projects/2d8940a5-38f0-4d35-be65-20b49d1a33c9)
-[![Software License](https://poser.pugx.org/graham-campbell/throttle/license.png)](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md)
-[![Latest Version](https://poser.pugx.org/graham-campbell/throttle/v/stable.png)](https://packagist.org/packages/graham-campbell/throttle)
-[![Still Maintained](http://stillmaintained.com/GrahamCampbell/Laravel-Throttle.png)](http://stillmaintained.com/GrahamCampbell/Laravel-Throttle)
 
 
 ## What Is Laravel Throttle?
@@ -25,7 +24,7 @@ Laravel Throttle is a rate limiter for [Laravel 4.1](http://laravel.com).
 
 ## System Requirements
 
-* PHP 5.4.7+ or HHVM 2.4+ is required.
+* PHP 5.4.7+ or HHVM 3.0+ is required.
 * You will need [Laravel 4.1](http://laravel.com) because this package is designed for it.
 * You will need [Composer](https://getcomposer.org) installed to load the dependencies of Laravel Throttle.
 
