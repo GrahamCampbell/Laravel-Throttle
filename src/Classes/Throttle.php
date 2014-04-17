@@ -17,7 +17,7 @@
 namespace GrahamCampbell\Throttle\Classes;
 
 use Illuminate\Http\Request;
-use Illuminate\Cache\CacheManager;
+use Illuminate\Cache\TaggableStore;
 
 /**
  * This is the throttle class.
@@ -33,7 +33,7 @@ class Throttle
     /**
      * The cache instance.
      *
-     * @var \Illuminate\Cache\CacheManager
+     * @var \Illuminate\Cache\TaggableStore
      */
     protected $cache;
 
@@ -47,11 +47,11 @@ class Throttle
     /**
      * Create a new instance.
      *
-     * @param  \Illuminate\Cache\CacheManager  $cache
+     * @param  \Illuminate\Cache\TaggableStore  $cache
      * @param  string  $throttler
      * @return void
      */
-    public function __construct(CacheManager $cache, $throttler)
+    public function __construct(TaggableStore $cache, $throttler)
     {
         $this->cache = $cache;
         $this->throttler = $throttler;
@@ -129,7 +129,7 @@ class Throttle
      * Get the store.
      *
      * @param  string  $ip
-     * @return \Illuminate\Cache\StoreInterface
+     * @return \Illuminate\Cache\TaggableStore
      */
     protected function getStore($ip)
     {
@@ -150,7 +150,7 @@ class Throttle
     /**
      * Get the cache instance.
      *
-     * @return \Illuminate\Cache\CacheManager
+     * @return \Illuminate\Cache\TaggableStore
      */
     public function getCache()
     {

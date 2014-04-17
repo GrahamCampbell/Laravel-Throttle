@@ -52,11 +52,15 @@ To get started, first publish the package config file:
 
     php artisan config:publish graham-campbell/throttle
 
-There is one config option:
+There are two config options:
 
 **Throttler Class**
 
 This option (`'throttler'`) defines the throttler class to be used. The default value for this setting is `'GrahamCampbell\Throttle\Throttlers\CacheThrottler'`.
+
+**Cache Driver**
+
+This option (`'driver'`) defines the cache driver to be used. It may be the name of any driver set in app/config/cache.php. Setting it to null will use the driver you have set as default in app/config/cache.php. Please note that a driver that supports cache tags is required. The default value for this setting is `null`.
 
 
 ## Usage
