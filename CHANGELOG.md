@@ -2,7 +2,7 @@ CHANGE LOG
 ==========
 
 
-## V0.3 Alpha (Upcoming - July 2014)
+## V1.0 Beta 1 (Upcoming - July 2014)
 
 * Upgrade to Laravel 4.2
 
@@ -10,6 +10,7 @@ CHANGE LOG
 ## V0.2 Alpha (Upcoming)
 
 * PHP 5.6 and HHVM compatibility
+* Added configurable cache driver
 * Composer tweaks
 
 
