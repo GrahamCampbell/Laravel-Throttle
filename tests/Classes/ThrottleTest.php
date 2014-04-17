@@ -114,7 +114,7 @@ class ThrottleTest extends AbstractTestCase
 
     protected function getThrottle()
     {
-        $cache = Mockery::mock('Illuminate\Cache\CacheManager');
+        $cache = Mockery::mock('Illuminate\Cache\Repository');
         $throttler = 'GrahamCampbell\Throttle\Throttlers\CacheThrottler';
 
         return new Throttle($cache, $throttler);
@@ -122,7 +122,7 @@ class ThrottleTest extends AbstractTestCase
 
     protected function getMockedThrottle()
     {
-        $cache = Mockery::mock('Illuminate\Cache\CacheManager');
+        $cache = Mockery::mock('Illuminate\Cache\Repository');
         $throttler = 'GrahamCampbell\Throttle\Throttlers\CacheThrottler';
 
         return Mockery::mock('GrahamCampbell\Throttle\Classes\Throttle[get]', array($cache, $throttler));
