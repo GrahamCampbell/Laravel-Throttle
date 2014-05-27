@@ -1,6 +1,6 @@
 {
     "name": "graham-campbell/throttle",
-    "description": "Throttle Is A Rate Limiter For Laravel 4.1",
+    "description": "Throttle Is A Rate Limiter For Laravel 4.1+",
     "keywords": ["laravel", "framework", "rate limit", "throttle", "throttling", "Throttle", "Laravel Throttle", "Laravel-Throttle", "Graham Campbell", "GrahamCampbell"],
     "license": "Apache-2.0",
     "authors": [
@@ -11,13 +11,12 @@
     ],
     "require": {
         "php": ">=5.4.7",
-        "laravel/framework": "4.1.*",
-        "symfony/config": "2.4.*",
-        "symfony/event-dispatcher": "2.4.*",
-        "symfony/filesystem": "2.4.*"
+        "illuminate/cache": "~4.1",
+        "illuminate/http": "~4.1",
+        "illuminate/support": "~4.1"
     },
     "require-dev": {
-        "graham-campbell/testbench": "0.3.*"
+        "graham-campbell/testbench": "~1.0"
     },
     "autoload": {
         "psr-4": {
@@ -31,7 +30,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2-dev"
+            "dev-develop": "1.0-dev"
         }
     },
     "minimum-stability": "dev",
