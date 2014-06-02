@@ -44,6 +44,8 @@ class ThrottleServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->package('graham-campbell/throttle', 'graham-campbell/throttle', __DIR__);
+
+        include __DIR__.'/filters.php';
     }
 
     /**
