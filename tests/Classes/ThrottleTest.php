@@ -31,100 +31,39 @@ use GrahamCampbell\TestBench\Classes\AbstractTestCase;
  */
 class ThrottleTest extends AbstractTestCase
 {
-    public function testGetRequest()
+    public function testMake()
     {
-        $throttle = $this->getThrottle();
+        extract($this->getThrottle());
 
-        $request = Mockery::mock('Illuminate\Http\Request');
-
-        $throttle->getCache()->shouldReceive('tags')
-            ->with('throttle', '127.0.0.1')->once()->andReturn(Mockery::mock('Illuminate\Cache\StoreInterface'));
-        $request->shouldReceive('getClientIp')->once()->andReturn('127.0.0.1');
-        $request->shouldReceive('path')->once()->andReturn('http://laravel.com/');
-
-        $return = $throttle->get($request, 10, 60);
+        $return = $throttle->get($request, 12, 123);
 
         $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
     }
 
-    public function testGetArray()
+    public function testCall()
     {
-        $throttle = $this->getThrottle();
+        extract($this->getThrottle());
 
-        $array = array('ip' => '127.0.0.1', 'route' => 'http://laravel.com/');
+        $throttler->shouldReceive('hit')->once()->andReturnSelf();
 
-        $throttle->getCache()->shouldReceive('tags')
-            ->with('throttle', '127.0.0.1')->once()->andReturn(Mockery::mock('Illuminate\Cache\StoreInterface'));
-
-        $return = $throttle->get($array, 10, 60);
-
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
-    }
-
-    public function testGetError()
-    {
-        $throttle = $this->getThrottle();
-
-        $array = array('error' => 'test');
-
-        $return = null;
-
-        try {
-            $throttle->get($array, 10, 60);
-        } catch (\Exception $e) {
-            $return = $e;
-        }
-
-        $this->assertInstanceOf('InvalidArgumentException', $return);
-    }
-
-    public function testHit()
-    {
-        $throttle = $this->getMockedThrottle();
-
-        $request = Mockery::mock('Illuminate\Http\Request');
-
-        $throttler = Mockery::mock('GrahamCampbell\Throttle\Throttlers\CacheThrottler');
-
-        $throttler->shouldReceive('hit')->once()->with()->andReturn($throttler);
-
-        $throttle->shouldReceive('get')->once()->with($request, 10, 60)->andReturn($throttler);
-
-        $return = $throttle->hit($request, 10, 60);
-
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
-    }
-
-    public function testClear()
-    {
-        $throttle = $this->getMockedThrottle();
-
-        $request = Mockery::mock('Illuminate\Http\Request');
-
-        $throttler = Mockery::mock('GrahamCampbell\Throttle\Throttlers\CacheThrottler');
-
-        $throttler->shouldReceive('clear')->once()->with()->andReturn($throttler);
-
-        $throttle->shouldReceive('get')->once()->with($request, 10, 60)->andReturn($throttler);
-
-        $return = $throttle->clear($request, 10, 60);
+        $return = $throttle->hit($request, 12, 123);
 
         $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
     }
 
     protected function getThrottle()
     {
-        $cache = Mockery::mock('Illuminate\Cache\Repository');
-        $throttler = 'GrahamCampbell\Throttle\Throttlers\CacheThrottler';
+        $factory = Mockery::mock('GrahamCampbell\Throttle\Factories\CacheFactory');
 
-        return new Throttle($cache, $throttler);
-    }
+        $request = Mockery::mock('Illuminate\Http\Request');
 
-    protected function getMockedThrottle()
-    {
-        $cache = Mockery::mock('Illuminate\Cache\Repository');
-        $throttler = 'GrahamCampbell\Throttle\Throttlers\CacheThrottler';
+        $throttler = Mockery::mock('GrahamCampbell\Throttle\Throttlers\CacheThrottler');
 
-        return Mockery::mock('GrahamCampbell\Throttle\Classes\Throttle[get]', array($cache, $throttler));
+        $throttle = new Throttle($factory);
+
+        $throttle->getFactory()->shouldReceive('make')->once()
+            ->with($request, 12, 123)->andReturn($throttler);
+
+        return compact('throttle', 'throttler', 'request', 'factory');
     }
 }

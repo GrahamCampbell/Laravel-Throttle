@@ -16,8 +16,7 @@
 
 namespace GrahamCampbell\Throttle\Classes;
 
-use Illuminate\Http\Request;
-use Illuminate\Cache\Repository;
+use GrahamCampbell\Throttle\Factories\FactoryInterface;
 
 /**
  * This is the throttle class.
@@ -31,34 +30,25 @@ use Illuminate\Cache\Repository;
 class Throttle
 {
     /**
-     * The cache instance.
+     * The factory instance.
      *
-     * @var \Illuminate\Cache\Repository
+     * @var \GrahamCampbell\Throttle\Factories\FactoryInterface
      */
-    protected $cache;
-
-    /**
-     * The throttler.
-     *
-     * @var string
-     */
-    protected $throttler;
+    protected $factory;
 
     /**
      * Create a new instance.
      *
-     * @param  \Illuminate\Cache\Repository  $cache
-     * @param  string  $throttler
+     * @param  \GrahamCampbell\Throttle\Factories\FactoryInterface  $factory
      * @return void
      */
-    public function __construct(Repository $cache, $throttler)
+    public function __construct(FactoryInterface $factory)
     {
-        $this->cache = $cache;
-        $this->throttler = $throttler;
+        $this->factory = $factory;
     }
 
     /**
-     * Get the throttler.
+     * Get a new throttler.
      *
      * @param  array|\Illuminate\Http\Request  $data
      * @param  int  $limit
@@ -67,93 +57,28 @@ class Throttle
      */
     public function get($data, $limit = 10, $time = 60)
     {
-        $data = $this->parseData($data);
-        $store = $this->getStore($data['ip']);
-        $key = $this->getKey($data['route']);
-
-        $throttler = $this->throttler;
-
-        return new $throttler($store, $key, $limit, $time);
-    }
-
-    /**
-     * Hit the the throttle.
-     *
-     * @param  array|\Illuminate\Http\Request  $data
-     * @param  int  $limit
-     * @param  int  $time
-     * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
-     */
-    public function hit($data, $limit = 10, $time = 60)
-    {
-        return $this->get($data, $limit, $time)->hit();
-    }
-
-    /**
-     * Clear the the throttle.
-     *
-     * @param  array|\Illuminate\Http\Request  $data
-     * @param  int  $limit
-     * @param  int  $time
-     * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
-     */
-    public function clear($data, $limit = 10, $time = 60)
-    {
-        return $this->get($data, $limit, $time)->clear();
-    }
-
-    /**
-     * Parse the data.
-     *
-     * @param  array|\Illuminate\Http\Request  $data
-     * @return array
-     */
-    protected function parseData($data)
-    {
-        if ($data instanceof Request) {
-            $parsed = array('ip' => $data->getClientIp(), 'route' => $data->path());
-        } elseif (is_array($data)) {
-            if (array_key_exists('ip', $data) && array_key_exists('route', $data)) {
-                $parsed = array('ip' => $data['ip'], 'route' => $data['route']);
-            }
-        }
-
-        if (!isset($parsed)) {
-            throw new \InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
-        }
-
-        return $parsed;
-    }
-
-    /**
-     * Get the store.
-     *
-     * @param  string  $ip
-     * @return \Illuminate\Cache\TaggableStore
-     */
-    protected function getStore($ip)
-    {
-        return $this->cache->tags('throttle', $ip);
-    }
-
-    /**
-     * Get the key.
-     *
-     * @param  string  $path
-     * @return string
-     */
-    protected function getKey($path)
-    {
-        return md5($path);
+        return $this->factory->make($data, $limit, $time);
     }
 
     /**
      * Get the cache instance.
      *
-     * @return \Illuminate\Cache\Repository
+     * @return \GrahamCampbell\Throttle\Factories\FactoryInterface
      */
-    public function getCache()
+    public function getFactory()
     {
-        return $this->cache;
+        return $this->factory;
+    }
+
+    /**
+     * Dynamically pass methods to a new throttler instance.
+     *
+     * @param  string  $method
+     * @param  array   $parameters
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        return call_user_func_array(array($this, 'get'), $parameters)->$method();
     }
 }

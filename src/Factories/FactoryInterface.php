@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-namespace GrahamCampbell\Throttle\Throttlers;
+namespace GrahamCampbell\Throttle\Factories;
 
 /**
- * This is the throttler interface class.
+ * This is the throttler factory interface.
  *
  * @package    Laravel-Throttle
  * @author     Graham Campbell
@@ -25,40 +25,15 @@ namespace GrahamCampbell\Throttle\Throttlers;
  * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md
  * @link       https://github.com/GrahamCampbell/Laravel-Throttle
  */
-interface ThrottlerInterface
+interface FactoryInterface
 {
     /**
-     * Rate limit access to a resource.
+     * Make a new throttler instance.
      *
-     * @return bool
+     * @param  array|\Illuminate\Http\Request  $data
+     * @param  int  $limit
+     * @param  int  $time
+     * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
-    public function attempt();
-
-    /**
-     * Hit the throttle.
-     *
-     * @return $this
-     */
-    public function hit();
-
-    /**
-     * Clear the throttle.
-     *
-     * @return $this
-     */
-    public function clear();
-
-    /**
-     * Get the throttle hit count.
-     *
-     * @return int
-     */
-    public function count();
-
-    /**
-     * Check the throttle.
-     *
-     * @return bool
-     */
-    public function check();
+    public function make($data, $limit = 10, $time = 60);
 }

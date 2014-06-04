@@ -92,7 +92,7 @@ class CacheThrottler implements ThrottlerInterface
     }
 
     /**
-     * Hit the the throttle.
+     * Hit the throttle.
      *
      * @return $this
      */
@@ -106,7 +106,7 @@ class CacheThrottler implements ThrottlerInterface
     }
 
     /**
-     * Clear the the throttle.
+     * Clear the throttle.
      *
      * @return $this
      */
