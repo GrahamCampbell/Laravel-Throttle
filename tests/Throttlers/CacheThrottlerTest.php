@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-namespace GrahamCampbell\Tests\Throttle;
+namespace GrahamCampbell\Tests\Throttle\Throttlers;
 
 use Mockery;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
