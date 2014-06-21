@@ -71,6 +71,8 @@ class ThrottleServiceProvider extends ServiceProvider
 
             return new Factories\CacheFactory($cache);
         });
+
+        $this->app->alias('throttle.factory', 'GrahamCampbell\Throttle\Factories\FactoryInterface');
     }
 
     /**
@@ -85,6 +87,8 @@ class ThrottleServiceProvider extends ServiceProvider
 
             return new Throttle($factory);
         });
+
+        $this->app->alias('throttle', 'GrahamCampbell\Throttle\Throttle');
     }
 
     /**

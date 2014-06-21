@@ -7,6 +7,7 @@ CHANGE LOG
 * Upgrade to Laravel 4.1+
 * Added a simple throttling filter
 * Refactoring
+* Added di aliases
 
 
 ## V0.2 Alpha (21/04/2014)
