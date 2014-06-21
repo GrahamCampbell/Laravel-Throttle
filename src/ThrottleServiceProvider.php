@@ -83,7 +83,7 @@ class ThrottleServiceProvider extends ServiceProvider
         $this->app->bindShared('throttle', function ($app) {
             $factory = $app['throttle.factory'];
 
-            return new Classes\Throttle($factory);
+            return new Throttle($factory);
         });
     }
 

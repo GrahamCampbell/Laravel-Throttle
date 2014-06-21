@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-namespace GrahamCampbell\Throttle\Classes;
+namespace GrahamCampbell\Throttle;
 
 use GrahamCampbell\Throttle\Factories\FactoryInterface;
 

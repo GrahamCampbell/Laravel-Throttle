@@ -18,7 +18,7 @@ namespace GrahamCampbell\Tests\Throttle\Factories;
 
 use Mockery;
 use GrahamCampbell\Throttle\Factories\CacheFactory;
-use GrahamCampbell\TestBench\Classes\AbstractTestCase;
+use GrahamCampbell\TestBench\AbstractTestCase;
 
 /**
  * This is the cache factory test class.

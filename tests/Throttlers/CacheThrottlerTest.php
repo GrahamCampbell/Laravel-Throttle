@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-namespace GrahamCampbell\Tests\Throttle\Classes;
+namespace GrahamCampbell\Tests\Throttle;
 
 use Mockery;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
-use GrahamCampbell\TestBench\Classes\AbstractTestCase;
+use GrahamCampbell\TestBench\AbstractTestCase;
 
 /**
  * This is the cache throttler test class.

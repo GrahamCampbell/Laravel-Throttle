@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-namespace GrahamCampbell\Tests\Throttle\Classes;
+namespace GrahamCampbell\Tests\Throttle;
 
 use Mockery;
-use GrahamCampbell\Throttle\Classes\Throttle;
-use GrahamCampbell\TestBench\Classes\AbstractTestCase;
+use GrahamCampbell\Throttle\Throttle;
+use GrahamCampbell\TestBench\AbstractTestCase as AbstractTestBenchTestCase;
 
 /**
  * This is the throttle test class.
@@ -29,7 +29,7 @@ use GrahamCampbell\TestBench\Classes\AbstractTestCase;
  * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md
  * @link       https://github.com/GrahamCampbell/Laravel-Throttle
  */
-class ThrottleTest extends AbstractTestCase
+class ThrottleTest extends AbstractTestBenchTestCase
 {
     public function testMake()
     {

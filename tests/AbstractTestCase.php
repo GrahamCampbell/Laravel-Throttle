@@ -16,7 +16,7 @@
 
 namespace GrahamCampbell\Tests\Throttle;
 
-use GrahamCampbell\TestBench\Classes\AbstractLaravelTestCase as TestCase;
+use GrahamCampbell\TestBench\AbstractLaravelTestCase as TestCase;
 
 /**
  * This is the abstract test case class.
