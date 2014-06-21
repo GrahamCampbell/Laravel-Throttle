@@ -31,6 +31,11 @@ class ServiceProviderTest extends AbstractTestCase
 {
     use ServiceProviderTestCaseTrait;
 
+    public function testThrottleFactoryIsInjectable()
+    {
+        $this->assertIsInjectable('GrahamCampbell\Throttle\Factories\FactoryInterface');
+    }
+
     public function testThrottleIsInjectable()
     {
         $this->assertIsInjectable('GrahamCampbell\Throttle\Throttle');
