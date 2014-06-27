@@ -14,22 +14,11 @@
  * limitations under the License.
  */
 
-return array(
+use GrahamCampbell\Throttle\Facades\Throttle;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
-    /*
-    |--------------------------------------------------------------------------
-    | Cache Driver
-    |--------------------------------------------------------------------------
-    |
-    | This defines the cache driver to be used. It may be the name of any
-    | driver set in app/config/cache.php. Setting it to null will use the
-    | driver you have set as default in app/config/cache.php. Please note that
-    | a driver that supports cache tags is required.
-    |
-    | Default: null
-    |
-    */
-
-    'driver' => null
-
-);
+Route::filter('throttle', function ($route, $request, $limit = 10, $time = 60) {
+    if (!Throttle::attempt($request, $limit, $time)) {
+        throw new TooManyRequestsHttpException($time*60, 'Rate limit exceed.');
+    }
+});

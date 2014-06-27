@@ -44,6 +44,8 @@ class ThrottleServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->package('graham-campbell/throttle', 'graham-campbell/throttle', __DIR__);
+
+        include __DIR__.'/filters.php';
     }
 
     /**
@@ -53,7 +55,24 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerFactory();
         $this->registerThrottle();
+    }
+
+    /**
+     * Register the factory class.
+     *
+     * @return void
+     */
+    protected function registerFactory()
+    {
+        $this->app->bindShared('throttle.factory', function ($app) {
+            $cache = $app['cache']->driver($app['config']['graham-campbell/throttle::driver']);
+
+            return new Factories\CacheFactory($cache);
+        });
+
+        $this->app->alias('throttle.factory', 'GrahamCampbell\Throttle\Factories\FactoryInterface');
     }
 
     /**
@@ -64,11 +83,12 @@ class ThrottleServiceProvider extends ServiceProvider
     protected function registerThrottle()
     {
         $this->app->bindShared('throttle', function ($app) {
-            $cache = $app['cache']->driver($app['config']['graham-campbell/throttle::driver']);
-            $throttler = $app['config']['graham-campbell/throttle::throttler'];
+            $factory = $app['throttle.factory'];
 
-            return new Classes\Throttle($cache, $throttler);
+            return new Throttle($factory);
         });
+
+        $this->app->alias('throttle', 'GrahamCampbell\Throttle\Throttle');
     }
 
     /**
@@ -79,7 +99,8 @@ class ThrottleServiceProvider extends ServiceProvider
     public function provides()
     {
         return array(
-            'throttle'
+            'throttle',
+            'throttle.factory'
         );
     }
 }

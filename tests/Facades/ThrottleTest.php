@@ -59,6 +59,6 @@ class ThrottleTest extends AbstractTestCase
      */
     protected function getFacadeRoot()
     {
-        return 'GrahamCampbell\Throttle\Classes\Throttle';
+        return 'GrahamCampbell\Throttle\Throttle';
     }
 }
