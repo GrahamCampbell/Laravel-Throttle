@@ -102,8 +102,9 @@ class FilterTest extends AbstractTestCase
         $this->assertResponseOk();
     }
 
-    protected function hit($times = 10, $time = 3600) {
-        for($i = 0; $i < $times; $i++) {
+    protected function hit($times = 10, $time = 3600)
+    {
+        for ($i = 0; $i < $times; $i++) {
             $this->call('GET', 'throttle-test-route');
             $this->assertResponseOk();
         }
