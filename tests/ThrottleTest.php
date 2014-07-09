@@ -35,9 +35,19 @@ class ThrottleTest extends AbstractTestBenchTestCase
     {
         extract($this->getThrottle());
 
-        $return = $throttle->get($request, 12, 123);
+        $return = $throttle->get($data, 12, 123);
 
         $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+    }
+
+    public function testCache()
+    {
+        extract($this->getThrottle());
+
+        for ($i = 0; $i < 3; $i++) {
+            $return = $throttle->get($data, 12, 123);
+            $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+        }
     }
 
     public function testCall()
@@ -46,7 +56,7 @@ class ThrottleTest extends AbstractTestBenchTestCase
 
         $throttler->shouldReceive('hit')->once()->andReturnSelf();
 
-        $return = $throttle->hit($request, 12, 123);
+        $return = $throttle->hit($data, 12, 123);
 
         $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
     }
@@ -55,15 +65,15 @@ class ThrottleTest extends AbstractTestBenchTestCase
     {
         $factory = Mockery::mock('GrahamCampbell\Throttle\Factories\CacheFactory');
 
-        $request = Mockery::mock('Illuminate\Http\Request');
+        $data = array('ip' => '127.0.0.1', 'route' => 'http://laravel.com/');
 
         $throttler = Mockery::mock('GrahamCampbell\Throttle\Throttlers\CacheThrottler');
 
         $throttle = new Throttle($factory);
 
         $throttle->getFactory()->shouldReceive('make')->once()
-            ->with($request, 12, 123)->andReturn($throttler);
+            ->with($data, 12, 123)->andReturn($throttler);
 
-        return compact('throttle', 'throttler', 'request', 'factory');
+        return compact('throttle', 'throttler', 'data', 'factory');
     }
 }

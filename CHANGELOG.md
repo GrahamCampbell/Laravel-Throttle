@@ -6,6 +6,7 @@ CHANGE LOG
 
 * Upgrade to Laravel 4.1+
 * Added a simple throttling filter
+* Caching throttler instances
 * Refactoring
 * Added di aliases
 

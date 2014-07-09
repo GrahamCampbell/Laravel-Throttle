@@ -88,20 +88,6 @@ class FilterTest extends AbstractTestCase
         $this->hit(3, 300);
     }
 
-    public function testLimitAndClear()
-    {
-        $this->app['router']->get('throttle-test-route', array('before' => 'throttle:4', function () {
-            return 'Why herro there!';
-        }));
-
-        $this->hit(4);
-
-        $this->app['cache']->driver('array')->flush();
-
-        $this->call('GET', 'throttle-test-route');
-        $this->assertResponseOk();
-    }
-
     protected function hit($times = 10, $time = 3600)
     {
         for ($i = 0; $i < $times; $i++) {

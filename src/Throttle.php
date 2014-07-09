@@ -30,6 +30,13 @@ use GrahamCampbell\Throttle\Factories\FactoryInterface;
 class Throttle
 {
     /**
+     * The cached throttler instances.
+     *
+     * @var \GrahamCampbell\Throttle\Factories\FactoryInterface
+     */
+    protected $throttlers = array();
+
+    /**
      * The factory instance.
      *
      * @var \GrahamCampbell\Throttle\Factories\FactoryInterface
@@ -57,7 +64,13 @@ class Throttle
      */
     public function get($data, $limit = 10, $time = 60)
     {
-        return $this->factory->make($data, $limit, $time);
+        $key = md5(serialize($data).$limit.$time);
+
+        if (!array_key_exists($key, $this->throttlers)) {
+            $this->throttlers[$key] = $this->factory->make($data, $limit, $time);
+        }
+
+        return $this->throttlers[$key];
     }
 
     /**
