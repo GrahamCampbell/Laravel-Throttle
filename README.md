@@ -80,7 +80,7 @@ This class implements `Throttler\ThrottlerInterface` completely. This is the onl
 
 This interface defines the public methods a throttler factory class must implement. Such a class must only implement one method.
 
-The `'make'` method will create a new throttler class (a class that implements `Throttler\ThrottlerInterface`) from the 1-3 parameters that you pass to it. The first parameter is required and must either an instance of `\Illuminate\Http\Request`, or an associative array with two keys (`'ip'` should be the ip address of the user you wish to throttle and `'route'` should be the full url you wish to throttle, but actually, for advanced usage, may be any unique key you choose). The second parameter is optional and should be an `int` which represents the maximum number of hits that are allowed before the user hits the limit. The third and final parameter should be an `int` that represents the time the user must wait after going over the limit before the hit count will be reset to zero. This method is normally called by the `Throttle` class, and is not intended for use anywhere else. This documentation is included for advanced users who may wish to write their own factory classes to make their own custom throttler classes.
+The `'make'` method will create a new throttler class (a class that implements `Throttler\ThrottlerInterface`) from the 1-3 parameters that you pass to it. It accepts the same parameters as the `'get'` method on the `Throttle` class. Please read the docs for that method for information on parameters and expected usage. This documentation of an internal interface is included for advanced users who may wish to write their own factory classes to make their own custom throttler classes.
 
 **Factories\CacheFactory**
 
@@ -89,6 +89,10 @@ This class implements `Factories\FactoryInterface` completely. This is the only 
 **ThrottleServiceProvider**
 
 This class contains no public methods of interest. This class should be added to the providers array in `app/config/app.php`. This class will setup ioc bindings.
+
+**Filters**
+
+You may put the `throttle` filter in front of your routes to throttle them. The filter can take up to two parameters. The two parameters are `limit` and `time`. It may be useful for you to take a look at the [source](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/src/filters.php) for this, read the [tests](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/tests/Functional/FilterTest.php), or check out Laravel's [documentation](http://laravel.com/docs/routing#route-filters) if you need to.
 
 **Further Information**
 
