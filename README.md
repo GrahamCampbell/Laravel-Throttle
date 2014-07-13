@@ -39,14 +39,14 @@ To get started, first publish the package config file:
 
 There is one config option:
 
-**Cache Driver**
+##### Cache Driver
 
 This option (`'driver'`) defines the cache driver to be used. It may be the name of any driver set in app/config/cache.php. Setting it to null will use the driver you have set as default in app/config/cache.php. Please note that a driver that supports cache tags is required. The default value for this setting is `null`.
 
 
 ## Usage
 
-**Throttle**
+##### Throttle
 
 This is the class of most interest. It is bound to the ioc container as `'throttle'` and can be accessed using the `Facades\Throttle` facade. There are six public methods of interest.
 
@@ -54,11 +54,11 @@ The `'get'` method will create a new throttler class (a class that implements `T
 
 The other 5 methods all accept the same parameters as the `get` method. What happens here is we dynamically create a throttler class (or we automatically reuse an instance we already created), and then we call the method on it with no parameters. These 5 methods are `'attempt'`, `'hit'`, `'clear'`, `'count'`, and `'check'`. They are all documented bellow.
 
-**Facades\Throttle**
+##### Facades\Throttle
 
 This facade will dynamically pass static method calls to the `'throttle'` object in the ioc container which by default is the `Throttle` class.
 
-**Throttler\ThrottlerInterface**
+##### Throttler\ThrottlerInterface
 
 This interface defines the public methods a throttler class must implement. All 5 methods here accept no parameters.
 
@@ -72,29 +72,29 @@ The `'count'` method will return the number of hits to the throttle.
 
 The `'check'` method will return a boolean representing whether or not the hit limit has been exceeded.
 
-**Throttler\CacheThrottler**
+##### Throttler\CacheThrottler
 
 This class implements `Throttler\ThrottlerInterface` completely. This is the only throttler implementation shipped with this package, and in created by the `Factories\CacheFactory` class.
 
-**Factories\FactoryInterface**
+##### Factories\FactoryInterface
 
 This interface defines the public methods a throttler factory class must implement. Such a class must only implement one method.
 
 The `'make'` method will create a new throttler class (a class that implements `Throttler\ThrottlerInterface`) from the 1-3 parameters that you pass to it. It accepts the same parameters as the `'get'` method on the `Throttle` class. Please read the docs for that method for information on parameters and expected usage. This documentation of an internal interface is included for advanced users who may wish to write their own factory classes to make their own custom throttler classes.
 
-**Factories\CacheFactory**
+##### Factories\CacheFactory
 
 This class implements `Factories\FactoryInterface` completely. This is the only throttler implementation shipped with this package, and is responsible for creating the `Factories\CacheFactory` class. This class is only intended for internal use by the `Throttle` class.
 
-**ThrottleServiceProvider**
+##### ThrottleServiceProvider
 
 This class contains no public methods of interest. This class should be added to the providers array in `app/config/app.php`. This class will setup ioc bindings.
 
-**Filters**
+##### Filters
 
 You may put the `throttle` filter in front of your routes to throttle them. The filter can take up to two parameters. The two parameters are `limit` and `time`. It may be useful for you to take a look at the [source](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/src/filters.php) for this, read the [tests](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/tests/Functional/FilterTest.php), or check out Laravel's [documentation](http://laravel.com/docs/routing#route-filters) if you need to.
 
-**Further Information**
+##### Further Information
 
 Feel free to check out the [API Documentation](http://docs.grahamjcampbell.co.uk) for Laravel Throttle.
 
