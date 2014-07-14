@@ -61,21 +61,16 @@ class CacheThrottleTest extends AbstractTestCase
         $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
     public function testMakeError()
     {
         $throttle = $this->getFactory();
 
         $array = array('error' => 'test');
 
-        $return = null;
-
-        try {
-            $throttle->make($array, 10, 60);
-        } catch (\Exception $e) {
-            $return = $e;
-        }
-
-        $this->assertInstanceOf('InvalidArgumentException', $return);
+        $throttle->make($array, 10, 60);
     }
 
     protected function getFactory()
