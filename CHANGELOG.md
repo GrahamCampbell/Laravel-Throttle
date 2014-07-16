@@ -2,11 +2,11 @@ CHANGE LOG
 ==========
 
 
-## V1.0 Beta 1 (Upcoming - July 2014)
+## V1.0 RC 1 (16/07/2014)
 
 * Upgrade to Laravel 4.1+
 * Added a simple throttling filter
-* Caching throttler instances
+* Internal caching of throttler instances
 * Refactoring
 * Added di aliases
 
