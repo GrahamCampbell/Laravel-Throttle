@@ -126,11 +126,11 @@ class CacheThrottler implements ThrottlerInterface
      */
     public function count()
     {
-        if (!is_null($this->number)) {
+        if ($this->number !== null) {
             return $this->number;
         }
 
-        $this->number = $this->store->get($this->key);
+        $this->number = (int) $this->store->get($this->key);
 
         if (!$this->number) {
             $this->number = 0;
@@ -146,11 +146,7 @@ class CacheThrottler implements ThrottlerInterface
      */
     public function check()
     {
-        if ($this->count() > $this->limit) {
-            return false;
-        }
-
-        return true;
+        return ($this->count() <= $this->limit);
     }
 
     /**
