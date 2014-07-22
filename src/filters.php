@@ -19,6 +19,6 @@ use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 Route::filter('throttle', function ($route, $request, $limit = 10, $time = 60) {
     if (!Throttle::attempt($request, $limit, $time)) {
-        throw new TooManyRequestsHttpException($time*60, 'Rate limit exceed.');
+        throw new TooManyRequestsHttpException($time * 60, 'Rate limit exceed.');
     }
 });
