@@ -16,9 +16,9 @@
 
 namespace GrahamCampbell\Throttle\Factories;
 
-use Illuminate\Http\Request;
-use Illuminate\Cache\Repository;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
+use Illuminate\Cache\Repository;
+use Illuminate\Http\Request;
 
 /**
  * This is the cache throttler factory class.
