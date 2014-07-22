@@ -32,7 +32,7 @@ class Throttle
     /**
      * The cached throttler instances.
      *
-     * @var \GrahamCampbell\Throttle\Factories\FactoryInterface
+     * @var array
      */
     protected $throttlers = array();
 
