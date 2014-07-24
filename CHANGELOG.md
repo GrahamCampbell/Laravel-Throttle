@@ -2,6 +2,12 @@ CHANGE LOG
 ==========
 
 
+## V1.0.1 (Upcoming - August 2014)
+
+* Cleaned up the count function
+* Minor fixes and tweaks
+
+
 ## V1.0 (20/07/2014)
 
 * Bumped to stable
