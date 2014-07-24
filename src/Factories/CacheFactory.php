@@ -71,6 +71,8 @@ class CacheFactory implements FactoryInterface
      *
      * @param  array|\Illuminate\Http\Request  $data
      * @return array
+     *
+     * @throws \InvalidArgumentException
      */
     protected function parseData($data)
     {
