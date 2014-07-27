@@ -28,9 +28,9 @@ interface FactoryInterface
     /**
      * Make a new throttler instance.
      *
-     * @param array|\Illuminate\Http\Request $data
-     * @param int                            $limit
-     * @param int                            $time
+     * @param string[]|\Illuminate\Http\Request $data
+     * @param int                               $limit
+     * @param int                               $time
      *
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */

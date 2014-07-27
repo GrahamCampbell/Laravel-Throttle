@@ -51,11 +51,11 @@ class CacheFactory implements FactoryInterface
     /**
      * Make a new throttler instance.
      *
-     * @param array|\Illuminate\Http\Request $data
-     * @param int                            $limit
-     * @param int                            $time
+     * @param string[]|\Illuminate\Http\Request $data
+     * @param int                               $limit
+     * @param int                               $time
      *
-     * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
+     * @return \GrahamCampbell\Throttle\Throttlers\CacheThrottler
      */
     public function make($data, $limit = 10, $time = 60)
     {
@@ -69,11 +69,11 @@ class CacheFactory implements FactoryInterface
     /**
      * Parse the data.
      *
-     * @param array|\Illuminate\Http\Request $data
+     * @param string[]|\Illuminate\Http\Request $data
      *
      * @throws \InvalidArgumentException
      *
-     * @return array
+     * @return string[]
      */
     protected function parseData($data)
     {
