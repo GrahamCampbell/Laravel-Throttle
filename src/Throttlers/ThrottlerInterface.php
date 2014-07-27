@@ -19,11 +19,9 @@ namespace GrahamCampbell\Throttle\Throttlers;
 /**
  * This is the throttler interface class.
  *
- * @package    Laravel-Throttle
- * @author     Graham Campbell
- * @copyright  Copyright 2013-2014 Graham Campbell
- * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md
- * @link       https://github.com/GrahamCampbell/Laravel-Throttle
+ * @author    Graham Campbell <graham@mineuk.com>
+ * @copyright 2013-2014 Graham Campbell
+ * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
 interface ThrottlerInterface
 {

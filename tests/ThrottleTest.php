@@ -23,11 +23,9 @@ use GrahamCampbell\TestBench\AbstractTestCase as AbstractTestBenchTestCase;
 /**
  * This is the throttle test class.
  *
- * @package    Laravel-Throttle
- * @author     Graham Campbell
- * @copyright  Copyright 2013-2014 Graham Campbell
- * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md
- * @link       https://github.com/GrahamCampbell/Laravel-Throttle
+ * @author    Graham Campbell <graham@mineuk.com>
+ * @copyright 2013-2014 Graham Campbell
+ * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
 class ThrottleTest extends AbstractTestBenchTestCase
 {

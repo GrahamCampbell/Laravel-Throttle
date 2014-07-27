@@ -19,20 +19,19 @@ namespace GrahamCampbell\Throttle\Factories;
 /**
  * This is the throttler factory interface.
  *
- * @package    Laravel-Throttle
- * @author     Graham Campbell
- * @copyright  Copyright 2013-2014 Graham Campbell
- * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md
- * @link       https://github.com/GrahamCampbell/Laravel-Throttle
+ * @author    Graham Campbell <graham@mineuk.com>
+ * @copyright 2013-2014 Graham Campbell
+ * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
 interface FactoryInterface
 {
     /**
      * Make a new throttler instance.
      *
-     * @param  array|\Illuminate\Http\Request  $data
-     * @param  int  $limit
-     * @param  int  $time
+     * @param array|\Illuminate\Http\Request $data
+     * @param int                            $limit
+     * @param int                            $time
+     *
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
     public function make($data, $limit = 10, $time = 60);

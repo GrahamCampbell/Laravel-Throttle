@@ -21,56 +21,55 @@ use Illuminate\Cache\StoreInterface;
 /**
  * This is the cache throttler class.
  *
- * @package    Laravel-Throttle
- * @author     Graham Campbell
- * @copyright  Copyright 2013-2014 Graham Campbell
- * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md
- * @link       https://github.com/GrahamCampbell/Laravel-Throttle
+ * @author    Graham Campbell <graham@mineuk.com>
+ * @copyright 2013-2014 Graham Campbell
+ * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
 class CacheThrottler implements ThrottlerInterface
 {
     /**
      * The store instance.
      *
-     * @var \Illuminate\Cache\StoreInterface
+     * @type \Illuminate\Cache\StoreInterface
      */
     protected $store;
 
     /**
      * The key.
      *
-     * @var string
+     * @type string
      */
     protected $key;
 
     /**
      * The request limit.
      *
-     * @var int
+     * @type int
      */
     protected $limit;
 
     /**
      * The the expiration time.
      *
-     * @var int
+     * @type int
      */
     protected $time;
 
     /**
      * The number of requests.
      *
-     * @var int
+     * @type int
      */
     protected $number;
 
     /**
      * Create a new instance.
      *
-     * @param  \Illuminate\Cache\StoreInterface  $store
-     * @param  string  $key
-     * @param  int     $limit
-     * @param  int     $time
+     * @param \Illuminate\Cache\StoreInterface $store
+     * @param string                           $key
+     * @param int                              $limit
+     * @param int                              $time
+     *
      * @return void
      */
     public function __construct(StoreInterface $store, $key, $limit, $time)

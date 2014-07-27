@@ -21,32 +21,31 @@ use GrahamCampbell\Throttle\Factories\FactoryInterface;
 /**
  * This is the throttle class.
  *
- * @package    Laravel-Throttle
- * @author     Graham Campbell
- * @copyright  Copyright 2013-2014 Graham Campbell
- * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md
- * @link       https://github.com/GrahamCampbell/Laravel-Throttle
+ * @author    Graham Campbell <graham@mineuk.com>
+ * @copyright 2013-2014 Graham Campbell
+ * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
 class Throttle
 {
     /**
      * The cached throttler instances.
      *
-     * @var array
+     * @type array
      */
     protected $throttlers = array();
 
     /**
      * The factory instance.
      *
-     * @var \GrahamCampbell\Throttle\Factories\FactoryInterface
+     * @type \GrahamCampbell\Throttle\Factories\FactoryInterface
      */
     protected $factory;
 
     /**
      * Create a new instance.
      *
-     * @param  \GrahamCampbell\Throttle\Factories\FactoryInterface  $factory
+     * @param \GrahamCampbell\Throttle\Factories\FactoryInterface $factory
+     *
      * @return void
      */
     public function __construct(FactoryInterface $factory)
@@ -57,9 +56,10 @@ class Throttle
     /**
      * Get a new throttler.
      *
-     * @param  array|\Illuminate\Http\Request  $data
-     * @param  int  $limit
-     * @param  int  $time
+     * @param array|\Illuminate\Http\Request $data
+     * @param int                            $limit
+     * @param int                            $time
+     *
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
     public function get($data, $limit = 10, $time = 60)
@@ -86,8 +86,9 @@ class Throttle
     /**
      * Dynamically pass methods to a new throttler instance.
      *
-     * @param  string  $method
-     * @param  array   $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)

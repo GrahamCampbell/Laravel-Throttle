@@ -23,25 +23,24 @@ use Illuminate\Http\Request;
 /**
  * This is the cache throttler factory class.
  *
- * @package    Laravel-Throttle
- * @author     Graham Campbell
- * @copyright  Copyright 2013-2014 Graham Campbell
- * @license    https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md
- * @link       https://github.com/GrahamCampbell/Laravel-Throttle
+ * @author    Graham Campbell <graham@mineuk.com>
+ * @copyright 2013-2014 Graham Campbell
+ * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
 class CacheFactory implements FactoryInterface
 {
     /**
      * The cache instance.
      *
-     * @var \Illuminate\Cache\Repository
+     * @type \Illuminate\Cache\Repository
      */
     protected $cache;
 
     /**
      * Create a new instance.
      *
-     * @param  \Illuminate\Cache\Repository  $cache
+     * @param \Illuminate\Cache\Repository $cache
+     *
      * @return void
      */
     public function __construct(Repository $cache)
@@ -52,9 +51,10 @@ class CacheFactory implements FactoryInterface
     /**
      * Make a new throttler instance.
      *
-     * @param  array|\Illuminate\Http\Request  $data
-     * @param  int  $limit
-     * @param  int  $time
+     * @param array|\Illuminate\Http\Request $data
+     * @param int                            $limit
+     * @param int                            $time
+     *
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
     public function make($data, $limit = 10, $time = 60)
@@ -69,10 +69,11 @@ class CacheFactory implements FactoryInterface
     /**
      * Parse the data.
      *
-     * @param  array|\Illuminate\Http\Request  $data
-     * @return array
+     * @param array|\Illuminate\Http\Request $data
      *
      * @throws \InvalidArgumentException
+     *
+     * @return array
      */
     protected function parseData($data)
     {
@@ -94,7 +95,8 @@ class CacheFactory implements FactoryInterface
     /**
      * Get the store.
      *
-     * @param  string  $ip
+     * @param string $ip
+     *
      * @return \Illuminate\Cache\TaggableStore
      */
     protected function getStore($ip)
@@ -105,7 +107,8 @@ class CacheFactory implements FactoryInterface
     /**
      * Get the key.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return string
      */
     protected function getKey($path)
