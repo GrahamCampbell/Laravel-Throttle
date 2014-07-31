@@ -30,14 +30,14 @@ class Throttle
     /**
      * The cached throttler instances.
      *
-     * @type array
+     * @var array
      */
     protected $throttlers = array();
 
     /**
      * The factory instance.
      *
-     * @type \GrahamCampbell\Throttle\Factories\FactoryInterface
+     * @var \GrahamCampbell\Throttle\Factories\FactoryInterface
      */
     protected $factory;
 

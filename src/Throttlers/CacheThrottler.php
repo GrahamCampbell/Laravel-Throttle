@@ -30,35 +30,35 @@ class CacheThrottler implements ThrottlerInterface
     /**
      * The store instance.
      *
-     * @type \Illuminate\Cache\StoreInterface
+     * @var \Illuminate\Cache\StoreInterface
      */
     protected $store;
 
     /**
      * The key.
      *
-     * @type string
+     * @var string
      */
     protected $key;
 
     /**
      * The request limit.
      *
-     * @type int
+     * @var int
      */
     protected $limit;
 
     /**
      * The the expiration time.
      *
-     * @type int
+     * @var int
      */
     protected $time;
 
     /**
      * The number of requests.
      *
-     * @type int
+     * @var int
      */
     protected $number;
 

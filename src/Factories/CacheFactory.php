@@ -32,7 +32,7 @@ class CacheFactory implements FactoryInterface
     /**
      * The cache instance.
      *
-     * @type \Illuminate\Cache\Repository
+     * @var \Illuminate\Cache\Repository
      */
     protected $cache;
 
