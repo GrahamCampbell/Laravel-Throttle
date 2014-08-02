@@ -2,7 +2,7 @@ CHANGE LOG
 ==========
 
 
-## V1.0.1 (Upcoming - August 2014)
+## V1.0.1 (02/08/2014)
 
 * Cleaned up the count function
 * Minor fixes and tweaks
