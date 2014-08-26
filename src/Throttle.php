@@ -17,6 +17,7 @@
 namespace GrahamCampbell\Throttle;
 
 use GrahamCampbell\Throttle\Factories\FactoryInterface;
+use Illuminate\Http\Request;
 
 /**
  * This is the throttle class.
@@ -64,13 +65,38 @@ class Throttle
      */
     public function get($data, $limit = 10, $time = 60)
     {
-        $key = md5(serialize($data).$limit.$time);
+        $key = $this->getKey($data, $limit, $time);
 
         if (!array_key_exists($key, $this->throttlers)) {
             $this->throttlers[$key] = $this->factory->make($data, $limit, $time);
         }
 
         return $this->throttlers[$key];
+    }
+
+    /**
+     * Get the key.
+     *
+     * @param string[]|\Illuminate\Http\Request $data
+     * @param int                               $limit
+     * @param int                               $time
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return string
+     */
+    protected function getKey($data, $limit = 10, $time = 60)
+    {
+        if (is_object($data) && $data instanceof Request)
+        {
+            return md5(spl_object_hash($data).$limit.$time);
+        }
+
+        if (is_array($data)) {
+            return md5(serialize($data).$limit.$time);
+        }
+
+        throw new \InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
     }
 
     /**
