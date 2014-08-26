@@ -77,19 +77,15 @@ class CacheFactory implements FactoryInterface
      */
     protected function parseData($data)
     {
-        if ($data instanceof Request) {
-            $parsed = array('ip' => $data->getClientIp(), 'route' => $data->path());
-        } elseif (is_array($data)) {
-            if (array_key_exists('ip', $data) && array_key_exists('route', $data)) {
-                $parsed = array('ip' => $data['ip'], 'route' => $data['route']);
-            }
+        if (is_object($data) && $data instanceof Request) {
+            return array('ip' => $data->getClientIp(), 'route' => $data->path());
         }
 
-        if (!isset($parsed)) {
-            throw new \InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
+        if (is_array($data) && array_key_exists('ip', $data) && array_key_exists('route', $data)) {
+            return array('ip' => $data['ip'], 'route' => $data['route']);
         }
 
-        return $parsed;
+        throw new \InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
     }
 
     /**
