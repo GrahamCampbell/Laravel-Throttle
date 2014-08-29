@@ -2,6 +2,11 @@ CHANGE LOG
 ==========
 
 
+## V2.0.0 (Upcoming)
+
+* Re-write using transformers
+
+
 ## V1.0.2 (09/08/2014)
 
 * Corrected the license comments

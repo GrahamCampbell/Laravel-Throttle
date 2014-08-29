@@ -54,6 +54,7 @@ class ThrottleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerFactory();
+        $this->registerTransformer();
         $this->registerThrottle();
     }
 
@@ -74,6 +75,20 @@ class ThrottleServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register the transformer class.
+     *
+     * @return void
+     */
+    protected function registerTransformer()
+    {
+        $this->app->bindShared('throttle.transformer', function ($app) {
+            return new Transformers\TransformerFactory();
+        });
+
+        $this->app->alias('throttle.transformer', 'GrahamCampbell\Throttle\Transformers\TransformerFactory');
+    }
+
+    /**
      * Register the throttle class.
      *
      * @return void
@@ -82,8 +97,9 @@ class ThrottleServiceProvider extends ServiceProvider
     {
         $this->app->bindShared('throttle', function ($app) {
             $factory = $app['throttle.factory'];
+            $transformer = $app['throttle.transformer'];
 
-            return new Throttle($factory);
+            return new Throttle($factory, $transformer);
         });
 
         $this->app->alias('throttle', 'GrahamCampbell\Throttle\Throttle');
@@ -98,7 +114,8 @@ class ThrottleServiceProvider extends ServiceProvider
     {
         return array(
             'throttle',
-            'throttle.factory'
+            'throttle.factory',
+            'throttle.transformer'
         );
     }
 }

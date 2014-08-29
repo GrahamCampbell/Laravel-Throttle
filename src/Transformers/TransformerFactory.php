@@ -14,33 +14,39 @@
  * limitations under the License.
  */
 
-namespace GrahamCampbell\Tests\Throttle;
+namespace GrahamCampbell\Throttle\Transformers;
 
-use GrahamCampbell\TestBench\Traits\ServiceProviderTestCaseTrait;
+use Illuminate\Http\Request;
+use InvalidArgumentException;
 
 /**
- * This is the service provider test class.
+ * This is the transformer factory class.
  *
  * @author    Graham Campbell <graham@mineuk.com>
  * @copyright 2013-2014 Graham Campbell
  * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
-class ServiceProviderTest extends AbstractTestCase
+class TransformerFactory
 {
-    use ServiceProviderTestCaseTrait;
-
-    public function testThrottleFactoryIsInjectable()
+    /**
+     * Make a new transformer instance.
+     *
+     * @param mixed $data
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \GrahamCampbell\Throttle\Transformers\TransformerInterface
+     */
+    public function make($data)
     {
-        $this->assertIsInjectable('GrahamCampbell\Throttle\Factories\FactoryInterface');
-    }
+        if (is_object($data) && $data instanceof Request) {
+            return new RequestTransformer();
+        }
 
-    public function testTransformerFactoryIsInjectable()
-    {
-        $this->assertIsInjectable('GrahamCampbell\Throttle\Transformers\TransformerFactory');
-    }
+        if (is_array($data)) {
+            return new ArrayTransformer();
+        }
 
-    public function testThrottleIsInjectable()
-    {
-        $this->assertIsInjectable('GrahamCampbell\Throttle\Throttle');
+        throw new InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
     }
 }

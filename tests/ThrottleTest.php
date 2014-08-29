@@ -17,6 +17,7 @@
 namespace GrahamCampbell\Tests\Throttle;
 
 use Mockery;
+use GrahamCampbell\Throttle\Data;
 use GrahamCampbell\Throttle\Throttle;
 use GrahamCampbell\TestBench\AbstractTestCase as AbstractTestBenchTestCase;
 
@@ -67,10 +68,18 @@ class ThrottleTest extends AbstractTestBenchTestCase
 
         $throttler = Mockery::mock('GrahamCampbell\Throttle\Throttlers\CacheThrottler');
 
-        $throttle = new Throttle($factory);
+        $trans = Mockery::mock('GrahamCampbell\Throttle\Transformers\ArrayTransformer');
+
+        $transformer = Mockery::mock('GrahamCampbell\Throttle\Transformers\TransformerFactory');
+
+        $transformer->shouldReceive('make')->with($data)->andReturn($trans);
+        $trans->shouldReceive('transform')->with($data, 12, 123)
+            ->andReturn($transformed = new Data('127.0.0.1', 'http://laravel.com/', 12, 123));
+
+        $throttle = new Throttle($factory, $transformer);
 
         $throttle->getFactory()->shouldReceive('make')->once()
-            ->with($data, 12, 123)->andReturn($throttler);
+            ->with($transformed)->andReturn($throttler);
 
         return compact('throttle', 'throttler', 'data', 'factory');
     }

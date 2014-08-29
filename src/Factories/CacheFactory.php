@@ -16,9 +16,9 @@
 
 namespace GrahamCampbell\Throttle\Factories;
 
+use GrahamCampbell\Throttle\Data;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
 use Illuminate\Cache\Repository;
-use Illuminate\Http\Request;
 
 /**
  * This is the cache throttler factory class.
@@ -49,67 +49,17 @@ class CacheFactory implements FactoryInterface
     }
 
     /**
-     * Make a new throttler instance.
+     * Make a new cache throttler instance.
      *
-     * @param string[]|\Illuminate\Http\Request $data
-     * @param int                               $limit
-     * @param int                               $time
+     * @param \GrahamCampbell\Throttle\Data $data
      *
      * @return \GrahamCampbell\Throttle\Throttlers\CacheThrottler
      */
-    public function make($data, $limit = 10, $time = 60)
+    public function make(Data $data)
     {
-        $data = $this->parseData($data);
-        $store = $this->getStore($data['ip']);
-        $key = $this->getKey($data['route']);
+        $store = $this->cache->tags('throttle', $data->getIp());
 
-        return new CacheThrottler($store, $key, $limit, $time);
-    }
-
-    /**
-     * Parse the data.
-     *
-     * @param string[]|\Illuminate\Http\Request $data
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return string[]
-     */
-    protected function parseData($data)
-    {
-        if (is_object($data) && $data instanceof Request) {
-            return array('ip' => $data->getClientIp(), 'route' => $data->path());
-        }
-
-        if (is_array($data) && array_key_exists('ip', $data) && array_key_exists('route', $data)) {
-            return array('ip' => $data['ip'], 'route' => $data['route']);
-        }
-
-        throw new \InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
-    }
-
-    /**
-     * Get the store.
-     *
-     * @param string $ip
-     *
-     * @return \Illuminate\Cache\TaggableStore
-     */
-    protected function getStore($ip)
-    {
-        return $this->cache->tags('throttle', $ip);
-    }
-
-    /**
-     * Get the key.
-     *
-     * @param string $path
-     *
-     * @return string
-     */
-    protected function getKey($path)
-    {
-        return md5($path);
+        return new CacheThrottler($store, $data->getRouteKey(), $data->getLimit(), $data->getTime());
     }
 
     /**

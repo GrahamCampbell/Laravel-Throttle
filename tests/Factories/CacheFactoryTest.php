@@ -29,46 +29,22 @@ use GrahamCampbell\TestBench\AbstractTestCase;
  */
 class CacheThrottleTest extends AbstractTestCase
 {
-    public function testMakeRequest()
+    public function testMake()
     {
         $throttle = $this->getFactory();
-
-        $request = Mockery::mock('Illuminate\Http\Request');
-
-        $throttle->getCache()->shouldReceive('tags')
-            ->with('throttle', '127.0.0.1')->once()->andReturn(Mockery::mock('Illuminate\Cache\StoreInterface'));
-        $request->shouldReceive('getClientIp')->once()->andReturn('127.0.0.1');
-        $request->shouldReceive('path')->once()->andReturn('http://laravel.com/');
-
-        $return = $throttle->make($request, 10, 60);
-
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
-    }
-
-    public function testMakeArray()
-    {
-        $throttle = $this->getFactory();
-
-        $array = array('ip' => '127.0.0.1', 'route' => 'http://laravel.com/');
 
         $throttle->getCache()->shouldReceive('tags')
             ->with('throttle', '127.0.0.1')->once()->andReturn(Mockery::mock('Illuminate\Cache\StoreInterface'));
 
-        $return = $throttle->make($array, 10, 60);
+        $data = Mockery::mock('GrahamCampbell\Throttle\Data');
+        $data->shouldReceive('getIp')->once()->andReturn('127.0.0.1');
+        $data->shouldReceive('getRouteKey')->once()->andReturn('unique-md5-hash');
+        $data->shouldReceive('getLimit')->once()->andReturn(246);
+        $data->shouldReceive('getTime')->once()->andReturn(123);
+
+        $return = $throttle->make($data);
 
         $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testMakeError()
-    {
-        $throttle = $this->getFactory();
-
-        $array = array('error' => 'test');
-
-        $throttle->make($array, 10, 60);
     }
 
     protected function getFactory()

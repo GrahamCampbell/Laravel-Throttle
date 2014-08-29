@@ -82,7 +82,7 @@ This class implements `Throttler\ThrottlerInterface` completely. This is the onl
 
 This interface defines the public methods a throttler factory class must implement. Such a class must only implement one method.
 
-The `'make'` method will create a new throttler class (a class that implements `Throttler\ThrottlerInterface`) from the 1-3 parameters that you pass to it. It accepts the same parameters as the `'get'` method on the `Throttle` class. Please read the docs for that method for information on parameters and expected usage. This documentation of an internal interface is included for advanced users who may wish to write their own factory classes to make their own custom throttler classes.
+The `'make'` method will create a new throttler class (a class that implements `Throttler\ThrottlerInterface`) from data object you pass to it. This documentation of an internal interface is included for advanced users who may wish to write their own factory classes to make their own custom throttler classes.
 
 ##### Factories\CacheFactory
 

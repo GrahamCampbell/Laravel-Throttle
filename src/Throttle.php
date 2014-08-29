@@ -17,7 +17,7 @@
 namespace GrahamCampbell\Throttle;
 
 use GrahamCampbell\Throttle\Factories\FactoryInterface;
-use Illuminate\Http\Request;
+use GrahamCampbell\Throttle\Transformers\TransformerFactory;
 
 /**
  * This is the throttle class.
@@ -31,7 +31,7 @@ class Throttle
     /**
      * The cached throttler instances.
      *
-     * @var array
+     * @var \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface[]
      */
     protected $throttlers = array();
 
@@ -43,15 +43,24 @@ class Throttle
     protected $factory;
 
     /**
+     * The factory instance.
+     *
+     * @var \GrahamCampbell\Throttle\Transformers\TransformerFactory
+     */
+    protected $transformer;
+
+    /**
      * Create a new instance.
      *
      * @param \GrahamCampbell\Throttle\Factories\FactoryInterface $factory
+     * @param \GrahamCampbell\Throttle\TransformerFactory          $transformer
      *
      * @return void
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct(FactoryInterface $factory, TransformerFactory $transformer)
     {
         $this->factory = $factory;
+        $this->transformer = $transformer;
     }
 
     /**
@@ -65,38 +74,13 @@ class Throttle
      */
     public function get($data, $limit = 10, $time = 60)
     {
-        $key = $this->getKey($data, $limit, $time);
+        $transformed = $this->transformer->make($data)->transform($data, $limit, $time);
 
-        if (!array_key_exists($key, $this->throttlers)) {
-            $this->throttlers[$key] = $this->factory->make($data, $limit, $time);
+        if (!array_key_exists($key = $transformed->getKey(), $this->throttlers)) {
+            $this->throttlers[$key] = $this->factory->make($transformed);
         }
 
         return $this->throttlers[$key];
-    }
-
-    /**
-     * Get the key.
-     *
-     * @param string[]|\Illuminate\Http\Request $data
-     * @param int                               $limit
-     * @param int                               $time
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return string
-     */
-    protected function getKey($data, $limit = 10, $time = 60)
-    {
-        if (is_object($data) && $data instanceof Request)
-        {
-            return md5(spl_object_hash($data).$limit.$time);
-        }
-
-        if (is_array($data)) {
-            return md5(serialize($data).$limit.$time);
-        }
-
-        throw new \InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
     }
 
     /**
@@ -107,6 +91,18 @@ class Throttle
     public function getFactory()
     {
         return $this->factory;
+    }
+
+    /**
+     * Get the transformer instance.
+     *
+     * @codeCoverageIgnore
+     *
+     * @return \GrahamCampbell\Throttle\Transformers\TransformerFactory
+     */
+    public function getTransformer()
+    {
+        return $this->transformer;
     }
 
     /**

@@ -14,33 +14,31 @@
  * limitations under the License.
  */
 
-namespace GrahamCampbell\Tests\Throttle;
+namespace GrahamCampbell\Throttle\Transformers;
 
-use GrahamCampbell\TestBench\Traits\ServiceProviderTestCaseTrait;
+use GrahamCampbell\Throttle\Data;
+use Illuminate\Http\Request;
 
 /**
- * This is the service provider test class.
+ * This is the request transformer class.
  *
  * @author    Graham Campbell <graham@mineuk.com>
  * @copyright 2013-2014 Graham Campbell
  * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
-class ServiceProviderTest extends AbstractTestCase
+class RequestTransformer implements TransformerInterface
 {
-    use ServiceProviderTestCaseTrait;
-
-    public function testThrottleFactoryIsInjectable()
+    /**
+     * Transform the data into a new data instance.
+     *
+     * @param \Illuminate\Http\Request $data
+     * @param int                      $limit
+     * @param int                      $time
+     *
+     * @return \GrahamCampbell\Throttle\Data
+     */
+    public function transform($data, $limit = 10, $time = 60)
     {
-        $this->assertIsInjectable('GrahamCampbell\Throttle\Factories\FactoryInterface');
-    }
-
-    public function testTransformerFactoryIsInjectable()
-    {
-        $this->assertIsInjectable('GrahamCampbell\Throttle\Transformers\TransformerFactory');
-    }
-
-    public function testThrottleIsInjectable()
-    {
-        $this->assertIsInjectable('GrahamCampbell\Throttle\Throttle');
+        return new Data((string) $data->getClientIp(), (string) $data->path(), (int) $limit, (int) $time);
     }
 }

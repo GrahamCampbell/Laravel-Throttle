@@ -14,25 +14,37 @@
  * limitations under the License.
  */
 
-namespace GrahamCampbell\Throttle\Factories;
+namespace GrahamCampbell\Throttle\Transformers;
 
 use GrahamCampbell\Throttle\Data;
+use InvalidArgumentException;
 
 /**
- * This is the throttler factory interface.
+ * This is the array transformer class.
  *
  * @author    Graham Campbell <graham@mineuk.com>
  * @copyright 2013-2014 Graham Campbell
  * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
-interface FactoryInterface
+class ArrayTransformer implements TransformerInterface
 {
     /**
-     * Make a new throttler instance.
+     * Transform the data into a new data instance.
      *
-     * @param \GrahamCampbell\Throttle\Data $data
+     * @param string[] $data
+     * @param int      $limit
+     * @param int      $time
      *
-     * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
+     * @throws \InvalidArgumentException
+     *
+     * @return \GrahamCampbell\Throttle\Data
      */
-    public function make(Data $data);
+    public function transform($data, $limit = 10, $time = 60)
+    {
+        if ($ip = array_get($data, 'ip') && $route = array_get($data, 'route')) {
+            return new Data((string) $ip, (string) $route, (int) $limit, (int) $time);
+        }
+
+        throw new InvalidArgumentException('The data array does not provide the required ip and route information.');
+    }
 }

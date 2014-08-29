@@ -49,7 +49,7 @@ class CacheThrottler implements ThrottlerInterface
     protected $limit;
 
     /**
-     * The the expiration time.
+     * The expiration time.
      *
      * @var int
      */
