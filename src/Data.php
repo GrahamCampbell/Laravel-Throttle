@@ -149,7 +149,7 @@ class Data
     public function getKey()
     {
         if (!$this->key) {
-            $this->key = md5($this->ip . $this->route . $this->limit . $this->time);
+            $this->key = md5($this->ip.$this->route.$this->limit.$this->time);
         }
 
         return $this->key;

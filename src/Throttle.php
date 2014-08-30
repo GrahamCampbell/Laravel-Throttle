@@ -53,7 +53,7 @@ class Throttle
      * Create a new instance.
      *
      * @param \GrahamCampbell\Throttle\Factories\FactoryInterface $factory
-     * @param \GrahamCampbell\Throttle\TransformerFactory          $transformer
+     * @param \GrahamCampbell\Throttle\TransformerFactory         $transformer
      *
      * @return void
      */
