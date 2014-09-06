@@ -38,7 +38,7 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->attempt();
 
-        $this->assertEquals(true, $return);
+        $this->assertSame(true, $return);
     }
 
     public function testCountHit()
@@ -54,7 +54,7 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->count();
 
-        $this->assertEquals($return, 1);
+        $this->assertSame($return, 1);
     }
 
     public function testCountClear()
@@ -69,7 +69,7 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->count();
 
-        $this->assertEquals($return, 0);
+        $this->assertSame($return, 0);
     }
 
     public function testCountCheckTrue()
@@ -80,11 +80,11 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->count();
 
-        $this->assertEquals($return, 0);
+        $this->assertSame($return, 0);
 
         $return = $throttler->check();
 
-        $this->assertEquals($return, true);
+        $this->assertSame($return, true);
     }
 
     public function testCountCheckFalse()
@@ -95,11 +95,11 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->count();
 
-        $this->assertEquals($return, 11);
+        $this->assertSame($return, 11);
 
         $return = $throttler->check();
 
-        $this->assertEquals($return, false);
+        $this->assertSame($return, false);
     }
 
     protected function getThrottler()

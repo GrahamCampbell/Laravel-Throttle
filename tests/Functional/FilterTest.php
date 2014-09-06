@@ -87,6 +87,9 @@ class FilterTest extends AbstractTestCase
         $this->hit(3, 300);
     }
 
+    /**
+     * @expectedException \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
+     */
     protected function hit($times = 10, $time = 3600)
     {
         for ($i = 0; $i < $times; $i++) {
@@ -97,8 +100,9 @@ class FilterTest extends AbstractTestCase
         try {
             $this->call('GET', 'throttle-test-route');
         } catch (TooManyRequestsHttpException $e) {
-            $this->assertEquals('Rate limit exceed.', $e->getMessage());
-            $this->assertEquals($time, $e->getHeaders()['Retry-After']);
+            $this->assertSame('Rate limit exceed.', $e->getMessage());
+            $this->assertSame($time, $e->getHeaders()['Retry-After']);
+            throw $e;
         }
     }
 }
