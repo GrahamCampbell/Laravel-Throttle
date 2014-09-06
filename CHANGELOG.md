@@ -5,6 +5,8 @@ CHANGE LOG
 ## V2.0.0 (Upcoming)
 
 * Re-write using transformers
+* Tweaked the limit functionality
+* Improved the test suite
 
 
 ## V1.0.2 (09/08/2014)
