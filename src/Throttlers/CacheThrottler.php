@@ -145,7 +145,7 @@ class CacheThrottler implements ThrottlerInterface
      */
     public function check()
     {
-        return ($this->count() <= $this->limit);
+        return ($this->count() <= $this->limit + 1);
     }
 
     /**
