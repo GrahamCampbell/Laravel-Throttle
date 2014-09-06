@@ -60,16 +60,28 @@ class FilterTest extends AbstractTestCase
         $this->app['cache']->driver('array')->flush();
     }
 
-    public function testBasicFilter()
+    public function testBasicFilterSuccess()
     {
         $this->app['router']->get('throttle-test-route', array('before' => 'throttle', function () {
             return 'Why herro there!';
         }));
 
-        $this->hit();
+        $this->hit(10);
     }
 
-    public function testCustomLimit()
+    /**
+     * @expectedException \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
+     */
+    public function testBasicFilterFailure()
+    {
+        $this->app['router']->get('throttle-test-route', array('before' => 'throttle', function () {
+            return 'Why herro there!';
+        }));
+
+        $this->hit(11);
+    }
+
+    public function testCustomLimitSuccess()
     {
         $this->app['router']->get('throttle-test-route', array('before' => 'throttle:5', function () {
             return 'Why herro there!';
@@ -78,7 +90,19 @@ class FilterTest extends AbstractTestCase
         $this->hit(5);
     }
 
-    public function testCustomTime()
+    /**
+     * @expectedException \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
+     */
+    public function testCustomLimitFailure()
+    {
+        $this->app['router']->get('throttle-test-route', array('before' => 'throttle:5', function () {
+            return 'Why herro there!';
+        }));
+
+        $this->hit(6);
+    }
+
+    public function testCustomTimeSuccess()
     {
         $this->app['router']->get('throttle-test-route', array('before' => 'throttle:3,5', function () {
             return 'Why herro there!';
@@ -90,12 +114,26 @@ class FilterTest extends AbstractTestCase
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
      */
-    protected function hit($times = 10, $time = 3600)
+    public function testCustomTimeFailure()
     {
+        $this->app['router']->get('throttle-test-route', array('before' => 'throttle:3,5', function () {
+            return 'Why herro there!';
+        }));
+
+        $this->hit(4, 300);
+    }
+
+    protected function hit($times, $time = 3600)
+    {
+        // echo "\n";
+
         for ($i = 0; $i < $times; $i++) {
+            // echo "hit\n";
             $this->call('GET', 'throttle-test-route');
             $this->assertResponseOk();
         }
+
+        // echo "done\n";
 
         try {
             $this->call('GET', 'throttle-test-route');

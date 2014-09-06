@@ -38,7 +38,7 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->attempt();
 
-        $this->assertSame(true, $return);
+        $this->assertTrue($return);
     }
 
     public function testCountHit()
@@ -54,7 +54,7 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->count();
 
-        $this->assertSame($return, 1);
+        $this->assertSame(1, $return);
     }
 
     public function testCountClear()
@@ -69,7 +69,7 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->count();
 
-        $this->assertSame($return, 0);
+        $this->assertSame(0, $return);
     }
 
     public function testCountCheckTrue()
@@ -80,14 +80,14 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->count();
 
-        $this->assertSame($return, 0);
+        $this->assertSame(0, $return);
 
         $return = $throttler->check();
 
-        $this->assertSame($return, true);
+        $this->assertTrue($return);
     }
 
-    public function testCountCheckFalse()
+    public function testCountCheckEdge()
     {
         $throttler = $this->getThrottler();
 
@@ -95,11 +95,26 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->count();
 
-        $this->assertSame($return, 11);
+        $this->assertSame(11, $return);
 
         $return = $throttler->check();
 
-        $this->assertSame($return, false);
+        $this->assertTrue($return);
+    }
+
+    public function testCountCheckFalse()
+    {
+        $throttler = $this->getThrottler();
+
+        $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(12);
+
+        $return = $throttler->count();
+
+        $this->assertSame(12, $return);
+
+        $return = $throttler->check();
+
+        $this->assertFalse($return);
     }
 
     protected function getThrottler()
