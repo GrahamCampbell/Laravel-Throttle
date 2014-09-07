@@ -17,7 +17,6 @@
 namespace GrahamCampbell\Throttle\Transformers;
 
 use GrahamCampbell\Throttle\Data;
-use Illuminate\Http\Request;
 
 /**
  * This is the request transformer class.
