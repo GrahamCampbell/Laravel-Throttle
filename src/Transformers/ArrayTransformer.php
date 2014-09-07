@@ -31,9 +31,9 @@ class ArrayTransformer implements TransformerInterface
     /**
      * Transform the data into a new data instance.
      *
-     * @param string[] $data
-     * @param int      $limit
-     * @param int      $time
+     * @param array $data
+     * @param int   $limit
+     * @param int   $time
      *
      * @throws \InvalidArgumentException
      *

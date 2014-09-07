@@ -28,9 +28,9 @@ interface TransformerInterface
     /**
      * Transform the data into a new data instance.
      *
-     * @param string[]|\Illuminate\Http\Request $data
-     * @param int                               $limit
-     * @param int                               $time
+     * @param array|\Illuminate\Http\Request $data
+     * @param int                            $limit
+     * @param int                            $time
      *
      * @return \GrahamCampbell\Throttle\Data
      */

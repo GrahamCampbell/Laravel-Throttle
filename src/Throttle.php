@@ -66,9 +66,9 @@ class Throttle
     /**
      * Get a new throttler.
      *
-     * @param string[]|\Illuminate\Http\Request $data
-     * @param int                               $limit
-     * @param int                               $time
+     * @param array|\Illuminate\Http\Request $data
+     * @param int                            $limit
+     * @param int                            $time
      *
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
