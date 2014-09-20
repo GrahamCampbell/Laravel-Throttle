@@ -2,7 +2,7 @@ CHANGE LOG
 ==========
 
 
-## V2.0.0 (Upcoming)
+## V2.0 (Upcoming)
 
 * Re-write using transformers
 * Tweaked the limit functionality
