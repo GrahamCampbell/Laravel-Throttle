@@ -41,7 +41,7 @@ class FilterTest extends AbstractTestCase
     /**
      * Additional application environment setup.
      *
-     * @param \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      *
      * @return void
      */

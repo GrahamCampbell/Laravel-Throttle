@@ -49,7 +49,7 @@ class CacheThrottleTest extends AbstractTestCase
 
     protected function getFactory()
     {
-        $cache = Mockery::mock('Illuminate\Cache\Repository');
+        $cache = Mockery::mock('Illuminate\Contracts\Cache\Cache');
 
         return new CacheFactory($cache);
     }

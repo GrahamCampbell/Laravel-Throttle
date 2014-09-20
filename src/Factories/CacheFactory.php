@@ -18,7 +18,7 @@ namespace GrahamCampbell\Throttle\Factories;
 
 use GrahamCampbell\Throttle\Data;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
-use Illuminate\Cache\Repository;
+use Illuminate\Contracts\Cache\Cache;
 
 /**
  * This is the cache throttler factory class.
@@ -32,14 +32,14 @@ class CacheFactory implements FactoryInterface
     /**
      * The cache instance.
      *
-     * @var \Illuminate\Cache\Repository
+     * @var \Illuminate\Contracts\Cache\Cache
      */
     protected $cache;
 
     /**
      * Create a new instance.
      *
-     * @param \Illuminate\Cache\Repository $cache
+     * @param \Illuminate\Contracts\Cache\Cache $cache
      *
      * @return void
      */
@@ -65,7 +65,7 @@ class CacheFactory implements FactoryInterface
     /**
      * Get the cache instance.
      *
-     * @return \Illuminate\Cache\Repository
+     * @return \Illuminate\Contracts\Cache\Cache
      */
     public function getCache()
     {
