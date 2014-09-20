@@ -43,7 +43,7 @@ class CacheFactory implements FactoryInterface
      *
      * @return void
      */
-    public function __construct(Repository $cache)
+    public function __construct(Cache $cache)
     {
         $this->cache = $cache;
     }
