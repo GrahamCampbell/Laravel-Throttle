@@ -17,6 +17,7 @@
 namespace GrahamCampbell\Throttle;
 
 use Illuminate\Support\ServiceProvider;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 /**
  * This is the throttle service provider class.
@@ -43,7 +44,24 @@ class ThrottleServiceProvider extends ServiceProvider
     {
         $this->package('graham-campbell/throttle', 'graham-campbell/throttle', __DIR__);
 
-        include __DIR__.'/filters.php';
+        $this->setupFilters();
+    }
+
+    /**
+     * Setup the filters.
+     *
+     * @return void
+     */
+    protected function setupFilters()
+    {
+        $router = $this->app['router'];
+        $throttle = $this->app['throttle'];
+
+        $router->filter('throttle', function ($route, $request, $limit = 10, $time = 60) use ($throttle) {
+            if (!$throttle->attempt($request, $limit, $time)) {
+                throw new TooManyRequestsHttpException($time * 60, 'Rate limit exceed.');
+            }
+        });
     }
 
     /**
