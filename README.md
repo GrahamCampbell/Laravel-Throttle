@@ -160,7 +160,7 @@ $request = Request::getFacadeRoot();
 // the attempt function will hit the throttle, then return check
 var_dump(Throttle::attempt($request));
 
-// this is the same as writing
+// so this is the same as writing
 var_dump(Throttle::hit($request)->check());
 
 // and, of course, the same as
