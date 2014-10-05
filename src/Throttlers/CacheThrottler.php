@@ -16,6 +16,7 @@
 
 namespace GrahamCampbell\Throttle\Throttlers;
 
+use Countable;
 use Illuminate\Cache\StoreInterface;
 
 /**
@@ -25,7 +26,7 @@ use Illuminate\Cache\StoreInterface;
  * @copyright 2013-2014 Graham Campbell
  * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
-class CacheThrottler implements ThrottlerInterface
+class CacheThrottler implements ThrottlerInterface, Countable
 {
     /**
      * The store instance.

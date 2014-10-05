@@ -117,6 +117,16 @@ class CacheThrottlerTest extends AbstractTestCase
         $this->assertFalse($return);
     }
 
+    public function testIsCountable()
+    {
+        $throttler = $this->getThrottler();
+
+        $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(42);
+
+        $this->assertInstanceOf('Countable', $throttler);
+        $this->assertCount(42, $throttler);
+    }
+
     protected function getThrottler()
     {
         $store = Mockery::mock('Illuminate\Cache\StoreInterface');
