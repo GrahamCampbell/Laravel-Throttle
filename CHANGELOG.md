@@ -7,7 +7,7 @@ CHANGE LOG
 * Upgraded to laravel 5
 
 
-## V2.0 (Upcoming)
+## V2.0 (05/10/2014)
 
 * Re-write using transformers
 * Tweaked the limit functionality
