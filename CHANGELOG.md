@@ -11,6 +11,7 @@ CHANGE LOG
 
 * Re-write using transformers
 * Tweaked the limit functionality
+* Made the throtter countable
 * Improved the test suite
 * Added cs fixers to the test suite
 * Improved the docs
