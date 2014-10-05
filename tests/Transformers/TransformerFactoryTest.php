@@ -16,9 +16,9 @@
 
 namespace GrahamCampbell\Tests\Throttle\Transformers;
 
-use Mockery;
 use GrahamCampbell\TestBench\AbstractTestCase;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;
+use Mockery;
 
 /**
  * This is the transformer factory test class.

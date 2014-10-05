@@ -16,9 +16,9 @@
 
 namespace GrahamCampbell\Tests\Throttle\Throttlers;
 
-use Mockery;
-use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
 use GrahamCampbell\TestBench\AbstractTestCase;
+use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
+use Mockery;
 
 /**
  * This is the cache throttler test class.

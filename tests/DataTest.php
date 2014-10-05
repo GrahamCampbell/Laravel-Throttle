@@ -16,8 +16,8 @@
 
 namespace GrahamCampbell\Tests\Throttle;
 
-use GrahamCampbell\Throttle\Data;
 use GrahamCampbell\TestBench\AbstractTestCase as AbstractTestBenchTestCase;
+use GrahamCampbell\Throttle\Data;
 
 /**
  * This is the data test class.

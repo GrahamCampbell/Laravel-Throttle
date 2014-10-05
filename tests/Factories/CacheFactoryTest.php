@@ -16,9 +16,9 @@
 
 namespace GrahamCampbell\Tests\Throttle\Factories;
 
-use Mockery;
-use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\TestBench\AbstractTestCase;
+use GrahamCampbell\Throttle\Factories\CacheFactory;
+use Mockery;
 
 /**
  * This is the cache factory test class.
@@ -27,7 +27,7 @@ use GrahamCampbell\TestBench\AbstractTestCase;
  * @copyright 2013-2014 Graham Campbell
  * @license   <https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/LICENSE.md> Apache 2.0
  */
-class CacheThrottleTest extends AbstractTestCase
+class CacheFactoryTest extends AbstractTestCase
 {
     public function testMake()
     {
