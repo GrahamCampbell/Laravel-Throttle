@@ -81,7 +81,7 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     protected function registerTransformer()
     {
-        $this->app->bindShared('throttle.transformer', function ($app) {
+        $this->app->bindShared('throttle.transformer', function () {
             return new Transformers\TransformerFactory();
         });
 
