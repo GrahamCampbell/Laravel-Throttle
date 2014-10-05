@@ -80,7 +80,7 @@ The `'check'` method will return a boolean representing whether or not the hit l
 
 ##### Throttler\CacheThrottler
 
-This class implements `Throttler\ThrottlerInterface` completely. This is the only throttler implementation shipped with this package, and in created by the `Factories\CacheFactory` class.
+This class implements `Throttler\ThrottlerInterface` completely. This is the only throttler implementation shipped with this package, and in created by the `Factories\CacheFactory` class. Note that this class also implements PHP's `Countable` interface.
 
 ##### Factories\FactoryInterface
 
@@ -99,6 +99,55 @@ This class contains no public methods of interest. This class should be added to
 ##### Filters
 
 You may put the `throttle` filter in front of your routes to throttle them. The filter can take up to two parameters. The two parameters are `limit` and `time`. It may be useful for you to take a look at the [source](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/src/filters.php) for this, read the [tests](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/tests/Functional/FilterTest.php), or check out Laravel's [documentation](http://laravel.com/docs/routing#route-filters) if you need to.
+
+
+##### Real Examples
+
+Here you can see an example of just how simple this package is to use.
+
+Our first example will be a super simple usage of our default filter. This will setup a filter for that url with a limit of 10 hits and a retention time of 1 hour.
+
+```php
+use Illuminate\Support\Facades\Route;
+
+Route::get('foo', array('before' => 'throttle', function () {
+    return 'Why herro there!';
+}, ));
+```
+
+What if we want custom limits? Easy! Laravel allows us to pass parameters to a filters. This will setup a filter for that url with a limit of 50 hits and a retention time of 30 mins.
+
+```php
+use Illuminate\Support\Facades\Route;
+
+Route::get('foo', array('before' => 'throttle:50,30', function () {
+    return 'Why herro there!';
+}, ));
+```
+
+What if we don't want to use the default filters provided with this package? Well, that's easy too.
+
+```php
+use GrahamCampbell\Throttle\Facades\Throttle;
+use Illuminate\Support\Facades\Request;
+
+// let's quickly get the current request object
+$request = Request::getFacadeRoot();
+
+// now let's get a throttler object for that request
+// we'll use the same config as in the previous example
+// note that only the first parameter is "required"
+$throttler = Throttle::get($request, 50, 30);
+
+// let's check if we've gone over the limit
+var_dump($thottler->check());
+
+// we implement Countable
+var_dump(count($thottler));
+
+// there are a few more functions available
+// please see the previous documentation
+```
 
 ##### Further Information
 
