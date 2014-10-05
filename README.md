@@ -149,6 +149,24 @@ var_dump(count($thottler));
 // please see the previous documentation
 ```
 
+Also note that you can call methods straight on the factory instead of calling the get method.
+
+```php
+use GrahamCampbell\Throttle\Facades\Throttle;
+use Illuminate\Support\Facades\Request;
+
+$request = Request::getFacadeRoot();
+
+// the attempt function will hit the throttle, then return check
+var_dump(Throttle::attempt($request));
+
+// this is the same as writing
+var_dump(Throttle::hit($request)->check());
+
+// and, of course, the same as
+var_dump(Throttle::get($request)->attempt());
+```
+
 ##### Further Information
 
 There are other classes in this package that are not documented here (such as the transformers). This is because they are not intended for public use and are used internally by this package.
