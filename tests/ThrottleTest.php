@@ -16,10 +16,10 @@
 
 namespace GrahamCampbell\Tests\Throttle;
 
-use Mockery;
+use GrahamCampbell\TestBench\AbstractTestCase as AbstractTestBenchTestCase;
 use GrahamCampbell\Throttle\Data;
 use GrahamCampbell\Throttle\Throttle;
-use GrahamCampbell\TestBench\AbstractTestCase as AbstractTestBenchTestCase;
+use Mockery;
 
 /**
  * This is the throttle test class.

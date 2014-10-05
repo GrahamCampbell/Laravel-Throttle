@@ -1,22 +1,17 @@
 Laravel Throttle
 ================
 
-
-[![Build Status](https://img.shields.io/travis/GrahamCampbell/Laravel-Throttle/master.svg?style=flat-square)](https://travis-ci.org/GrahamCampbell/Laravel-Throttle)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/GrahamCampbell/Laravel-Throttle.svg?style=flat-square)](https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/GrahamCampbell/Laravel-Throttle.svg?style=flat-square)](https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle)
-[![Software License](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Latest Version](https://img.shields.io/github/release/GrahamCampbell/Laravel-Throttle.svg?style=flat-square)](https://github.com/GrahamCampbell/Laravel-Throttle/releases)
-
-
-### Looking for a laravel 4 compatable version?
-
-Checkout the [2.0 branch](https://github.com/GrahamCampbell/Laravel-Throttle/tree/2.0), installable by requiring `"graham-campbell/throttle": "~2.0"`.
-
-
-## Introduction
-
 Laravel Throttle was created by, and is maintained by [Graham Campbell](https://github.com/GrahamCampbell), and is a rate limiter for [Laravel 5](http://laravel.com). Feel free to check out the [change log](CHANGELOG.md), [releases](https://github.com/GrahamCampbell/Laravel-Throttle/releases), [license](LICENSE.md), [api docs](http://docs.grahamjcampbell.co.uk), and [contribution guidelines](CONTRIBUTING.md).
+
+![Laravel Throttle](https://cloud.githubusercontent.com/assets/2829600/4432295/c1211b62-468c-11e4-9453-eb23480c7674.PNG)
+
+<p align="center">
+<a href="https://travis-ci.org/GrahamCampbell/Laravel-Throttle"><img src="https://img.shields.io/travis/GrahamCampbell/Laravel-Throttle/master.svg?style=flat-square" alt="Build Status"></img></a>
+<a href="https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle/code-structure"><img src="https://img.shields.io/scrutinizer/coverage/g/GrahamCampbell/Laravel-Throttle.svg?style=flat-square" alt="Coverage Status"></img></a>
+<a href="https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle"><img src="https://img.shields.io/scrutinizer/g/GrahamCampbell/Laravel-Throttle.svg?style=flat-square" alt="Quality Score"></img></a>
+<a href="LICENSE.md"><img src="https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg?style=flat-square" alt="Software License"></img></a>
+<a href="https://github.com/GrahamCampbell/Laravel-Throttle/releases"><img src="https://img.shields.io/github/release/GrahamCampbell/Laravel-Throttle.svg?style=flat-square" alt="Latest Version"></img></a>
+</p>
 
 
 ## Installation
@@ -32,6 +27,10 @@ Once Laravel Throttle is installed, you need to register the service provider. O
 You can register the Throttle facade in the `aliases` key of your `app/config/app.php` file if you like.
 
 * `'Throttle' => 'GrahamCampbell\Throttle\Facades\Throttle'`
+
+#### Looking for a laravel 4 compatable version?
+
+Checkout the [2.0 branch](https://github.com/GrahamCampbell/Laravel-Throttle/tree/2.0), installable by requiring `"graham-campbell/throttle": "~2.0"`.
 
 
 ## Configuration

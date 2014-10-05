@@ -133,7 +133,7 @@ class ThrottleServiceProvider extends ServiceProvider
         return array(
             'throttle',
             'throttle.factory',
-            'throttle.transformer'
+            'throttle.transformer',
         );
     }
 }

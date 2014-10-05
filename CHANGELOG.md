@@ -12,6 +12,8 @@ CHANGE LOG
 * Re-write using transformers
 * Tweaked the limit functionality
 * Improved the test suite
+* Added cs fixers to the test suite
+* Improved the docs
 
 
 ## V1.0.2 (09/08/2014)
