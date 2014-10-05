@@ -102,6 +102,8 @@ You may put the `throttle` filter in front of your routes to throttle them. The 
 
 ##### Further Information
 
+There are other classes in this package that are not documented here (such as the transformers). This is because they are not intended for public use and are used internally by this package.
+
 Feel free to check out the [API Documentation](http://docs.grahamjcampbell.co.uk) for Laravel Throttle.
 
 You may see an example of implementation in [Laravel Credentials](https://github.com/GrahamCampbell/Laravel-Credentials) and [Bootstrap CMS](https://github.com/GrahamCampbell/Bootstrap-CMS).
