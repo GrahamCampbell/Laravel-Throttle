@@ -40,7 +40,7 @@ Laravel Throttle supports optional configuration.
 To get started, first publish the package config file:
 
 ```bash
-$ php artisan config:publish graham-campbell/throttle
+$ php artisan publish:config graham-campbell/throttle
 ```
 
 There is one config option:
