@@ -17,6 +17,7 @@
 namespace GrahamCampbell\Tests\Throttle\Functional;
 
 use GrahamCampbell\Tests\Throttle\AbstractTestCase;
+use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 /**
@@ -29,23 +30,13 @@ use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 class FilterTest extends AbstractTestCase
 {
     /**
-     * Specify if routing filters are enabled.
-     *
-     * @return bool
-     */
-    protected function enableFilters()
-    {
-        return true;
-    }
-
-    /**
      * Additional application environment setup.
      *
      * @param \Illuminate\Contracts\Foundation\Application $app
      *
      * @return void
      */
-    protected function additionalSetup($app)
+    protected function additionalSetup(Application $app)
     {
         $app['config']->set('graham-campbell/throttle::driver', 'array');
     }
