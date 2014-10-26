@@ -26,11 +26,11 @@ To get the latest version of Laravel Throttle, simply add the following line to 
 
 You'll then need to run `composer install` or `composer update` to download it and have the autoloader updated.
 
-Once Laravel Throttle is installed, you need to register the service provider. Open up `app/config/app.php` and add the following to the `providers` key.
+Once Laravel Throttle is installed, you need to register the service provider. Open up `config/app.php` and add the following to the `providers` key.
 
 * `'GrahamCampbell\Throttle\ThrottleServiceProvider'`
 
-You can register the Throttle facade in the `aliases` key of your `app/config/app.php` file if you like.
+You can register the Throttle facade in the `aliases` key of your `config/app.php` file if you like.
 
 * `'Throttle' => 'GrahamCampbell\Throttle\Facades\Throttle'`
 
@@ -53,7 +53,7 @@ There is one config option:
 
 ##### Cache Driver
 
-This option (`'driver'`) defines the cache driver to be used. It may be the name of any driver set in app/config/cache.php. Setting it to null will use the driver you have set as default in app/config/cache.php. Please note that a driver that supports cache tags is required. The default value for this setting is `null`.
+This option (`'driver'`) defines the cache driver to be used. It may be the name of any driver set in config/cache.php. Setting it to null will use the driver you have set as default in config/cache.php. Please note that a driver that supports cache tags is required. The default value for this setting is `null`.
 
 
 ## Usage
@@ -100,7 +100,7 @@ This class implements `Factories\FactoryInterface` completely. This is the only 
 
 ##### ThrottleServiceProvider
 
-This class contains no public methods of interest. This class should be added to the providers array in `app/config/app.php`. This class will setup ioc bindings.
+This class contains no public methods of interest. This class should be added to the providers array in `config/app.php`. This class will setup ioc bindings.
 
 ##### Filters
 
