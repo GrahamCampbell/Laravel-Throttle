@@ -83,7 +83,7 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     protected function registerFactory()
     {
-        $this->app->bindShared('throttle.factory', function ($app) {
+        $this->app->singleton('throttle.factory', function ($app) {
             $cache = $app['cache']->driver($app['config']['graham-campbell/throttle::driver']);
 
             return new Factories\CacheFactory($cache);
@@ -99,7 +99,7 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     protected function registerTransformer()
     {
-        $this->app->bindShared('throttle.transformer', function () {
+        $this->app->singleton('throttle.transformer', function () {
             return new Transformers\TransformerFactory();
         });
 
@@ -113,7 +113,7 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     protected function registerThrottle()
     {
-        $this->app->bindShared('throttle', function ($app) {
+        $this->app->singleton('throttle', function ($app) {
             $factory = $app['throttle.factory'];
             $transformer = $app['throttle.transformer'];
 
