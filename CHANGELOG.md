@@ -2,6 +2,11 @@ CHANGE LOG
 ==========
 
 
+## V2.0.1 (Upcoming)
+
+* Tweaked the array transformer
+
+
 ## V2.0 (05/10/2014)
 
 * Re-write using transformers
