@@ -2,7 +2,7 @@ CHANGE LOG
 ==========
 
 
-## V2.0.1 (Upcoming)
+## V2.0.1 (30/10/2014)
 
 * Tweaked the array transformer
 
