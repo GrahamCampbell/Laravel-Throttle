@@ -36,7 +36,7 @@ class FilterTest extends AbstractTestCase
      *
      * @return void
      */
-    protected function additionalSetup(Application $app)
+    protected function additionalSetup($app)
     {
         $app['config']->set('graham-campbell/throttle::driver', 'array');
     }
