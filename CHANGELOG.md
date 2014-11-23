@@ -7,6 +7,11 @@ CHANGE LOG
 * Upgraded to laravel 5
 
 
+## V2.0.2 (Upcoming)
+
+* Removed the cs fixers
+
+
 ## V2.0.1 (30/10/2014)
 
 * Tweaked the array transformer
