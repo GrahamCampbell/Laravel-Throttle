@@ -113,7 +113,7 @@ class Data
     public function getRouteKey()
     {
         if (!$this->routeKey) {
-            $this->routeKey = md5($this->route);
+            $this->routeKey = sha1($this->route);
         }
 
         return $this->routeKey;
@@ -149,7 +149,7 @@ class Data
     public function getKey()
     {
         if (!$this->key) {
-            $this->key = md5($this->ip.$this->route.$this->limit.$this->time);
+            $this->key = sha1($this->ip.$this->route);
         }
 
         return $this->key;

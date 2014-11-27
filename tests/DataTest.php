@@ -46,7 +46,7 @@ class DataTest extends AbstractTestBenchTestCase
     {
         $data = $this->getData();
 
-        $this->assertSame('72bdf68973bae84cb0fc9ad08f49b799', $data->getRouteKey());
+        $this->assertSame('7f0b5fb00418ce23a73fb23b055519cad18033ff', $data->getRouteKey());
     }
 
     public function testGetLimit()
@@ -67,7 +67,7 @@ class DataTest extends AbstractTestBenchTestCase
     {
         $data = $this->getData();
 
-        $this->assertSame('648af8e05d0872dd391879160369caea', $data->getKey());
+        $this->assertSame('9fa39d579031694fbc8e2931aa354df18883e5f2', $data->getKey());
     }
 
     protected function getData()

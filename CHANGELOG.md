@@ -5,6 +5,7 @@ CHANGE LOG
 ## V3.0 Beta 1 (Upcoming)
 
 * Upgraded to laravel 5
+* Updated the "key" definition
 
 
 ## V2.0.2 (Upcoming)
