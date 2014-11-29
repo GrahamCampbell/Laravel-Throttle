@@ -142,7 +142,7 @@ class Data
     /**
      * Get the unique key.
      *
-     * This key is used to identify the the data between requests.
+     * This key is used to identify the data between requests.
      *
      * @var string
      */
