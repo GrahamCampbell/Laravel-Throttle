@@ -173,6 +173,61 @@ var_dump(Throttle::hit($request)->check());
 var_dump(Throttle::get($request)->attempt());
 ```
 
+Example for using Laravel 5 Middlewares.
+
+```
+namespace App\Http\Middleware;
+
+use Closure;
+use GrahamCampbell\Throttle\Throttle;
+use Illuminate\Contracts\Routing\Middleware;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
+
+class RateLimitMiddleware implements Middleware
+{
+    /**
+     * The throttle instance.
+     *
+     * @var \GrahamCampbell\Throttle\Throttle
+     */
+    protected $throttle;
+
+    /**
+     * Create a new instance.
+     *
+     * @param \GrahamCampbell\Throttle\Throttle $throttle
+     *
+     * @return void
+     */
+    public function __construct(Throttle $throttle)
+    {
+        $this->throttle = $throttle;
+    }
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
+     *
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        $limit = 10; // request limit
+        $time = 30; // ban time
+
+        if (false === $this->throttle->attempt($request, $limit, $time)) {
+            throw new TooManyRequestsHttpException($time * 60, 'Rate limit exceed.');
+        }
+
+        return $next($request);
+    }
+}
+```
+
 ##### Further Information
 
 There are other classes in this package that are not documented here (such as the transformers). This is because they are not intended for public use and are used internally by this package.
