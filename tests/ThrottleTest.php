@@ -64,7 +64,7 @@ class ThrottleTest extends AbstractTestBenchTestCase
     {
         $factory = Mockery::mock('GrahamCampbell\Throttle\Factories\CacheFactory');
 
-        $data = array('ip' => '127.0.0.1', 'route' => 'http://laravel.com/');
+        $data = ['ip' => '127.0.0.1', 'route' => 'http://laravel.com/'];
 
         $throttler = Mockery::mock('GrahamCampbell\Throttle\Throttlers\CacheThrottler');
 

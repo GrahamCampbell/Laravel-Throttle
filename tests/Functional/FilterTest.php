@@ -62,9 +62,9 @@ class FilterTest extends AbstractTestCase
 
     public function testBasicFilterSuccess()
     {
-        $this->app['router']->get('throttle-test-route', array('before' => 'throttle', function () {
+        $this->app['router']->get('throttle-test-route', ['before' => 'throttle', function () {
             return 'Why herro there!';
-        }));
+        }]);
 
         $this->hit(10);
     }
@@ -74,18 +74,18 @@ class FilterTest extends AbstractTestCase
      */
     public function testBasicFilterFailure()
     {
-        $this->app['router']->get('throttle-test-route', array('before' => 'throttle', function () {
+        $this->app['router']->get('throttle-test-route', ['before' => 'throttle', function () {
             return 'Why herro there!';
-        }));
+        }]);
 
         $this->hit(11);
     }
 
     public function testCustomLimitSuccess()
     {
-        $this->app['router']->get('throttle-test-route', array('before' => 'throttle:5', function () {
+        $this->app['router']->get('throttle-test-route', ['before' => 'throttle:5', function () {
             return 'Why herro there!';
-        }));
+        }]);
 
         $this->hit(5);
     }
@@ -95,18 +95,18 @@ class FilterTest extends AbstractTestCase
      */
     public function testCustomLimitFailure()
     {
-        $this->app['router']->get('throttle-test-route', array('before' => 'throttle:5', function () {
+        $this->app['router']->get('throttle-test-route', ['before' => 'throttle:5', function () {
             return 'Why herro there!';
-        }));
+        }]);
 
         $this->hit(6);
     }
 
     public function testCustomTimeSuccess()
     {
-        $this->app['router']->get('throttle-test-route', array('before' => 'throttle:3,5', function () {
+        $this->app['router']->get('throttle-test-route', ['before' => 'throttle:3,5', function () {
             return 'Why herro there!';
-        }));
+        }]);
 
         $this->hit(3, 300);
     }
@@ -116,9 +116,9 @@ class FilterTest extends AbstractTestCase
      */
     public function testCustomTimeFailure()
     {
-        $this->app['router']->get('throttle-test-route', array('before' => 'throttle:3,5', function () {
+        $this->app['router']->get('throttle-test-route', ['before' => 'throttle:3,5', function () {
             return 'Why herro there!';
-        }));
+        }]);
 
         $this->hit(4, 300);
     }

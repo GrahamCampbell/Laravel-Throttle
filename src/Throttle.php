@@ -33,7 +33,7 @@ class Throttle
      *
      * @var \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface[]
      */
-    protected $throttlers = array();
+    protected $throttlers = [];
 
     /**
      * The factory instance.
@@ -115,6 +115,6 @@ class Throttle
      */
     public function __call($method, $parameters)
     {
-        return call_user_func_array(array($this, 'get'), $parameters)->$method();
+        return call_user_func_array([$this, 'get'], $parameters)->$method();
     }
 }

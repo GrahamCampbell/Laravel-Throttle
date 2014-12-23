@@ -45,7 +45,7 @@ class TransformerFactoryTest extends AbstractTestCase
     public function testArray()
     {
         $factory = new TransformerFactory();
-        $transformer = $factory->make($array = array('ip' => 'abc', 'route' => 'qwerty'));
+        $transformer = $factory->make($array = ['ip' => 'abc', 'route' => 'qwerty']);
 
         $this->assertInstanceOf('GrahamCampbell\Throttle\Transformers\ArrayTransformer', $transformer);
 
@@ -59,11 +59,11 @@ class TransformerFactoryTest extends AbstractTestCase
     public function testEmptyArray()
     {
         $factory = new TransformerFactory();
-        $transformer = $factory->make(array());
+        $transformer = $factory->make([]);
 
         $this->assertInstanceOf('GrahamCampbell\Throttle\Transformers\ArrayTransformer', $transformer);
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Data', $transformer->transform(array()));
+        $this->assertInstanceOf('GrahamCampbell\Throttle\Data', $transformer->transform([]));
     }
 
     /**
