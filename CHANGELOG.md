@@ -5,6 +5,8 @@ CHANGE LOG
 ## V2.0.2 (Upcoming)
 
 * Removed the cs fixers
+* CS fixes
+* Moved to the MIT license
 
 
 ## V2.0.1 (30/10/2014)
