@@ -2,7 +2,7 @@
     "name": "graham-campbell/throttle",
     "description": "Throttle Is A Rate Limiter For Laravel 5",
     "keywords": ["laravel", "framework", "rate limit", "throttle", "throttling", "Throttle", "Laravel Throttle", "Laravel-Throttle", "Graham Campbell", "GrahamCampbell"],
-    "license": "Apache-2.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Graham Campbell",

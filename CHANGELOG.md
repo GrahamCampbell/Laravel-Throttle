@@ -8,9 +8,11 @@ CHANGE LOG
 * Updated the "key" definition
 
 
-## V2.0.2 (Upcoming)
+## V2.0.2 (04/01/2015)
 
 * Removed the cs fixers
+* CS fixes
+* Moved to the MIT license
 
 
 ## V2.0.1 (30/10/2014)
