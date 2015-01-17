@@ -12,7 +12,7 @@
 namespace GrahamCampbell\Throttle;
 
 use Illuminate\Routing\Router;
-use Illuminate\Support\ServiceProvider;
+use Orchestra\Support\Providers\ServiceProvider;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 /**
@@ -23,20 +23,13 @@ use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 class ThrottleServiceProvider extends ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
-    /**
-     * Bootstrap the application events.
+     * Boot the service provider.
      *
      * @return void
      */
     public function boot()
     {
-        $this->package('graham-campbell/throttle', 'graham-campbell/throttle', __DIR__);
+        $this->addConfigComponent('graham-campbell/throttle', 'graham-campbell/throttle', realpath(__DIR__.'/../config'));
 
         $this->setupFilters($this->app['router'], $this->app['throttle']);
     }
