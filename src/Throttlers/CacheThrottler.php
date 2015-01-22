@@ -12,7 +12,7 @@
 namespace GrahamCampbell\Throttle\Throttlers;
 
 use Countable;
-use Illuminate\Cache\StoreInterface;
+use Illuminate\Contracts\Cache\Store;
 
 /**
  * This is the cache throttler class.
@@ -24,7 +24,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
     /**
      * The store instance.
      *
-     * @var \Illuminate\Cache\StoreInterface
+     * @var \Illuminate\Contracts\Cache\Store
      */
     protected $store;
 
@@ -59,14 +59,14 @@ class CacheThrottler implements ThrottlerInterface, Countable
     /**
      * Create a new instance.
      *
-     * @param \Illuminate\Cache\StoreInterface $store
-     * @param string                           $key
-     * @param int                              $limit
-     * @param int                              $time
+     * @param \Illuminate\Contracts\Cache\Store $store
+     * @param string                            $key
+     * @param int                               $limit
+     * @param int                               $time
      *
      * @return void
      */
-    public function __construct(StoreInterface $store, $key, $limit, $time)
+    public function __construct(Store $store, $key, $limit, $time)
     {
         $this->store = $store;
         $this->key = $key;
@@ -145,7 +145,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
     /**
      * Get the store instance.
      *
-     * @return \Illuminate\Cache\StoreInterface
+     * @return \Illuminate\Contracts\Cache\Store
      */
     public function getStore()
     {

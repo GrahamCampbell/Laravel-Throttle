@@ -122,7 +122,7 @@ class CacheThrottlerTest extends AbstractTestCase
 
     protected function getThrottler()
     {
-        $store = Mockery::mock('Illuminate\Cache\StoreInterface');
+        $store = Mockery::mock('Illuminate\Contracts\Cache\Store');
         $key = 'abc';
         $limit = 10;
         $time = 60;

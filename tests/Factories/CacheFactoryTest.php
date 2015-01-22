@@ -27,7 +27,7 @@ class CacheFactoryTest extends AbstractTestCase
         $throttle = $this->getFactory();
 
         $throttle->getCache()->shouldReceive('tags')
-            ->with('throttle', '127.0.0.1')->once()->andReturn(Mockery::mock('Illuminate\Cache\StoreInterface'));
+            ->with('throttle', '127.0.0.1')->once()->andReturn(Mockery::mock('Illuminate\Contracts\Cache\Store'));
 
         $data = Mockery::mock('GrahamCampbell\Throttle\Data');
         $data->shouldReceive('getIp')->once()->andReturn('127.0.0.1');
