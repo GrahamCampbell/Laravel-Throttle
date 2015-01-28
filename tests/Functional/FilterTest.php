@@ -31,7 +31,7 @@ class FilterTest extends AbstractTestCase
      */
     protected function additionalSetup($app)
     {
-        $app['config']->set('graham-campbell/throttle::driver', 'array');
+        $app->config->set('graham-campbell/throttle::driver', 'array');
     }
 
     /**
@@ -41,12 +41,12 @@ class FilterTest extends AbstractTestCase
      */
     protected function finish()
     {
-        $this->app['cache']->driver('array')->flush();
+        $this->app->cache->driver('array')->flush();
     }
 
     public function testBasicFilterSuccess()
     {
-        $this->app['router']->get('throttle-test-route', ['before' => 'throttle', function () {
+        $this->app->router->get('throttle-test-route', ['before' => 'throttle', function () {
             return 'Why herro there!';
         }]);
 
@@ -58,7 +58,7 @@ class FilterTest extends AbstractTestCase
      */
     public function testBasicFilterFailure()
     {
-        $this->app['router']->get('throttle-test-route', ['before' => 'throttle', function () {
+        $this->app->router->get('throttle-test-route', ['before' => 'throttle', function () {
             return 'Why herro there!';
         }]);
 
@@ -67,7 +67,7 @@ class FilterTest extends AbstractTestCase
 
     public function testCustomLimitSuccess()
     {
-        $this->app['router']->get('throttle-test-route', ['before' => 'throttle:5', function () {
+        $this->app->router->get('throttle-test-route', ['before' => 'throttle:5', function () {
             return 'Why herro there!';
         }]);
 
@@ -79,7 +79,7 @@ class FilterTest extends AbstractTestCase
      */
     public function testCustomLimitFailure()
     {
-        $this->app['router']->get('throttle-test-route', ['before' => 'throttle:5', function () {
+        $this->app->router->get('throttle-test-route', ['before' => 'throttle:5', function () {
             return 'Why herro there!';
         }]);
 
@@ -88,7 +88,7 @@ class FilterTest extends AbstractTestCase
 
     public function testCustomTimeSuccess()
     {
-        $this->app['router']->get('throttle-test-route', ['before' => 'throttle:3,5', function () {
+        $this->app->router->get('throttle-test-route', ['before' => 'throttle:3,5', function () {
             return 'Why herro there!';
         }]);
 
@@ -100,7 +100,7 @@ class FilterTest extends AbstractTestCase
      */
     public function testCustomTimeFailure()
     {
-        $this->app['router']->get('throttle-test-route', ['before' => 'throttle:3,5', function () {
+        $this->app->router->get('throttle-test-route', ['before' => 'throttle:3,5', function () {
             return 'Why herro there!';
         }]);
 

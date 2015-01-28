@@ -14,9 +14,7 @@
         "illuminate/cache": "5.0.*",
         "illuminate/contracts": "5.0.*",
         "illuminate/http": "5.0.*",
-        "illuminate/support": "5.0.*",
-        "orchestra/config": "3.0.*",
-        "orchestra/support-providers": "3.0.*"
+        "illuminate/support": "5.0.*"
     },
     "require-dev": {
         "graham-campbell/testbench": "dev-master"

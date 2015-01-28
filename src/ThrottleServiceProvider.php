@@ -11,8 +11,9 @@
 
 namespace GrahamCampbell\Throttle;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Routing\Router;
-use Orchestra\Support\Providers\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 /**
@@ -29,9 +30,23 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->addConfigComponent('graham-campbell/throttle', 'graham-campbell/throttle', realpath(__DIR__.'/../config'));
+        $this->setupConfig();
 
-        $this->setupFilters($this->app['router'], $this->app['throttle']);
+        $this->setupFilters($this->app->router, $this->app->throttle);
+    }
+
+    /**
+     * Setup the config.
+     *
+     * @return void
+     */
+    protected function setupConfig()
+    {
+        $source = realpath(__DIR__.'/../config/throttle.php');
+
+        $this->publishes([$source => config_path('throttle.php')]);
+
+        $this->mergeConfigFrom('throttle', $source);
     }
 
     /**
@@ -58,56 +73,62 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerFactory();
-        $this->registerTransformer();
-        $this->registerThrottle();
+        $this->registerFactory($this->app);
+        $this->registerTransformer($this->app);
+        $this->registerThrottle($this->app);
     }
 
     /**
      * Register the factory class.
      *
+     * @param Illuminate\Contracts\Foundation\Application $app
+     *
      * @return void
      */
-    protected function registerFactory()
+    protected function registerFactory(Application $app)
     {
-        $this->app->singleton('throttle.factory', function ($app) {
-            $cache = $app['cache']->driver($app['config']['graham-campbell/throttle::driver']);
+        $app->singleton('throttle.factory', function ($app) {
+            $cache = $app->cache->driver($app->config->get('throttle.driver'));
 
             return new Factories\CacheFactory($cache);
         });
 
-        $this->app->alias('throttle.factory', 'GrahamCampbell\Throttle\Factories\FactoryInterface');
+        $app->alias('throttle.factory', 'GrahamCampbell\Throttle\Factories\FactoryInterface');
     }
 
     /**
      * Register the transformer class.
      *
+     * @param Illuminate\Contracts\Foundation\Application $app
+     *
      * @return void
      */
-    protected function registerTransformer()
+    protected function registerTransformer(Application $app)
     {
-        $this->app->singleton('throttle.transformer', function () {
+        $app->singleton('throttle.transformer', function () {
             return new Transformers\TransformerFactory();
         });
 
-        $this->app->alias('throttle.transformer', 'GrahamCampbell\Throttle\Transformers\TransformerFactory');
+        $app->alias('throttle.transformer', 'GrahamCampbell\Throttle\Transformers\TransformerFactory');
     }
 
     /**
      * Register the throttle class.
      *
+     * @param Illuminate\Contracts\Foundation\Application $app
+     *
      * @return void
      */
-    protected function registerThrottle()
+    protected function registerThrottle(Application $app)
     {
-        $this->app->singleton('throttle', function ($app) {
+        $app->singleton('throttle', function ($app) {
             $factory = $app['throttle.factory'];
             $transformer = $app['throttle.transformer'];
 
             return new Throttle($factory, $transformer);
         });
 
-        $this->app->alias('throttle', 'GrahamCampbell\Throttle\Throttle');
+        $app->alias('throttle', 'GrahamCampbell\Throttle\Throttle');
     }
 
     /**

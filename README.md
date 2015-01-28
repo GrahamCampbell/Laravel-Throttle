@@ -41,15 +41,15 @@ Checkout the [2.0 branch](https://github.com/GrahamCampbell/Laravel-Throttle/tre
 
 ## Configuration
 
-Laravel Throttle supports optional configuration through [orchestral/config](https://github.com/orchestral/config).
+Laravel Throttle supports optional configuration.
 
-If you want an automated way to publish the config, then install [orchestral/publisher](https://github.com/orchestral/publisher).
-
-You can then publish the config file by running:
+To get started, you'll need to publish all vendor assets:
 
 ```bash
-$ php artisan publish:config graham-campbell/throttle
+$ php artisan vendor:publish
 ```
+
+This will create a `config/throttle.php` file in your app that you can modify to set your configuration. Also, make sure you check for changes to the original config file in this package between releases.
 
 There is one config option:
 
