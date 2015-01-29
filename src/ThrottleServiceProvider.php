@@ -46,7 +46,7 @@ class ThrottleServiceProvider extends ServiceProvider
 
         $this->publishes([$source => config_path('throttle.php')]);
 
-        $this->mergeConfigFrom('throttle', $source);
+        $this->mergeConfigFrom($source, 'throttle');
     }
 
     /**
