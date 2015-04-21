@@ -84,11 +84,11 @@ class CacheThrottlerTest extends AbstractTestCase
     {
         $throttler = $this->getThrottler();
 
-        $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(11);
+        $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(9);
 
         $return = $throttler->count();
 
-        $this->assertSame(11, $return);
+        $this->assertSame(9, $return);
 
         $return = $throttler->check();
 
@@ -99,11 +99,11 @@ class CacheThrottlerTest extends AbstractTestCase
     {
         $throttler = $this->getThrottler();
 
-        $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(12);
+        $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(10);
 
         $return = $throttler->count();
 
-        $this->assertSame(12, $return);
+        $this->assertSame(10, $return);
 
         $return = $throttler->check();
 

@@ -81,7 +81,11 @@ class CacheThrottler implements ThrottlerInterface, Countable
      */
     public function attempt()
     {
-        return $this->hit()->check();
+        $response = $this->check();
+
+        $this->hit();
+
+        return $response;
     }
 
     /**
@@ -139,7 +143,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
      */
     public function check()
     {
-        return ($this->count() <= $this->limit + 1);
+        return ($this->count() < $this->limit);
     }
 
     /**
