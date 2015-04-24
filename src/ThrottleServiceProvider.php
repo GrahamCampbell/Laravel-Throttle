@@ -32,7 +32,7 @@ class ThrottleServiceProvider extends ServiceProvider
     {
         $this->setupConfig();
 
-        $this->setupFilters($this->app->router, $this->app->throttle);
+        $this->setupFilters($this->app->router);
     }
 
     /**
@@ -52,15 +52,14 @@ class ThrottleServiceProvider extends ServiceProvider
     /**
      * Setup the filters.
      *
-     * @param \Illuminate\Routing\Router        $router
-     * @param \GrahamCampbell\Throttle\Throttle $throttle
+     * @param \Illuminate\Routing\Router $router
      *
      * @return void
      */
-    protected function setupFilters(Router $router, Throttle $throttle)
+    protected function setupFilters(Router $router)
     {
-        $router->filter('throttle', function ($route, $request, $limit = 10, $time = 60) use ($throttle) {
-            if (!$throttle->attempt($request, $limit, $time)) {
+        $router->filter('throttle', function ($route, $request, $limit = 10, $time = 60) {
+            if (! $this->app->throttle->attempt($request, $limit, $time)) {
                 throw new TooManyRequestsHttpException($time * 60, 'Rate limit exceed.');
             }
         });
