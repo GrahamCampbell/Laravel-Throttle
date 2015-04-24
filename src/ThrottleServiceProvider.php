@@ -59,7 +59,7 @@ class ThrottleServiceProvider extends ServiceProvider
     protected function setupFilters(Router $router)
     {
         $router->filter('throttle', function ($route, $request, $limit = 10, $time = 60) {
-            if (! $this->app->throttle->attempt($request, $limit, $time)) {
+            if (!$this->app->throttle->attempt($request, $limit, $time)) {
                 throw new TooManyRequestsHttpException($time * 60, 'Rate limit exceed.');
             }
         });
@@ -86,7 +86,7 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     protected function registerFactory(Application $app)
     {
-        $app->singleton('throttle.factory', function ($app) {
+        $app->singleton('throttle.factory', function (Application $app) {
             $cache = $app->cache->driver($app->config->get('throttle.driver'));
 
             return new Factories\CacheFactory($cache);
