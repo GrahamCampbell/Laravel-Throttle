@@ -16,12 +16,12 @@ Laravel Throttle was created by, and is maintained by [Graham Campbell](https://
 
 ## Installation
 
-[PHP](https://php.net) 5.4+ or [HHVM](http://hhvm.com) 3.3+, and [Composer](https://getcomposer.org) are required.
+[PHP](https://php.net) 5.5+ or [HHVM](http://hhvm.com) 3.6+, and [Composer](https://getcomposer.org) are required.
 
 To get the latest version of Laravel Throttle, simply add the following line to the require block of your `composer.json` file:
 
 ```
-"graham-campbell/throttle": "~3.0"
+"graham-campbell/throttle": "~4.0"
 ```
 
 You'll then need to run `composer install` or `composer update` to download it and have the autoloader updated.
@@ -33,10 +33,6 @@ Once Laravel Throttle is installed, you need to register the service provider. O
 You can register the Throttle facade in the `aliases` key of your `config/app.php` file if you like.
 
 * `'Throttle' => 'GrahamCampbell\Throttle\Facades\Throttle'`
-
-#### Looking for a laravel 4 compatable version?
-
-Checkout the [2.0 branch](https://github.com/GrahamCampbell/Laravel-Throttle/tree/2.0), installable by requiring `"graham-campbell/throttle": "~2.0"`.
 
 
 ## Configuration
