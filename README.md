@@ -144,10 +144,10 @@ $request = Request::getFacadeRoot();
 $throttler = Throttle::get($request, 50, 30);
 
 // let's check if we've gone over the limit
-var_dump($thottler->check());
+var_dump($throttler->check());
 
 // we implement Countable
-var_dump(count($thottler));
+var_dump(count($throttler));
 
 // there are a few more functions available
 // please see the previous documentation
