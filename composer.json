@@ -17,7 +17,7 @@
         "illuminate/support": "5.0.*|5.1.*"
     },
     "require-dev": {
-        "graham-campbell/testbench": "~2.0"
+        "graham-campbell/testbench": "~2.1"
     },
     "autoload": {
         "psr-4": {
