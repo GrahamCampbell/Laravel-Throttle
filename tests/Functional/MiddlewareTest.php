@@ -43,7 +43,6 @@ class MiddlewareTest extends AbstractTestCase
         $this->app->cache->driver('array')->flush();
     }
 
-
     public function testBasicMiddlewareSuccess()
     {
         $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware', function () {
