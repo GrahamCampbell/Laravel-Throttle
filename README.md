@@ -135,13 +135,10 @@ What if we don't want to use the default middleware provided with this package? 
 use GrahamCampbell\Throttle\Facades\Throttle;
 use Illuminate\Support\Facades\Request;
 
-// let's quickly get the current request object
-$request = Request::instance();
-
 // now let's get a throttler object for that request
 // we'll use the same config as in the previous example
 // note that only the first parameter is "required"
-$throttler = Throttle::get($request, 50, 30);
+$throttler = Throttle::get(Request::instance(), 50, 30);
 
 // let's check if we've gone over the limit
 var_dump($throttler->check());
