@@ -50,9 +50,7 @@ class CacheFactory implements FactoryInterface
      */
     public function make(Data $data)
     {
-        $store = $this->cache->tags('throttle', $data->getIp());
-
-        return new CacheThrottler($store, $data->getRouteKey(), $data->getLimit(), $data->getTime());
+        return new CacheThrottler($this->cache->getStore(), $data->getKey(), $data->getLimit(), $data->getTime());
     }
 
     /**

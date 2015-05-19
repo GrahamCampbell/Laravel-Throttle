@@ -35,13 +35,6 @@ class DataTest extends AbstractTestBenchTestCase
         $this->assertSame('https://google.co.uk/', $data->getRoute());
     }
 
-    public function testGetRouteKey()
-    {
-        $data = $this->getData();
-
-        $this->assertSame('7f0b5fb00418ce23a73fb23b055519cad18033ff', $data->getRouteKey());
-    }
-
     public function testGetLimit()
     {
         $data = $this->getData();
