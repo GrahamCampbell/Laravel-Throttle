@@ -96,13 +96,13 @@ The `'make'` method will create a new throttler class (a class that implements `
 
 This class implements `Factories\FactoryInterface` completely. This is the only throttler implementation shipped with this package, and is responsible for creating the `Factories\CacheFactory` class. This class is only intended for internal use by the `Throttle` class.
 
+##### Http\Middleware\ThrottleMiddleware
+
+You may put the `GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware` middleware in front of your routes to throttle them. The middleware can take up to two parameters. The two parameters are `limit` and `time`. It may be useful for you to take a look at the [source](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/src/Http/Middleware/ThrottleMiddleware.php) for this, read the [tests](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/tests/Functional/MiddlewareTest.php), or check out Laravel's [documentation](http://laravel.com/docs/master/middleware) if you need to.
+
 ##### ThrottleServiceProvider
 
 This class contains no public methods of interest. This class should be added to the providers array in `config/app.php`. This class will setup ioc bindings.
-
-##### Middleware
-
-You may put the `GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware` middleware in front of your routes to throttle them. The middleware can take up to two parameters. The two parameters are `limit` and `time`. It may be useful for you to take a look at the [source](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/src/Http/Middleware/ThrottleMiddleware.php) for this, read the [tests](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/tests/Functional/MiddlewareTest.php), or check out Laravel's [documentation](http://laravel.com/docs/master/middleware) if you need to.
 
 
 ##### Real Examples
