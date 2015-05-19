@@ -2,6 +2,15 @@ CHANGE LOG
 ==========
 
 
+## V4.0 (Upcoming)
+
+* Support only laravel 5.1
+* Dropped php 5.4 support
+* Changed the way we go over the rate limit
+* Support cache drivers without tags
+* Ditched filters for middleware
+
+
 ## V3.0 (05/02/2015)
 
 * Upgraded to laravel 5.0
