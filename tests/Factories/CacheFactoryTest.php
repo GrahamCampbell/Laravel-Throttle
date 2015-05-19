@@ -26,12 +26,11 @@ class CacheFactoryTest extends AbstractTestCase
     {
         $throttle = $this->getFactory();
 
-        $throttle->getCache()->shouldReceive('tags')
-            ->with('throttle', '127.0.0.1')->once()->andReturn(Mockery::mock('Illuminate\Contracts\Cache\Store'));
+        $throttle->getCache()->shouldReceive('getStore')
+            ->once()->andReturn(Mockery::mock('Illuminate\Contracts\Cache\Store'));
 
         $data = Mockery::mock('GrahamCampbell\Throttle\Data');
-        $data->shouldReceive('getIp')->once()->andReturn('127.0.0.1');
-        $data->shouldReceive('getRouteKey')->once()->andReturn('unique-md5-hash');
+        $data->shouldReceive('getKey')->once()->andReturn('unique-hash');
         $data->shouldReceive('getLimit')->once()->andReturn(246);
         $data->shouldReceive('getTime')->once()->andReturn(123);
 

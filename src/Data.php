@@ -33,13 +33,6 @@ class Data
     protected $route;
 
     /**
-     * The route key.
-     *
-     * @var string
-     */
-    protected $routeKey;
-
-    /**
      * The request limit.
      *
      * @var int
@@ -96,20 +89,6 @@ class Data
     public function getRoute()
     {
         return $this->route;
-    }
-
-    /**
-     * Get the route key.
-     *
-     * @return string
-     */
-    public function getRouteKey()
-    {
-        if (!$this->routeKey) {
-            $this->routeKey = sha1($this->route);
-        }
-
-        return $this->routeKey;
     }
 
     /**
