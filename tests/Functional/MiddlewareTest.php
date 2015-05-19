@@ -12,15 +12,14 @@
 namespace GrahamCampbell\Tests\Throttle\Functional;
 
 use GrahamCampbell\Tests\Throttle\AbstractTestCase;
-use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 /**
- * This is the filter test class.
+ * This is the middleware test class.
  *
  * @author Graham Campbell <graham@mineuk.com>
  */
-class FilterTest extends AbstractTestCase
+class MiddlewareTest extends AbstractTestCase
 {
     /**
      * Additional application environment setup.
@@ -44,9 +43,10 @@ class FilterTest extends AbstractTestCase
         $this->app->cache->driver('array')->flush();
     }
 
-    public function testBasicFilterSuccess()
+
+    public function testBasicMiddlewareSuccess()
     {
-        $this->app->router->get('throttle-test-route', ['before' => 'throttle', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware', function () {
             return 'Why herro there!';
         }]);
 
@@ -56,9 +56,9 @@ class FilterTest extends AbstractTestCase
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
      */
-    public function testBasicFilterFailure()
+    public function testBasicMiddlewareFailure()
     {
-        $this->app->router->get('throttle-test-route', ['before' => 'throttle', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware', function () {
             return 'Why herro there!';
         }]);
 
@@ -67,7 +67,7 @@ class FilterTest extends AbstractTestCase
 
     public function testCustomLimitSuccess()
     {
-        $this->app->router->get('throttle-test-route', ['before' => 'throttle:5', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:5', function () {
             return 'Why herro there!';
         }]);
 
@@ -79,7 +79,7 @@ class FilterTest extends AbstractTestCase
      */
     public function testCustomLimitFailure()
     {
-        $this->app->router->get('throttle-test-route', ['before' => 'throttle:5', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:5', function () {
             return 'Why herro there!';
         }]);
 
@@ -88,7 +88,7 @@ class FilterTest extends AbstractTestCase
 
     public function testCustomTimeSuccess()
     {
-        $this->app->router->get('throttle-test-route', ['before' => 'throttle:3,5', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:3,5', function () {
             return 'Why herro there!';
         }]);
 
@@ -100,7 +100,7 @@ class FilterTest extends AbstractTestCase
      */
     public function testCustomTimeFailure()
     {
-        $this->app->router->get('throttle-test-route', ['before' => 'throttle:3,5', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:3,5', function () {
             return 'Why herro there!';
         }]);
 
