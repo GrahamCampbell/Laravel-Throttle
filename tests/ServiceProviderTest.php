@@ -36,4 +36,9 @@ class ServiceProviderTest extends AbstractTestCase
     {
         $this->assertIsInjectable('GrahamCampbell\Throttle\Throttle');
     }
+
+    public function testMiddlewareIsInjectable()
+    {
+        $this->assertIsInjectable('GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware');
+    }
 }

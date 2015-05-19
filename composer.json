@@ -11,10 +11,10 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "illuminate/cache": "5.0.*|5.1.*",
-        "illuminate/contracts": "5.0.*|5.1.*",
-        "illuminate/http": "5.0.*|5.1.*",
-        "illuminate/support": "5.0.*|5.1.*"
+        "illuminate/cache": "5.1.*",
+        "illuminate/contracts": "5.1.*",
+        "illuminate/http": "5.1.*",
+        "illuminate/support": "5.1.*"
     },
     "require-dev": {
         "graham-campbell/testbench": "~2.1"

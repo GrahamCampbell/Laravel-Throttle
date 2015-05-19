@@ -96,47 +96,47 @@ The `'make'` method will create a new throttler class (a class that implements `
 
 This class implements `Factories\FactoryInterface` completely. This is the only throttler implementation shipped with this package, and is responsible for creating the `Factories\CacheFactory` class. This class is only intended for internal use by the `Throttle` class.
 
+##### Http\Middleware\ThrottleMiddleware
+
+You may put the `GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware` middleware in front of your routes to throttle them. The middleware can take up to two parameters. The two parameters are `limit` and `time`. It may be useful for you to take a look at the [source](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/src/Http/Middleware/ThrottleMiddleware.php) for this, read the [tests](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/tests/Functional/MiddlewareTest.php), or check out Laravel's [documentation](http://laravel.com/docs/master/middleware) if you need to.
+
 ##### ThrottleServiceProvider
 
 This class contains no public methods of interest. This class should be added to the providers array in `config/app.php`. This class will setup ioc bindings.
-
-##### Filters
-
-You may put the `throttle` filter in front of your routes to throttle them. The filter can take up to two parameters. The two parameters are `limit` and `time`. It may be useful for you to take a look at the [source](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/src/filters.php) for this, read the [tests](https://github.com/GrahamCampbell/Laravel-Throttle/blob/master/tests/Functional/FilterTest.php), or check out Laravel's [documentation](http://laravel.com/docs/routing#route-filters) if you need to.
 
 
 ##### Real Examples
 
 Here you can see an example of just how simple this package is to use.
 
-Our first example will be a super simple usage of our default filter. This will setup a filter for that url with a limit of 10 hits and a retention time of 1 hour.
+Our first example will be a super simple usage of our default middleware. This will setup a middleware for that url with a limit of 10 hits and a retention time of 1 hour.
 
 ```php
 use Illuminate\Support\Facades\Route;
 
-Route::get('foo', array('before' => 'throttle', function () {
+Route::get('foo', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware', function () {
     return 'Why herro there!';
-}, ));
+}]);
 ```
 
-What if we want custom limits? Easy! Laravel allows us to pass parameters to a filters. This will setup a filter for that url with a limit of 50 hits and a retention time of 30 mins.
+What if we want custom limits? Easy! Laravel allows us to pass parameters to a middleware. This will setup a middleware for that url with a limit of 50 hits and a retention time of 30 mins.
 
 ```php
 use Illuminate\Support\Facades\Route;
 
-Route::get('foo', array('before' => 'throttle:50,30', function () {
+Route::get('foo', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:50,30', function () {
     return 'Why herro there!';
-}, ));
+}]);
 ```
 
-What if we don't want to use the default filters provided with this package? Well, that's easy too.
+What if we don't want to use the default middleware provided with this package? Well, that's easy too.
 
 ```php
 use GrahamCampbell\Throttle\Facades\Throttle;
 use Illuminate\Support\Facades\Request;
 
 // let's quickly get the current request object
-$request = Request::getFacadeRoot();
+$request = Request::instance();
 
 // now let's get a throttler object for that request
 // we'll use the same config as in the previous example
@@ -159,7 +159,7 @@ Also note that you can call methods straight on the factory instead of calling t
 use GrahamCampbell\Throttle\Facades\Throttle;
 use Illuminate\Support\Facades\Request;
 
-$request = Request::getFacadeRoot();
+$request = Request::instance();
 
 // the attempt function will hit the throttle, then return check
 var_dump(Throttle::attempt($request));
