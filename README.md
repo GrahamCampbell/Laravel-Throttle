@@ -114,9 +114,9 @@ Our first example will be a super simple usage of our default middleware. This w
 ```php
 use Illuminate\Support\Facades\Route;
 
-Route::get('foo', array('middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware', function () {
+Route::get('foo', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware', function () {
     return 'Why herro there!';
-}, ));
+}]);
 ```
 
 What if we want custom limits? Easy! Laravel allows us to pass parameters to a middleware. This will setup a middleware for that url with a limit of 50 hits and a retention time of 30 mins.
@@ -124,9 +124,9 @@ What if we want custom limits? Easy! Laravel allows us to pass parameters to a m
 ```php
 use Illuminate\Support\Facades\Route;
 
-Route::get('foo', array('middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:50,30', function () {
+Route::get('foo', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:50,30', function () {
     return 'Why herro there!';
-}, ));
+}]);
 ```
 
 What if we don't want to use the default middleware provided with this package? Well, that's easy too.
