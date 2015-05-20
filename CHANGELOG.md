@@ -2,7 +2,7 @@ CHANGE LOG
 ==========
 
 
-## V4.0 (Upcoming)
+## V4.0 (20/05/2015)
 
 * Support only laravel 5.1
 * Dropped php 5.4 support
