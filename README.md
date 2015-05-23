@@ -1,7 +1,7 @@
 Laravel Throttle
 ================
 
-Laravel Throttle was created by, and is maintained by [Graham Campbell](https://github.com/GrahamCampbell), and is a rate limiter for [Laravel 5](http://laravel.com). Feel free to check out the [change log](CHANGELOG.md), [releases](https://github.com/GrahamCampbell/Laravel-Throttle/releases), [license](LICENSE), [api docs](http://docs.grahamjcampbell.co.uk), and [contribution guidelines](CONTRIBUTING.md).
+Laravel Throttle was created by, and is maintained by [Graham Campbell](https://github.com/GrahamCampbell), and is a rate limiter for [Laravel 5](http://laravel.com). Feel free to check out the [change log](CHANGELOG.md), [releases](https://github.com/GrahamCampbell/Laravel-Throttle/releases), [license](LICENSE), [api docs](http://docs.gjcampbell.co.uk), and [contribution guidelines](CONTRIBUTING.md).
 
 ![Laravel Throttle](https://cloud.githubusercontent.com/assets/2829600/4432295/c1211b62-468c-11e4-9453-eb23480c7674.PNG)
 
@@ -172,7 +172,7 @@ var_dump(Throttle::get($request)->attempt());
 
 There are other classes in this package that are not documented here (such as the transformers). This is because they are not intended for public use and are used internally by this package.
 
-Feel free to check out the [API Documentation](http://docs.grahamjcampbell.co.uk) for Laravel Throttle.
+Feel free to check out the [API Documentation](http://docs.gjcampbell.co.uk) for Laravel Throttle.
 
 
 ## License
