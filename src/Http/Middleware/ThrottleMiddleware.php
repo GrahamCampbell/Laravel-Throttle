@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
  *
  * @author Graham Campbell <graham@cachethq.io>
  */
-class ThrottleMiddleware implements Middleware
+class ThrottleMiddleware
 {
     /**
      * The throttle instance.
