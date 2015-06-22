@@ -40,7 +40,9 @@ class ThrottleServiceProvider extends ServiceProvider
     {
         $source = realpath(__DIR__.'/../config/throttle.php');
 
-        $this->publishes([$source => config_path('throttle.php')]);
+        if (class_exists('Illuminate\Foundation\Application', false)) {
+            $this->publishes([$source => config_path('throttle.php')]);
+        }
 
         $this->mergeConfigFrom($source, 'throttle');
     }
