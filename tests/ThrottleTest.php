@@ -13,10 +13,10 @@ namespace GrahamCampbell\Tests\Throttle;
 
 use GrahamCampbell\TestBench\AbstractTestCase as AbstractTestBenchTestCase;
 use GrahamCampbell\Throttle\Data;
-use GrahamCampbell\Throttle\Throttle;
-use GrahamCampbell\Throttle\Transformers\ArrayTransformer;
 use GrahamCampbell\Throttle\Factories\CacheFactory;
+use GrahamCampbell\Throttle\Throttle;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
+use GrahamCampbell\Throttle\Transformers\ArrayTransformer;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;
 use Mockery;
 

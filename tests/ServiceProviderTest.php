@@ -11,12 +11,12 @@
 
 namespace GrahamCampbell\Tests\Throttle;
 
+use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\Throttle\Factories\FactoryInterface;
 use GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware;
 use GrahamCampbell\Throttle\Throttle;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;
-use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 
 /**
  * This is the service provider test class.

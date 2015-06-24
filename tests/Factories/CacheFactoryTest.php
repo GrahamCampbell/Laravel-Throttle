@@ -12,8 +12,8 @@
 namespace GrahamCampbell\Tests\Throttle\Factories;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
-use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\Throttle\Data;
+use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Cache\Store;

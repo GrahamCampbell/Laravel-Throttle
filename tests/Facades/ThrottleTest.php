@@ -11,10 +11,10 @@
 
 namespace GrahamCampbell\Tests\Throttle\Facades;
 
-use GrahamCampbell\Throttle\Facades\Throttle as Facade;
-use GrahamCampbell\Throttle\Throttle;
 use GrahamCampbell\TestBenchCore\FacadeTrait;
 use GrahamCampbell\Tests\Throttle\AbstractTestCase;
+use GrahamCampbell\Throttle\Facades\Throttle as Facade;
+use GrahamCampbell\Throttle\Throttle;
 
 /**
  * This is the throttle facade test class.
