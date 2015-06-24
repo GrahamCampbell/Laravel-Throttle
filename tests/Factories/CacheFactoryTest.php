@@ -13,6 +13,10 @@ namespace GrahamCampbell\Tests\Throttle\Factories;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use GrahamCampbell\Throttle\Factories\CacheFactory;
+use GrahamCampbell\Throttle\Data;
+use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
+use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Contracts\Cache\Store;
 use Mockery;
 
 /**
@@ -27,21 +31,21 @@ class CacheFactoryTest extends AbstractTestCase
         $throttle = $this->getFactory();
 
         $throttle->getCache()->shouldReceive('getStore')
-            ->once()->andReturn(Mockery::mock('Illuminate\Contracts\Cache\Store'));
+            ->once()->andReturn(Mockery::mock(Store::class));
 
-        $data = Mockery::mock('GrahamCampbell\Throttle\Data');
+        $data = Mockery::mock(Data::class);
         $data->shouldReceive('getKey')->once()->andReturn('unique-hash');
         $data->shouldReceive('getLimit')->once()->andReturn(246);
         $data->shouldReceive('getTime')->once()->andReturn(123);
 
         $return = $throttle->make($data);
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+        $this->assertInstanceOf(CacheThrottler::class, $return);
     }
 
     protected function getFactory()
     {
-        $cache = Mockery::mock('Illuminate\Contracts\Cache\Repository');
+        $cache = Mockery::mock(Repository::class);
 
         return new CacheFactory($cache);
     }

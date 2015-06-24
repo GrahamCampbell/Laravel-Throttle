@@ -12,6 +12,7 @@
 namespace GrahamCampbell\Tests\Throttle;
 
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
+use GrahamCampbell\Throttle\ThrottleServiceProvider;
 
 /**
  * This is the abstract test case class.
@@ -29,6 +30,6 @@ abstract class AbstractTestCase extends AbstractPackageTestCase
      */
     protected function getServiceProviderClass($app)
     {
-        return 'GrahamCampbell\Throttle\ThrottleServiceProvider';
+        return ThrottleServiceProvider::class;
     }
 }

@@ -12,6 +12,7 @@
 namespace GrahamCampbell\Tests\Throttle\Functional;
 
 use GrahamCampbell\Tests\Throttle\AbstractTestCase;
+use GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 /**
@@ -22,30 +23,30 @@ use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 class MiddlewareTest extends AbstractTestCase
 {
     /**
-     * Additional application environment setup.
+     * Setup the application environment.
      *
      * @param \Illuminate\Contracts\Foundation\Application $app
      *
      * @return void
      */
-    protected function additionalSetup($app)
+    protected function getEnvironmentSetUp($app)
     {
+        parent::getEnvironmentSetUp($app);
+
         $app->config->set('throttle.driver', 'array');
     }
 
     /**
-     * Run extra tear down code.
-     *
-     * @return void
+     * @after
      */
-    protected function finish()
+    public function tearDown()
     {
         $this->app->cache->driver('array')->flush();
     }
 
     public function testBasicMiddlewareSuccess()
     {
-        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class, function () {
             return 'Why herro there!';
         }]);
 
@@ -57,7 +58,7 @@ class MiddlewareTest extends AbstractTestCase
      */
     public function testBasicMiddlewareFailure()
     {
-        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class, function () {
             return 'Why herro there!';
         }]);
 
@@ -66,7 +67,7 @@ class MiddlewareTest extends AbstractTestCase
 
     public function testCustomLimitSuccess()
     {
-        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:5', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class.':5', function () {
             return 'Why herro there!';
         }]);
 
@@ -78,7 +79,7 @@ class MiddlewareTest extends AbstractTestCase
      */
     public function testCustomLimitFailure()
     {
-        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:5', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class.':5', function () {
             return 'Why herro there!';
         }]);
 
@@ -87,7 +88,7 @@ class MiddlewareTest extends AbstractTestCase
 
     public function testCustomTimeSuccess()
     {
-        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:3,5', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class.':3,5', function () {
             return 'Why herro there!';
         }]);
 
@@ -99,7 +100,7 @@ class MiddlewareTest extends AbstractTestCase
      */
     public function testCustomTimeFailure()
     {
-        $this->app->router->get('throttle-test-route', ['middleware' => 'GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware:3,5', function () {
+        $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class.':3,5', function () {
             return 'Why herro there!';
         }]);
 

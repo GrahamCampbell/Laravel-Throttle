@@ -14,6 +14,10 @@ namespace GrahamCampbell\Tests\Throttle;
 use GrahamCampbell\TestBench\AbstractTestCase as AbstractTestBenchTestCase;
 use GrahamCampbell\Throttle\Data;
 use GrahamCampbell\Throttle\Throttle;
+use GrahamCampbell\Throttle\Transformers\ArrayTransformer;
+use GrahamCampbell\Throttle\Factories\CacheFactory;
+use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
+use GrahamCampbell\Throttle\Transformers\TransformerFactory;
 use Mockery;
 
 /**
@@ -29,7 +33,7 @@ class ThrottleTest extends AbstractTestBenchTestCase
 
         $return = $throttle->get($data, 12, 123);
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+        $this->assertInstanceOf(CacheThrottler::class, $return);
     }
 
     public function testCache()
@@ -38,7 +42,7 @@ class ThrottleTest extends AbstractTestBenchTestCase
 
         for ($i = 0; $i < 3; $i++) {
             $return = $throttle->get($data, 12, 123);
-            $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+            $this->assertInstanceOf(CacheThrottler::class, $return);
         }
     }
 
@@ -50,20 +54,20 @@ class ThrottleTest extends AbstractTestBenchTestCase
 
         $return = $throttle->hit($data, 12, 123);
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+        $this->assertInstanceOf(CacheThrottler::class, $return);
     }
 
     protected function getThrottle()
     {
-        $factory = Mockery::mock('GrahamCampbell\Throttle\Factories\CacheFactory');
+        $factory = Mockery::mock(CacheFactory::class);
 
         $data = ['ip' => '127.0.0.1', 'route' => 'http://laravel.com/'];
 
-        $throttler = Mockery::mock('GrahamCampbell\Throttle\Throttlers\CacheThrottler');
+        $throttler = Mockery::mock(CacheThrottler::class);
 
-        $trans = Mockery::mock('GrahamCampbell\Throttle\Transformers\ArrayTransformer');
+        $trans = Mockery::mock(ArrayTransformer::class);
 
-        $transformer = Mockery::mock('GrahamCampbell\Throttle\Transformers\TransformerFactory');
+        $transformer = Mockery::mock(TransformerFactory::class);
 
         $transformer->shouldReceive('make')->with($data)->andReturn($trans);
         $trans->shouldReceive('transform')->with($data, 12, 123)

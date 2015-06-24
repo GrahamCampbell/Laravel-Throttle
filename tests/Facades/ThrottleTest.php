@@ -11,7 +11,9 @@
 
 namespace GrahamCampbell\Tests\Throttle\Facades;
 
-use GrahamCampbell\TestBench\Traits\FacadeTestCaseTrait;
+use GrahamCampbell\Throttle\Facades\Throttle as Facade;
+use GrahamCampbell\Throttle\Throttle;
+use GrahamCampbell\TestBenchCore\FacadeTrait;
 use GrahamCampbell\Tests\Throttle\AbstractTestCase;
 
 /**
@@ -21,7 +23,7 @@ use GrahamCampbell\Tests\Throttle\AbstractTestCase;
  */
 class ThrottleTest extends AbstractTestCase
 {
-    use FacadeTestCaseTrait;
+    use FacadeTrait;
 
     /**
      * Get the facade accessor.
@@ -40,7 +42,7 @@ class ThrottleTest extends AbstractTestCase
      */
     protected function getFacadeClass()
     {
-        return 'GrahamCampbell\Throttle\Facades\Throttle';
+        return Facade::class;
     }
 
     /**
@@ -50,6 +52,6 @@ class ThrottleTest extends AbstractTestCase
      */
     protected function getFacadeRoot()
     {
-        return 'GrahamCampbell\Throttle\Throttle';
+        return Throttle::class;
     }
 }

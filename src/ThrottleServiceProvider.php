@@ -11,6 +11,9 @@
 
 namespace GrahamCampbell\Throttle;
 
+use GrahamCampbell\Throttle\Factories\CacheFactory;
+use GrahamCampbell\Throttle\Factories\FactoryInterface;
+use GrahamCampbell\Throttle\Transformers\TransformerFactory;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
@@ -71,10 +74,11 @@ class ThrottleServiceProvider extends ServiceProvider
         $app->singleton('throttle.factory', function (Application $app) {
             $cache = $app->cache->driver($app->config->get('throttle.driver'));
 
-            return new Factories\CacheFactory($cache);
+            return new CacheFactory($cache);
         });
 
-        $app->alias('throttle.factory', 'GrahamCampbell\Throttle\Factories\FactoryInterface');
+        $app->alias('throttle.factory', CacheFactory::class);
+        $app->alias('throttle.factory', FactoryInterface::class);
     }
 
     /**
@@ -87,10 +91,10 @@ class ThrottleServiceProvider extends ServiceProvider
     protected function registerTransformer(Application $app)
     {
         $app->singleton('throttle.transformer', function () {
-            return new Transformers\TransformerFactory();
+            return new TransformerFactory();
         });
 
-        $app->alias('throttle.transformer', 'GrahamCampbell\Throttle\Transformers\TransformerFactory');
+        $app->alias('throttle.transformer', TransformerFactory::class);
     }
 
     /**
@@ -109,7 +113,7 @@ class ThrottleServiceProvider extends ServiceProvider
             return new Throttle($factory, $transformer);
         });
 
-        $app->alias('throttle', 'GrahamCampbell\Throttle\Throttle');
+        $app->alias('throttle', Throttle::class);
     }
 
     /**

@@ -12,7 +12,11 @@
 namespace GrahamCampbell\Tests\Throttle\Transformers;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
+use GrahamCampbell\Throttle\Data;
+use GrahamCampbell\Throttle\Transformers\ArrayTransformer;
+use GrahamCampbell\Throttle\Transformers\RequestTransformer;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;
+use Illuminate\Http\Request;
 use Mockery;
 
 /**
@@ -25,14 +29,14 @@ class TransformerFactoryTest extends AbstractTestCase
     public function testRequest()
     {
         $factory = new TransformerFactory();
-        $transformer = $factory->make($request = Mockery::mock('Illuminate\Http\Request'));
+        $transformer = $factory->make($request = Mockery::mock(Request::class));
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Transformers\RequestTransformer', $transformer);
+        $this->assertInstanceOf(RequestTransformer::class, $transformer);
 
         $request->shouldReceive('getClientIp')->once()->andReturn('123.123.123.123');
         $request->shouldReceive('path')->once()->andReturn('foobar');
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Data', $transformer->transform($request, 123, 321));
+        $this->assertInstanceOf(Data::class, $transformer->transform($request, 123, 321));
     }
 
     public function testArray()
@@ -40,9 +44,9 @@ class TransformerFactoryTest extends AbstractTestCase
         $factory = new TransformerFactory();
         $transformer = $factory->make($array = ['ip' => 'abc', 'route' => 'qwerty']);
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Transformers\ArrayTransformer', $transformer);
+        $this->assertInstanceOf(ArrayTransformer::class, $transformer);
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Data', $transformer->transform($array, 123, 321));
+        $this->assertInstanceOf(Data::class, $transformer->transform($array, 123, 321));
     }
 
     /**
@@ -54,9 +58,9 @@ class TransformerFactoryTest extends AbstractTestCase
         $factory = new TransformerFactory();
         $transformer = $factory->make([]);
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Transformers\ArrayTransformer', $transformer);
+        $this->assertInstanceOf(ArrayTransformer::class, $transformer);
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Data', $transformer->transform([]));
+        $this->assertInstanceOf(Data::class, $transformer->transform([]));
     }
 
     /**

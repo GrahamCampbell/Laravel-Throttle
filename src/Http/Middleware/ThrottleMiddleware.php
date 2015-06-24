@@ -13,7 +13,6 @@ namespace GrahamCampbell\Throttle\Http\Middleware;
 
 use Closure;
 use GrahamCampbell\Throttle\Throttle;
-use Illuminate\Contracts\Routing\Middleware;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 /**

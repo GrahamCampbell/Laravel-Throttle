@@ -13,6 +13,7 @@ namespace GrahamCampbell\Tests\Throttle\Throttlers;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
+use Illuminate\Contracts\Cache\Store;
 use Mockery;
 
 /**
@@ -43,7 +44,7 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->hit();
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+        $this->assertInstanceOf(CacheThrottler::class, $return);
 
         $return = $throttler->count();
 
@@ -58,7 +59,7 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $return = $throttler->clear();
 
-        $this->assertInstanceOf('GrahamCampbell\Throttle\Throttlers\CacheThrottler', $return);
+        $this->assertInstanceOf(CacheThrottler::class, $return);
 
         $return = $throttler->count();
 
@@ -122,7 +123,7 @@ class CacheThrottlerTest extends AbstractTestCase
 
     protected function getThrottler()
     {
-        $store = Mockery::mock('Illuminate\Contracts\Cache\Store');
+        $store = Mockery::mock(Store::class);
         $key = 'abc';
         $limit = 10;
         $time = 60;
