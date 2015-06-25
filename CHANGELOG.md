@@ -6,6 +6,7 @@ CHANGE LOG
 
 * Official lumen support
 * Code cleanup
+* Added "method" doc
 
 
 ## V4.0 (20/05/2015)

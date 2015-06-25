@@ -17,11 +17,11 @@ use GrahamCampbell\Throttle\Transformers\TransformerFactory;
 /**
  * This is the throttle class.
  *
- * @method bool attempt()
- * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface hit()
- * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface clear()
- * @method int count()
- * @method bool check()
+ * @method bool attempt(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface hit(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface clear(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method int count(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method bool check(array|\Illuminate\Http\Request $data, int $limit, int $time)
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
