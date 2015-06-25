@@ -17,6 +17,12 @@ use GrahamCampbell\Throttle\Transformers\TransformerFactory;
 /**
  * This is the throttle class.
  *
+ * @method bool attempt()
+ * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface hit()
+ * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface clear()
+ * @method int count()
+ * @method bool check()
+ *
  * @author Graham Campbell <graham@alt-three.com>
  */
 class Throttle

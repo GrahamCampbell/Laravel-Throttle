@@ -32,7 +32,7 @@ class ThrottleMiddleware
     /**
      * Create a new throttle middleware instance.
      *
-     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param \GrahamCampbell\Throttle\Throttle $throttle
      *
      * @return void
      */
