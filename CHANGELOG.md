@@ -2,7 +2,7 @@ CHANGE LOG
 ==========
 
 
-## V4.1 (Upcoming)
+## V4.1 (26/06/2015)
 
 * Official lumen support
 * Code cleanup
