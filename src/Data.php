@@ -116,7 +116,7 @@ class Data
      *
      * This key is used to identify the data between requests.
      *
-     * @var string
+     * @return string
      */
     public function getKey()
     {
