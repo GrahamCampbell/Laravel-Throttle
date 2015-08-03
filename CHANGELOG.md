@@ -2,6 +2,11 @@ CHANGE LOG
 ==========
 
 
+## V4.1.1 (03/08/2015)
+
+* Fixed typo in exception message
+
+
 ## V4.1 (26/06/2015)
 
 * Official lumen support
