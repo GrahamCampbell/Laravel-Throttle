@@ -117,7 +117,7 @@ class MiddlewareTest extends AbstractTestCase
         try {
             $this->call('GET', 'throttle-test-route');
         } catch (TooManyRequestsHttpException $e) {
-            $this->assertSame('Rate limit exceed.', $e->getMessage());
+            $this->assertSame('Rate limit exceeded.', $e->getMessage());
             $this->assertSame($time, $e->getHeaders()['Retry-After']);
             throw $e;
         }
