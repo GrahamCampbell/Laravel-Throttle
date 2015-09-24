@@ -97,8 +97,10 @@ class CacheThrottler implements ThrottlerInterface, Countable
     {
         if ($this->count()) {
                 $this->store->increment($this->key);
+                $this->number++;
         } else {
                 $this->store->put($this->key, 1, $this->time);
+                $this->number = 1;
         }
 
         return $this;
