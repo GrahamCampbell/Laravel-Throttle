@@ -2,6 +2,11 @@ CHANGE LOG
 ==========
 
 
+## V5.0 (Upcoming)
+
+* Changed the way expiary works on increment
+
+
 ## V4.1.1 (03/08/2015)
 
 * Fixed typo in exception message
