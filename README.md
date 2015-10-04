@@ -173,6 +173,11 @@ var_dump(Throttle::get($request)->attempt());
 There are other classes in this package that are not documented here (such as the transformers). This is because they are not intended for public use and are used internally by this package.
 
 
+## Security
+
+If you discover a security vulnerability within this package, please send an e-mail to Graham Campbell at graham@alt-three.com. All security vulnerabilities will be promptly addressed.
+
+
 ## License
 
 Laravel Throttle is licensed under [The MIT License (MIT)](LICENSE).
