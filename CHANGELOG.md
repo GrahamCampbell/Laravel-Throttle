@@ -5,6 +5,7 @@ CHANGE LOG
 ## V5.0 (Upcoming)
 
 * Changed the way expiary works on increment
+* Improved lumen support
 
 
 ## V4.1.1 (03/08/2015)
