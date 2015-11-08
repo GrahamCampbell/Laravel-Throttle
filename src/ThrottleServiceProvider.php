@@ -15,7 +15,9 @@ use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\Throttle\Factories\FactoryInterface;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Lumen\Application as LumenApplication;
 
 /**
  * This is the throttle service provider class.
@@ -45,9 +47,9 @@ class ThrottleServiceProvider extends ServiceProvider
     {
         $source = realpath(__DIR__.'/../config/throttle.php');
 
-        if (class_exists('Illuminate\Foundation\Application', false) && $app->runningInConsole()) {
+        if ($app instanceof LaravelApplication && $app->runningInConsole()) {
             $this->publishes([$source => config_path('throttle.php')]);
-        } elseif (class_exists('Laravel\Lumen\Application', false)) {
+        } elseif ($app instanceof LumenApplication) {
             $app->configure('throttle');
         }
 
