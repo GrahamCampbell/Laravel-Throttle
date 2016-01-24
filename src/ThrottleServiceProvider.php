@@ -33,24 +33,22 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->setupConfig($this->app);
+        $this->setupConfig();
     }
 
     /**
      * Setup the config.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
      * @return void
      */
-    protected function setupConfig(Application $app)
+    protected function setupConfig()
     {
         $source = realpath(__DIR__.'/../config/throttle.php');
 
-        if ($app instanceof LaravelApplication && $app->runningInConsole()) {
+        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
             $this->publishes([$source => config_path('throttle.php')]);
-        } elseif ($app instanceof LumenApplication) {
-            $app->configure('throttle');
+        } elseif ($this->app instanceof LumenApplication) {
+            $this->app->configure('throttle');
         }
 
         $this->mergeConfigFrom($source, 'throttle');
