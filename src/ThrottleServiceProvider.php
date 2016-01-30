@@ -73,14 +73,14 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     protected function registerFactory()
     {
-        $app->singleton('throttle.factory', function (Container $app) {
+        $this->app->singleton('throttle.factory', function (Container $app) {
             $cache = $app->cache->driver($app->config->get('throttle.driver'));
 
             return new CacheFactory($cache);
         });
 
-        $app->alias('throttle.factory', CacheFactory::class);
-        $app->alias('throttle.factory', FactoryInterface::class);
+        $this->app->alias('throttle.factory', CacheFactory::class);
+        $this->app->alias('throttle.factory', FactoryInterface::class);
     }
 
     /**
@@ -90,11 +90,11 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     protected function registerTransformer()
     {
-        $app->singleton('throttle.transformer', function () {
+        $this->app->singleton('throttle.transformer', function () {
             return new TransformerFactory();
         });
 
-        $app->alias('throttle.transformer', TransformerFactory::class);
+        $this->app->alias('throttle.transformer', TransformerFactory::class);
     }
 
     /**
@@ -104,14 +104,14 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     protected function registerThrottle()
     {
-        $app->singleton('throttle', function (Container $app) {
+        $this->app->singleton('throttle', function (Container $app) {
             $factory = $app['throttle.factory'];
             $transformer = $app['throttle.transformer'];
 
             return new Throttle($factory, $transformer);
         });
 
-        $app->alias('throttle', Throttle::class);
+        $this->app->alias('throttle', Throttle::class);
     }
 
     /**
