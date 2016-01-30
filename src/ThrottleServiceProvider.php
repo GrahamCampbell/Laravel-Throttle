@@ -14,7 +14,7 @@ namespace GrahamCampbell\Throttle;
 use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\Throttle\Factories\FactoryInterface;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
@@ -61,21 +61,19 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerFactory($this->app);
-        $this->registerTransformer($this->app);
-        $this->registerThrottle($this->app);
+        $this->registerFactory();
+        $this->registerTransformer();
+        $this->registerThrottle();
     }
 
     /**
      * Register the factory class.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
      * @return void
      */
-    protected function registerFactory(Application $app)
+    protected function registerFactory()
     {
-        $app->singleton('throttle.factory', function (Application $app) {
+        $app->singleton('throttle.factory', function (Container $app) {
             $cache = $app->cache->driver($app->config->get('throttle.driver'));
 
             return new CacheFactory($cache);
@@ -88,11 +86,9 @@ class ThrottleServiceProvider extends ServiceProvider
     /**
      * Register the transformer class.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
      * @return void
      */
-    protected function registerTransformer(Application $app)
+    protected function registerTransformer()
     {
         $app->singleton('throttle.transformer', function () {
             return new TransformerFactory();
@@ -104,13 +100,11 @@ class ThrottleServiceProvider extends ServiceProvider
     /**
      * Register the throttle class.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
      * @return void
      */
-    protected function registerThrottle(Application $app)
+    protected function registerThrottle()
     {
-        $app->singleton('throttle', function ($app) {
+        $app->singleton('throttle', function (Container $app) {
             $factory = $app['throttle.factory'];
             $transformer = $app['throttle.transformer'];
 
