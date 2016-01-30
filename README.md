@@ -6,6 +6,7 @@ Laravel Throttle was created by, and is maintained by [Graham Campbell](https://
 ![Laravel Throttle](https://cloud.githubusercontent.com/assets/2829600/4432295/c1211b62-468c-11e4-9453-eb23480c7674.PNG)
 
 <p align="center">
+<a href="https://styleci.io/repos/15437427"><img src="https://styleci.io/repos/15437427/shield" alt="StyleCI Status"></img></a>
 <a href="https://travis-ci.org/GrahamCampbell/Laravel-Throttle"><img src="https://img.shields.io/travis/GrahamCampbell/Laravel-Throttle/master.svg?style=flat-square" alt="Build Status"></img></a>
 <a href="https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle/code-structure"><img src="https://img.shields.io/scrutinizer/coverage/g/GrahamCampbell/Laravel-Throttle.svg?style=flat-square" alt="Coverage Status"></img></a>
 <a href="https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle"><img src="https://img.shields.io/scrutinizer/g/GrahamCampbell/Laravel-Throttle.svg?style=flat-square" alt="Quality Score"></img></a>
