@@ -12,7 +12,7 @@
 namespace GrahamCampbell\Throttle\Throttlers;
 
 use Countable;
-use Illuminate\Contracts\Cache\Store;
+use Illuminate\Contracts\Cache\Repository;
 
 /**
  * This is the cache throttler class.
@@ -24,9 +24,9 @@ class CacheThrottler implements ThrottlerInterface, Countable
     /**
      * The store instance.
      *
-     * @var \Illuminate\Contracts\Cache\Store
+     * @var \Illuminate\Contracts\Cache\Repository
      */
-    protected $store;
+    protected $cache;
 
     /**
      * The key.
@@ -59,16 +59,16 @@ class CacheThrottler implements ThrottlerInterface, Countable
     /**
      * Create a new instance.
      *
-     * @param \Illuminate\Contracts\Cache\Store $store
+     * @param \Illuminate\Contracts\Cache\Repository $cache
      * @param string                            $key
      * @param int                               $limit
      * @param int                               $time
      *
      * @return void
      */
-    public function __construct(Store $store, $key, $limit, $time)
+    public function __construct(Repository $cache, $key, $limit, $time)
     {
-        $this->store = $store;
+        $this->cache = $cache;
         $this->key = $key;
         $this->limit = $limit;
         $this->time = $time;
@@ -96,10 +96,12 @@ class CacheThrottler implements ThrottlerInterface, Countable
     public function hit()
     {
         if ($this->count()) {
-            $this->store->increment($this->key);
+            $this->cache->increment($this->key);
             $this->number++;
-        } else {
-            $this->store->put($this->key, 1, $this->time);
+        }
+        else {
+            $this->setFirstHitData();
+            $this->cache->put($this->key, 1, $this->time);
             $this->number = 1;
         }
 
@@ -115,7 +117,9 @@ class CacheThrottler implements ThrottlerInterface, Countable
     {
         $this->number = 0;
 
-        $this->store->put($this->key, $this->number, $this->time);
+        $this->cache->put($this->key, $this->number, $this->time);
+
+        $this->cache->forget($this->key . ":" . $this->getFirstHitMarker());
 
         return $this;
     }
@@ -131,7 +135,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
             return $this->number;
         }
 
-        $this->number = (int) $this->store->get($this->key);
+        $this->number = (int) $this->cache->get($this->key);
 
         if (!$this->number) {
             $this->number = 0;
@@ -147,16 +151,76 @@ class CacheThrottler implements ThrottlerInterface, Countable
      */
     public function check()
     {
-        return $this->count() < $this->limit;
+        if(!$this->cache->has($this->key . ":" . $this->getFirstHitMarker())){
+            $this->clear();
+        }
+
+        if($this->count() < $this->limit){
+            return true;
+        }
+
+        return false;
     }
 
     /**
      * Get the store instance.
      *
-     * @return \Illuminate\Contracts\Cache\Store
+     * @return \Illuminate\Contracts\Cache\Repository
      */
-    public function getStore()
+    public function getCache()
     {
-        return $this->store;
+        return $this->cache;
+    }
+
+    /**
+     * Get the Cache First Hit marker.
+     *
+     * @return string
+     */
+    protected function getFirstHitMarker()
+    {
+        return (property_exists($this, 'firstHitMarker')) ? $this->firstHitMarker : 'marker';
+    }
+
+    /**
+     * Set the First Hit cache data.
+     *
+     * @return void
+     */
+    protected function setFirstHitData()
+    {
+        $this->cache->add($this->key . ":" . $this->getFirstHitMarker(), time(), $this->time);
+    }
+
+    /**
+     * Get the number of seconds until the "$this->key" is accessible again.
+     *
+     * @return int
+     */
+    public function availableIn()
+    {
+        if($this->check()){
+            return 0;
+        }
+
+        $remainedTime = ($this->time * 60) - (time() - $this->cache->get($this->key . ":" . $this->getFirstHitMarker()));
+
+        if($remainedTime < 0){
+            $this->clear();
+        }
+
+        return $remainedTime;
+    }
+
+    /**
+     * Get the number of retries left for the given key.
+     *
+     * @return int
+     */
+    public function retriesLeft()
+    {
+        $remainedAttempts = $this->limit - $this->count();
+
+        return ($remainedAttempts > 0) ? $remainedAttempts : 0;
     }
 }
