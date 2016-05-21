@@ -155,11 +155,20 @@ class CacheThrottler implements ThrottlerInterface, Countable
             $this->clear();
         }
 
+        if($this->limitRemainedTime() <= 0){
+            $this->clear();
+        }
+
         if($this->count() < $this->limit){
             return true;
         }
 
         return false;
+    }
+
+    protected function limitRemainedTime()
+    {
+        return ($this->time * 60) - (time() - $this->cache->get($this->key . ":" . $this->getFirstHitMarker()));
     }
 
     /**
@@ -203,13 +212,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
             return 0;
         }
 
-        $remainedTime = ($this->time * 60) - (time() - $this->cache->get($this->key . ":" . $this->getFirstHitMarker()));
-
-        if($remainedTime < 0){
-            $this->clear();
-        }
-
-        return $remainedTime;
+        return $this->limitRemainedTime();
     }
 
     /**
