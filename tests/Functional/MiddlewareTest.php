@@ -110,16 +110,26 @@ class MiddlewareTest extends AbstractTestCase
     protected function hit($times, $time = 3600)
     {
         for ($i = 0; $i < $times - 1; $i++) {
-            $this->call('GET', 'throttle-test-route');
-            $this->assertResponseOk();
+            $this->wrappedCall('GET', 'throttle-test-route');
         }
 
         try {
-            $this->call('GET', 'throttle-test-route');
+            $this->wrappedCall('GET', 'throttle-test-route');
         } catch (TooManyRequestsHttpException $e) {
             $this->assertSame('Rate limit exceeded.', $e->getMessage());
             $this->assertSame($time, $e->getHeaders()['Retry-After']);
             throw $e;
         }
+    }
+    
+    protected function wrappedCall($method, $uri)
+    {
+        $response = $this->call($method, $uri);
+
+        if ($ex = $response->exception) {
+            throw $ex;
+        }
+
+        $this->assertSame(200, $response->status());
     }
 }
