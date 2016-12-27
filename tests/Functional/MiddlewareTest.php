@@ -121,7 +121,7 @@ class MiddlewareTest extends AbstractTestCase
             throw $e;
         }
     }
-    
+
     protected function wrappedCall($method, $uri)
     {
         $response = $this->call($method, $uri);
