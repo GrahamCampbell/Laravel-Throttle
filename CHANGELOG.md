@@ -2,6 +2,11 @@ CHANGE LOG
 ==========
 
 
+## V5.3 (01/01/2017)
+
+* Added laravel 5.4 support
+
+
 ## V5.2 (26/04/2016)
 
 * Added laravel 5.3 support
