@@ -83,9 +83,9 @@ This interface defines the public methods a throttler class must implement. All 
 
 The `'attempt'` method will hit the throttle (increment the hit count), and then will return a boolean representing whether or not the hit limit has been exceeded.
 
-The `'hit'` method will hit the throttle (increment the hit count), and the will return `$this` so you can make another method call if you so choose.
+The `'hit'` method will hit the throttle (increment the hit count), and then will return `$this` so you can make another method call if you so choose.
 
-The `'clear'` method will clear the throttle (set the hit count to zero), and the will return `$this` so you can make another method call if you so choose.
+The `'clear'` method will clear the throttle (set the hit count to zero), and then will return `$this` so you can make another method call if you so choose.
 
 The `'count'` method will return the number of hits to the throttle.
 
