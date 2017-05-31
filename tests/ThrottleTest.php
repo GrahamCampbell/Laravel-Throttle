@@ -17,7 +17,7 @@ use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\Throttle\Throttle;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
 use GrahamCampbell\Throttle\Transformers\ArrayTransformer;
-use GrahamCampbell\Throttle\Transformers\TransformerFactory;
+use GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface;
 use Mockery;
 
 /**
@@ -67,7 +67,7 @@ class ThrottleTest extends AbstractTestBenchTestCase
 
         $trans = Mockery::mock(ArrayTransformer::class);
 
-        $transformer = Mockery::mock(TransformerFactory::class);
+        $transformer = Mockery::mock(TransformerFactoryInterface::class);
 
         $transformer->shouldReceive('make')->with($data)->andReturn($trans);
         $trans->shouldReceive('transform')->with($data, 12, 123)

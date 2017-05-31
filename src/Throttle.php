@@ -13,6 +13,7 @@ namespace GrahamCampbell\Throttle;
 
 use GrahamCampbell\Throttle\Factories\FactoryInterface;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;
+use GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface;
 
 /**
  * This is the throttle class.
@@ -52,11 +53,11 @@ class Throttle
      * Create a new instance.
      *
      * @param \GrahamCampbell\Throttle\Factories\FactoryInterface      $factory
-     * @param \GrahamCampbell\Throttle\Transformers\TransformerFactory $transformer
+     * @param \GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface $transformer
      *
      * @return void
      */
-    public function __construct(FactoryInterface $factory, TransformerFactory $transformer)
+    public function __construct(FactoryInterface $factory, TransformerFactoryInterface $transformer)
     {
         $this->factory = $factory;
         $this->transformer = $transformer;

@@ -14,6 +14,7 @@ namespace GrahamCampbell\Throttle;
 use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\Throttle\Factories\FactoryInterface;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;
+use GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
@@ -95,6 +96,7 @@ class ThrottleServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('throttle.transformer', TransformerFactory::class);
+        $this->app->alias('throttle.transformer', TransformerFactoryInterface::class);
     }
 
     /**
