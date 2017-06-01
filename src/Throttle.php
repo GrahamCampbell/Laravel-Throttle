@@ -12,7 +12,6 @@
 namespace GrahamCampbell\Throttle;
 
 use GrahamCampbell\Throttle\Factories\FactoryInterface;
-use GrahamCampbell\Throttle\Transformers\TransformerFactory;
 use GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface;
 
 /**
@@ -52,7 +51,7 @@ class Throttle
     /**
      * Create a new instance.
      *
-     * @param \GrahamCampbell\Throttle\Factories\FactoryInterface      $factory
+     * @param \GrahamCampbell\Throttle\Factories\FactoryInterface               $factory
      * @param \GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface $transformer
      *
      * @return void
