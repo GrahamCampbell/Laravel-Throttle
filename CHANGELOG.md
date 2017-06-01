@@ -1,6 +1,10 @@
 CHANGE LOG
 ==========
 
+## V6.0 (Upcoming)
+
+* Abstracted with throttle factory interface
+
 
 ## V5.3 (01/01/2017)
 
