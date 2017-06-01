@@ -11,15 +11,12 @@
 
 namespace GrahamCampbell\Throttle\Transformers;
 
-use Illuminate\Http\Request;
-use InvalidArgumentException;
-
 /**
- * This is the transformer factory class.
+ * This is the transformer factory interface.
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class TransformerFactory implements TransformerFactoryInterface
+interface TransformerFactoryInterface
 {
     /**
      * Make a new transformer instance.
@@ -30,16 +27,5 @@ class TransformerFactory implements TransformerFactoryInterface
      *
      * @return \GrahamCampbell\Throttle\Transformers\TransformerInterface
      */
-    public function make($data)
-    {
-        if (is_object($data) && $data instanceof Request) {
-            return new RequestTransformer();
-        }
-
-        if (is_array($data)) {
-            return new ArrayTransformer();
-        }
-
-        throw new InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
-    }
+    public function make($data);
 }
