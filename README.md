@@ -30,7 +30,7 @@ Instead, you may of course manually update your require block and run `composer 
 ```json
 {
     "require": {
-        "graham-campbell/throttle": "^5.0"
+        "graham-campbell/throttle": "^6.0"
     }
 }
 ```
