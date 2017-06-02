@@ -52,4 +52,18 @@ interface ThrottlerInterface
      * @return bool
      */
     public function check();
+
+    /**
+     * Get the number of seconds until the "$this->key" is accessible again.
+     *
+     * @return int
+     */
+    public function availableIn();
+
+    /**
+     * Get the number of retries left for the given key.
+     *
+     * @return int
+     */
+    public function retriesLeft();
 }
