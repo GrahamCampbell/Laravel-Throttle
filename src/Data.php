@@ -31,6 +31,14 @@ class Data
      * @var string
      */
     protected $route;
+    
+    /**
+     * The user
+     * 
+     * @var string
+     */
+    protected $user;
+    
 
     /**
      * The request limit.
@@ -63,10 +71,11 @@ class Data
      *
      * @return void
      */
-    public function __construct($ip, $route, $limit = 10, $time = 60)
+    public function __construct($ip, $route, $user, $limit = 10, $time = 60)
     {
         $this->ip = $ip;
         $this->route = $route;
+        $this->user = $user;
         $this->limit = $limit;
         $this->time = $time;
     }
@@ -91,6 +100,16 @@ class Data
         return $this->route;
     }
 
+    /**
+     * Get the user.
+     *
+     * @return string
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+    
     /**
      * Get the request limit.
      *
@@ -121,7 +140,7 @@ class Data
     public function getKey()
     {
         if (!$this->key) {
-            $this->key = sha1($this->ip.$this->route);
+            $this->key = sha1($this->ip.$this->route.$this->user);
         }
 
         return $this->key;
