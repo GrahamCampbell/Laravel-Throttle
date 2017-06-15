@@ -37,6 +37,14 @@
     "extra": {
         "branch-alias": {
             "dev-master": "6.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "GrahamCampbell\\Throttle\\ThrottleServiceProvider"
+            ],
+            "aliases": {
+                "Throttle": "GrahamCampbell\\Throttle\\Facades\\Throttle"
+            }
         }
     },
     "minimum-stability": "dev",
