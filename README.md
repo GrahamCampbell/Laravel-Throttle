@@ -25,7 +25,7 @@ To get the latest version, simply require the project using [Composer](https://g
 $ composer require graham-campbell/throttle
 ```
 
-Once  installed, you need to register the `GrahamCampbell\Throttle\ThrottleServiceProvider` service provider in your `config/app.php`, and optionally alias our facade:
+Once installed, you need to register the `GrahamCampbell\Throttle\ThrottleServiceProvider` service provider in your `config/app.php`, and optionally alias our facade:
 
 ```php
         'Throttle' => GrahamCampbell\Throttle\Facades\Throttle::class,
