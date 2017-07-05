@@ -12,7 +12,7 @@
 namespace GrahamCampbell\Tests\Throttle\Transformers;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
-use GrahamCampbell\Throttle\Data;
+use GrahamCampbell\Throttle\DataInterface;
 use GrahamCampbell\Throttle\Transformers\ArrayTransformer;
 use GrahamCampbell\Throttle\Transformers\RequestTransformer;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;
@@ -36,7 +36,7 @@ class TransformerFactoryTest extends AbstractTestCase
         $request->shouldReceive('getClientIp')->once()->andReturn('123.123.123.123');
         $request->shouldReceive('path')->once()->andReturn('foobar');
 
-        $this->assertInstanceOf(Data::class, $transformer->transform($request, 123, 321));
+        $this->assertInstanceOf(DataInterface::class, $transformer->transform($request, 123, 321));
     }
 
     public function testArray()
@@ -46,7 +46,7 @@ class TransformerFactoryTest extends AbstractTestCase
 
         $this->assertInstanceOf(ArrayTransformer::class, $transformer);
 
-        $this->assertInstanceOf(Data::class, $transformer->transform($array, 123, 321));
+        $this->assertInstanceOf(DataInterface::class, $transformer->transform($array, 123, 321));
     }
 
     /**
@@ -60,7 +60,7 @@ class TransformerFactoryTest extends AbstractTestCase
 
         $this->assertInstanceOf(ArrayTransformer::class, $transformer);
 
-        $this->assertInstanceOf(Data::class, $transformer->transform([]));
+        $this->assertInstanceOf(DataInterface::class, $transformer->transform([]));
     }
 
     /**

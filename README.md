@@ -10,6 +10,7 @@ Laravel Throttle was created by, and is maintained by [Graham Campbell](https://
 <a href="https://travis-ci.org/GrahamCampbell/Laravel-Throttle"><img src="https://img.shields.io/travis/GrahamCampbell/Laravel-Throttle/master.svg?style=flat-square" alt="Build Status"></img></a>
 <a href="https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle/code-structure"><img src="https://img.shields.io/scrutinizer/coverage/g/GrahamCampbell/Laravel-Throttle.svg?style=flat-square" alt="Coverage Status"></img></a>
 <a href="https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle"><img src="https://img.shields.io/scrutinizer/g/GrahamCampbell/Laravel-Throttle.svg?style=flat-square" alt="Quality Score"></img></a>
+<a href="https://scrutinizer-ci.com/g/GrahamCampbell/Laravel-Throttle"><img src="https://img.shields.io/scrutinizer/g/GrahamCampbell/Laravel-Throttle.svg?style=flat-square" alt="Quality Score"></img></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License"></img></a>
 <a href="https://github.com/GrahamCampbell/Laravel-Throttle/releases"><img src="https://img.shields.io/github/release/GrahamCampbell/Laravel-Throttle.svg?style=flat-square" alt="Latest Version"></img></a>
 </p>
@@ -53,13 +54,28 @@ This option (`'driver'`) defines the cache driver to be used. It may be the name
 
 ## Usage
 
+
+##### DataInterface
+
+This interface defines the public methods a data class must implement. All 3 methods here accept no parameters.
+
+The `'getLimit'` method will return an `int` which represents the maximum number of hits that are allowed before the user hits the limit.
+
+The `'getTime'` method will return an `int` which represents the time the user must wait after going over the limit before the hit count will be reset to zero.
+
+The `'getKey'` method will return a `string` which is used as a unique key to identify the data between requests.
+
+##### Data
+
+This class implements `DataInterface` fully, allowing the throttler to identify repeat calls to `'attempt'`, `'hit'`, `'clear'`, `'count'`, and `'check'`. These are all documented below. 
+
 ##### Throttle
 
 This is the class of most interest. It is bound to the ioc container as `'throttle'` and can be accessed using the `Facades\Throttle` facade. There are six public methods of interest.
 
-The `'get'` method will create a new throttler class (a class that implements `Throttler\ThrottlerInterface`) from the 1-3 parameters that you pass to it. The first parameter is required and must either an instance of `\Illuminate\Http\Request`, or an associative array with two keys (`'ip'` should be the ip address of the user you wish to throttle and `'route'` should be the full url you wish to throttle, but actually, for advanced usage, may be any unique key you choose). The second parameter is optional and should be an `int` which represents the maximum number of hits that are allowed before the user hits the limit. The third and final parameter should be an `int` that represents the time the user must wait after going over the limit before the hit count will be reset to zero. Under the hood this method will be calling the make method on a throttler factory class (a class that implements `Factories\FactoryInterface`).
+The `'get'` method will create a new throttler class (a class that implements `Throttler\ThrottlerInterface`) from the 1-3 parameters that you pass to it. The first parameter is required and must either an instance of `\Illuminate\Http\Request`, an associative array with two keys (`'ip'` should be the ip address of the user you wish to throttle and `'route'` should be the full url you wish to throttle, but actually, for advanced usage, may be any unique key you choose) or an concrete instance of DataInterface. The second parameter is optional and should be an `int` which represents the maximum number of hits that are allowed before the user hits the limit. The third and final parameter should be an `int` that represents the time the user must wait after going over the limit before the hit count will be reset to zero. Under the hood this method will be calling the make method on a throttler factory class (a class that implements `Factories\FactoryInterface`).
 
-The other 5 methods all accept the same parameters as the `get` method. What happens here is we dynamically create a throttler class (or we automatically reuse an instance we already created), and then we call the method on it with no parameters. These 5 methods are `'attempt'`, `'hit'`, `'clear'`, `'count'`, and `'check'`. They are all documented bellow.
+The other 5 methods all accept the same parameters as the `get` method. What happens here is we dynamically create a throttler class (or we automatically reuse an instance we already created), and then we call the method on it with no parameters. These 5 methods are `'attempt'`, `'hit'`, `'clear'`, `'count'`, and `'check'`. They are all documented below.
 
 ##### Facades\Throttle
 
