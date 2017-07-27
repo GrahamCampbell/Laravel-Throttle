@@ -44,7 +44,7 @@ class Throttle
     /**
      * The factory instance.
      *
-     * @var \GrahamCampbell\Throttle\Transformers\TransformerFactory
+     * @var \GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface
      */
     protected $transformer;
 
@@ -97,7 +97,7 @@ class Throttle
      *
      * @codeCoverageIgnore
      *
-     * @return \GrahamCampbell\Throttle\Transformers\TransformerFactory
+     * @return \GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface
      */
     public function getTransformer()
     {
