@@ -66,7 +66,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
      *
      * @return void
      */
-    public function __construct(Store $store, $key, $limit, $time)
+    public function __construct(Store $store, string $key, int $limit, int $time)
     {
         $this->store = $store;
         $this->key = $key;

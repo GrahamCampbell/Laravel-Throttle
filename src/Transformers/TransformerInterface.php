@@ -27,5 +27,5 @@ interface TransformerInterface
      *
      * @return \GrahamCampbell\Throttle\Data
      */
-    public function transform($data, $limit = 10, $time = 60);
+    public function transform($data, int $limit = 10, int $time = 60);
 }

@@ -71,7 +71,7 @@ class Throttle
      *
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
-    public function get($data, $limit = 10, $time = 60)
+    public function get($data, int $limit = 10, int $time = 60)
     {
         $transformed = $this->transformer->make($data)->transform($data, $limit, $time);
 
