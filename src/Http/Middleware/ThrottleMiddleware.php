@@ -57,7 +57,7 @@ class ThrottleMiddleware
      */
     public function handle($request, Closure $next, $limit = 10, $time = 60)
     {
-        if (!$this->throttle->attempt($request, $limit, $time)) {
+        if (!$this->throttle->attempt($request, (int) $limit, (int) $time)) {
             throw new TooManyRequestsHttpException($time * 60, 'Rate limit exceeded.');
         }
 
