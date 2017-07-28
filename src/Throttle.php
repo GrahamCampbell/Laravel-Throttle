@@ -65,18 +65,20 @@ class Throttle
     /**
      * Get a new throttler.
      *
-     * @param array|\Illuminate\Http\Request $data
-     * @param int                            $limit
-     * @param int                            $time
+     * @param array|\Illuminate\Http\Request|\GrahamCampbell\Throttle\DataInterface $data
+     * @param int                                                                   $limit
+     * @param int                                                                   $time
      *
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
     public function get($data, int $limit = 10, int $time = 60)
     {
-        $transformed = $this->transformer->make($data)->transform($data, $limit, $time);
+        if (!($data instanceof DataInterface)) {
+            $data = $this->transformer->make($data)->transform($data, $limit, $time);
+        }
 
-        if (!array_key_exists($key = $transformed->getKey(), $this->throttlers)) {
-            $this->throttlers[$key] = $this->factory->make($transformed);
+        if (!array_key_exists($key = $data->getKey(), $this->throttlers)) {
+            $this->throttlers[$key] = $this->factory->make($data);
         }
 
         return $this->throttlers[$key];

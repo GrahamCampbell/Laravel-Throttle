@@ -25,7 +25,7 @@ interface TransformerInterface
      * @param int                            $limit
      * @param int                            $time
      *
-     * @return \GrahamCampbell\Throttle\Data
+     * @return \GrahamCampbell\Throttle\DataInterface
      */
     public function transform($data, int $limit = 10, int $time = 60);
 }

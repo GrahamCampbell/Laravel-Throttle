@@ -30,7 +30,7 @@ class ArrayTransformer implements TransformerInterface
      *
      * @throws \InvalidArgumentException
      *
-     * @return \GrahamCampbell\Throttle\Data
+     * @return \GrahamCampbell\Throttle\DataInterface
      */
     public function transform($data, int $limit = 10, int $time = 60)
     {

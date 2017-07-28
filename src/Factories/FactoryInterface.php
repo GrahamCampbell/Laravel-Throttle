@@ -11,7 +11,7 @@
 
 namespace GrahamCampbell\Throttle\Factories;
 
-use GrahamCampbell\Throttle\Data;
+use GrahamCampbell\Throttle\DataInterface;
 
 /**
  * This is the throttler factory interface.
@@ -23,9 +23,9 @@ interface FactoryInterface
     /**
      * Make a new throttler instance.
      *
-     * @param \GrahamCampbell\Throttle\Data $data
+     * @param \GrahamCampbell\Throttle\DataInterface $data
      *
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
-    public function make(Data $data);
+    public function make(DataInterface $data);
 }

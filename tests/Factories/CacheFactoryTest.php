@@ -12,7 +12,7 @@
 namespace GrahamCampbell\Tests\Throttle\Factories;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
-use GrahamCampbell\Throttle\Data;
+use GrahamCampbell\Throttle\DataInterface;
 use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
 use Illuminate\Contracts\Cache\Repository;
@@ -33,7 +33,7 @@ class CacheFactoryTest extends AbstractTestCase
         $throttle->getCache()->shouldReceive('getStore')
             ->once()->andReturn(Mockery::mock(Store::class));
 
-        $data = Mockery::mock(Data::class);
+        $data = Mockery::mock(DataInterface::class);
         $data->shouldReceive('getKey')->once()->andReturn('unique-hash');
         $data->shouldReceive('getLimit')->once()->andReturn(246);
         $data->shouldReceive('getTime')->once()->andReturn(123);

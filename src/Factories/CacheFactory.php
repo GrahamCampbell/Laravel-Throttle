@@ -11,7 +11,7 @@
 
 namespace GrahamCampbell\Throttle\Factories;
 
-use GrahamCampbell\Throttle\Data;
+use GrahamCampbell\Throttle\DataInterface;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
 use Illuminate\Contracts\Cache\Repository;
 
@@ -44,11 +44,11 @@ class CacheFactory implements FactoryInterface
     /**
      * Make a new cache throttler instance.
      *
-     * @param \GrahamCampbell\Throttle\Data $data
+     * @param \GrahamCampbell\Throttle\DataInterface $data
      *
      * @return \GrahamCampbell\Throttle\Throttlers\CacheThrottler
      */
-    public function make(Data $data)
+    public function make(DataInterface $data)
     {
         return new CacheThrottler($this->cache->getStore(), $data->getKey(), $data->getLimit(), $data->getTime());
     }

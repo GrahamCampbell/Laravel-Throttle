@@ -16,7 +16,7 @@ namespace GrahamCampbell\Throttle;
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class Data
+class Data implements DataInterface
 {
     /**
      * The ip.
