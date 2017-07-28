@@ -11,10 +11,10 @@
     ],
     "require": {
         "php": "^7.0",
-        "illuminate/cache": "5.1.*|5.2.*|5.3.*|5.4.*",
-        "illuminate/contracts": "5.1.*|5.2.*|5.3.*|5.4.*",
-        "illuminate/http": "5.1.*|5.2.*|5.3.*|5.4.*",
-        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*"
+        "illuminate/cache": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/contracts": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/http": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*"
     },
     "require-dev": {
         "graham-campbell/analyzer": "^1.1",
