@@ -1,9 +1,13 @@
 CHANGE LOG
 ==========
 
-## V6.0 (Upcoming)
 
-* Abstracted with throttle factory interface
+## V6.0 (06/08/2017)
+
+* Support PHP 7.0, 7.1, 7.2
+* Support Laravel 5.1 - 5.5
+* More type hints
+* Added throttle factory interface
 
 
 ## V5.3 (01/01/2017)
