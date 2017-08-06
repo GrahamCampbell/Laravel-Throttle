@@ -41,10 +41,7 @@
         "laravel": {
             "providers": [
                 "GrahamCampbell\\Throttle\\ThrottleServiceProvider"
-            ],
-            "aliases": {
-                "Throttle": "GrahamCampbell\\Throttle\\Facades\\Throttle"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
