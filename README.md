@@ -25,7 +25,9 @@ To get the latest version, simply require the project using [Composer](https://g
 $ composer require graham-campbell/throttle
 ```
 
-Once installed, you need to register the `GrahamCampbell\Throttle\ThrottleServiceProvider` service provider in your `config/app.php`, or if you're using Laravel 5.5, this can be done via the automatic package discovery. You can also optionally alias our facade:
+Once installed, you need to register the `GrahamCampbell\Throttle\ThrottleServiceProvider` service provider in your `config/app.php`, or if you're using Laravel 5.5, this can be done via the automatic package discovery.
+
+You can also optionally alias our facade:
 
 ```php
         'Throttle' => GrahamCampbell\Throttle\Facades\Throttle::class,
