@@ -120,6 +120,7 @@ class MiddlewareTest extends AbstractTestCase
         } catch (TooManyRequestsHttpException $e) {
             $this->assertSame('Rate limit exceeded.', $e->getMessage());
             $this->assertSame($time, $e->getHeaders()['Retry-After']);
+
             throw $e;
         }
     }
