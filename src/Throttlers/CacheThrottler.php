@@ -97,6 +97,10 @@ class CacheThrottler implements ThrottlerInterface, Countable
      */
     public function hit()
     {
+        if ($this->store instanceof \Illuminate\Cache\RedisStore) {
+            return $this->hitRedis();
+        }
+
         if ($this->count()) {
             $this->store->increment($this->key);
             $this->number++;
@@ -160,5 +164,22 @@ class CacheThrottler implements ThrottlerInterface, Countable
     public function getStore()
     {
         return $this->store;
+    }
+
+    /**
+     * Specific hit implementation(atomic) for Redis store.
+     *
+     * @return $this
+     */
+    protected function hitRedis()
+    {
+        $lua = 'local v = redis.call(\'incr\', KEYS[1]) '.
+               'if v>1 then return v '.
+               'else redis.call(\'setex\', KEYS[1], ARGV[1], 1) return 1 end';
+
+        $this->number = $this->store->connection()->eval(
+            $lua, 1, $this->store->getPrefix().$this->key, max(1, $this->time * 60));
+
+        return $this;
     }
 }
