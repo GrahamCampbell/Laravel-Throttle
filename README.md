@@ -17,7 +17,7 @@ Laravel Throttle was created by, and is maintained by [Graham Campbell](https://
 
 ## Installation
 
-Laravel Throttle requires [PHP](https://php.net) 7. This particular version supports Laravel 5.1, 5.2, 5.3, 5.4, or 5.5 only.
+Laravel Throttle requires [PHP](https://php.net) 7. This particular version supports Laravel 5.1, 5.2, 5.3, 5.4, 5.5 or 5.6 only.
 
 To get the latest version, simply require the project using [Composer](https://getcomposer.org):
 
@@ -25,7 +25,7 @@ To get the latest version, simply require the project using [Composer](https://g
 $ composer require graham-campbell/throttle
 ```
 
-Once installed, you need to register the `GrahamCampbell\Throttle\ThrottleServiceProvider` service provider in your `config/app.php`, or if you're using Laravel 5.5, this can be done via the automatic package discovery.
+Once installed, you need to register the `GrahamCampbell\Throttle\ThrottleServiceProvider` service provider in your `config/app.php`, or if you're using Laravel 5.5 and greater, this can be done via the automatic package discovery.
 
 You can also optionally alias our facade:
 
