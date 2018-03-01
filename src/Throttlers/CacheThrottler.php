@@ -182,13 +182,14 @@ class CacheThrottler implements ThrottlerInterface, Countable
 
         return $this;
     }
-    
+
     /**
      * Compute the cache key for redis.
      *
      * @return string
      */
-    protected function computeRedisKey() {
+    protected function computeRedisKey()
+    {
         return $this->store->getPrefix().$this->key;
     }
 }
