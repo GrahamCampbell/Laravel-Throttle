@@ -2,6 +2,13 @@ CHANGE LOG
 ==========
 
 
+## V7.0 (01/03/2018)
+
+* Support PHP 7.1 or 7.2
+* Support Laravel 5.5 or 5.6
+* Improved Redis support using Lua
+
+
 ## V6.0.1 (02/01/2018)
 
 * Fixed config when inside phar
