@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace GrahamCampbell\Throttle\Throttlers;
 
 use Countable;
+use Illuminate\Cache\RedisStore;
 use Illuminate\Contracts\Cache\Store;
 
 /**
@@ -97,6 +98,10 @@ class CacheThrottler implements ThrottlerInterface, Countable
      */
     public function hit()
     {
+        if ($this->store instanceof RedisStore) {
+            return $this->hitRedis();
+        }
+
         if ($this->count()) {
             $this->store->increment($this->key);
             $this->number++;
@@ -160,5 +165,30 @@ class CacheThrottler implements ThrottlerInterface, Countable
     public function getStore()
     {
         return $this->store;
+    }
+
+    /**
+     * An atomic hit implementation for redis.
+     *
+     * @return $this
+     */
+    protected function hitRedis()
+    {
+        $lua = 'local v = redis.call(\'incr\', KEYS[1]) '.
+               'if v>1 then return v '.
+               'else redis.call(\'setex\', KEYS[1], ARGV[1], 1) return 1 end';
+
+        $this->number = $this->store->connection()->eval($lua, 1, $this->computeRedisKey(), $this->time);
+
+        return $this;
+    }
+    
+    /**
+     * Compute the cache key for redis.
+     *
+     * @return string
+     */
+    protected function computeRedisKey() {
+        return $this->store->getPrefix().$this->key;
     }
 }
