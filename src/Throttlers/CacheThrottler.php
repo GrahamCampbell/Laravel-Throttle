@@ -178,7 +178,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
                'if v>1 then return v '.
                'else redis.call(\'setex\', KEYS[1], ARGV[1], 1) return 1 end';
 
-        $this->number = $this->store->connection()->eval($lua, 1, $this->computeRedisKey(), $this->time);
+        $this->number = $this->store->connection()->eval($lua, 1, $this->computeRedisKey(), $this->time * 60);
 
         return $this;
     }
