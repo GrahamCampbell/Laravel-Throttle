@@ -2,6 +2,11 @@ CHANGE LOG
 ==========
 
 
+# V7.0.1 (04/03/2018)
+
+* Fixed bug in new Redis implementation
+
+
 ## V7.0 (01/03/2018)
 
 * Support PHP 7.1 or 7.2
