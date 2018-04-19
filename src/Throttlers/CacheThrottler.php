@@ -148,6 +148,20 @@ class CacheThrottler implements ThrottlerInterface, Countable
     }
 
     /**
+     * Get the time until the end of current duration.
+     *
+     * @return int
+     */
+    public function ttl()
+    {
+        if (!$this->store instanceof RedisStore) {
+            throw new \LogicException('The ttl() method can only be called for Redis backed throttlers');
+        }
+
+        return $this->store->connection()->ttl($this->computeRedisKey());
+    }
+
+    /**
      * Check the throttle.
      *
      * @return bool

@@ -79,6 +79,8 @@ The `'clear'` method will clear the throttle (set the hit count to zero), and th
 
 The `'count'` method will return the number of hits to the throttle.
 
+The `'ttl'` method will return the time until the end of the current duration in seconds.
+
 The `'check'` method will return a boolean representing whether or not the hit limit has been exceeded.
 
 ##### Throttler\CacheThrottler

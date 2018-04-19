@@ -49,6 +49,13 @@ interface ThrottlerInterface
     public function count();
 
     /**
+     * Get the time until the end of current duration.
+     *
+     * @return int
+     */
+    public function ttl();
+
+    /**
      * Check the throttle.
      *
      * @return bool
