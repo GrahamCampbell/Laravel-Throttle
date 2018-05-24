@@ -48,7 +48,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
     /**
      * The expiration time.
      *
-     * @var int
+     * @var float
      */
     protected $time;
 
@@ -65,11 +65,11 @@ class CacheThrottler implements ThrottlerInterface, Countable
      * @param \Illuminate\Contracts\Cache\Store $store
      * @param string                            $key
      * @param int                               $limit
-     * @param int                               $time
+     * @param float                             $time
      *
      * @return void
      */
-    public function __construct(Store $store, string $key, int $limit, int $time)
+    public function __construct(Store $store, string $key, int $limit, float $time)
     {
         $this->store = $store;
         $this->key = $key;

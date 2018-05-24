@@ -49,7 +49,7 @@ class ThrottleMiddleware
      * @param \Illuminate\Http\Request $request
      * @param \Closure                 $next
      * @param int                      $limit
-     * @param int                      $time
+     * @param float                    $time
      *
      * @throws \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
      *
@@ -57,7 +57,7 @@ class ThrottleMiddleware
      */
     public function handle($request, Closure $next, $limit = 10, $time = 60)
     {
-        if (!$this->throttle->attempt($request, (int) $limit, (int) $time)) {
+        if (!$this->throttle->attempt($request, (int) $limit, (float) $time)) {
             throw new TooManyRequestsHttpException($time * 60, 'Rate limit exceeded.');
         }
 

@@ -28,16 +28,16 @@ class ArrayTransformer implements TransformerInterface
      *
      * @param array $data
      * @param int   $limit
-     * @param int   $time
+     * @param float $time
      *
      * @throws \InvalidArgumentException
      *
      * @return \GrahamCampbell\Throttle\Data
      */
-    public function transform($data, int $limit = 10, int $time = 60)
+    public function transform($data, int $limit = 10, float $time = 60)
     {
         if (($ip = array_get($data, 'ip')) && ($route = array_get($data, 'route'))) {
-            return new Data((string) $ip, (string) $route, (int) $limit, (int) $time);
+            return new Data((string) $ip, (string) $route, $limit, $time);
         }
 
         throw new InvalidArgumentException('The data array does not provide the required ip and route information.');

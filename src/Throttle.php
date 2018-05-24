@@ -19,9 +19,9 @@ use GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface;
 /**
  * This is the throttle class.
  *
- * @method bool attempt(array|\Illuminate\Http\Request $data, int $limit, int $time)
- * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface hit(array|\Illuminate\Http\Request $data, int $limit, int $time)
- * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface clear(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method bool attempt(array|\Illuminate\Http\Request $data, int $limit, float $time)
+ * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface hit(array|\Illuminate\Http\Request $data, int $limit, float $time)
+ * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface clear(array|\Illuminate\Http\Request $data, int $limit, float $time)
  * @method int count(array|\Illuminate\Http\Request $data, int $limit, int $time)
  * @method bool check(array|\Illuminate\Http\Request $data, int $limit, int $time)
  *
@@ -69,11 +69,11 @@ class Throttle
      *
      * @param mixed $data
      * @param int   $limit
-     * @param int   $time
+     * @param float $time
      *
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
-    public function get($data, int $limit = 10, int $time = 60)
+    public function get($data, int $limit = 10, float $time = 60)
     {
         $transformed = $this->transformer->make($data)->transform($data, $limit, $time);
 

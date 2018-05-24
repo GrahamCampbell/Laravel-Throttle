@@ -25,9 +25,9 @@ interface TransformerInterface
      *
      * @param array|\Illuminate\Http\Request $data
      * @param int                            $limit
-     * @param int                            $time
+     * @param float                          $time
      *
      * @return \GrahamCampbell\Throttle\Data
      */
-    public function transform($data, int $limit = 10, int $time = 60);
+    public function transform($data, int $limit = 10, float $time = 60);
 }
