@@ -33,6 +33,6 @@ class RequestTransformer implements TransformerInterface
      */
     public function transform($data, int $limit = 10, float $time = 60)
     {
-        return new Data((string) $data->getClientIp(), (string) $data->path(), (int) $limit, (int) $time);
+        return new Data((string) $data->getClientIp(), (string) $data->path(), $limit, $time);
     }
 }

@@ -37,7 +37,7 @@ class ArrayTransformer implements TransformerInterface
     public function transform($data, int $limit = 10, float $time = 60)
     {
         if (($ip = array_get($data, 'ip')) && ($route = array_get($data, 'route'))) {
-            return new Data((string) $ip, (string) $route, (int) $limit, (int) $time);
+            return new Data((string) $ip, (string) $route, $limit, $time);
         }
 
         throw new InvalidArgumentException('The data array does not provide the required ip and route information.');

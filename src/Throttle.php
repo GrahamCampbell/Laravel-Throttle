@@ -19,9 +19,9 @@ use GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface;
 /**
  * This is the throttle class.
  *
- * @method bool attempt(array|\Illuminate\Http\Request $data, int $limit, int $time)
- * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface hit(array|\Illuminate\Http\Request $data, int $limit, int $time)
- * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface clear(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method bool attempt(array|\Illuminate\Http\Request $data, int $limit, float $time)
+ * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface hit(array|\Illuminate\Http\Request $data, int $limit, float $time)
+ * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface clear(array|\Illuminate\Http\Request $data, int $limit, float $time)
  * @method int count(array|\Illuminate\Http\Request $data, int $limit, int $time)
  * @method bool check(array|\Illuminate\Http\Request $data, int $limit, int $time)
  *
