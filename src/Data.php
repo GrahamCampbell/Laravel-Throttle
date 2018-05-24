@@ -61,11 +61,11 @@ class Data
      * @param string $ip
      * @param string $route
      * @param int    $limit
-     * @param int    $time
+     * @param float  $time
      *
      * @return void
      */
-    public function __construct(string $ip, string $route, int $limit = 10, int $time = 60)
+    public function __construct(string $ip, string $route, int $limit = 10, float $time = 60)
     {
         $this->ip = $ip;
         $this->route = $route;

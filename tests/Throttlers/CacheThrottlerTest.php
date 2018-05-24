@@ -30,7 +30,7 @@ class CacheThrottlerTest extends AbstractTestCase
         $throttler = $this->getThrottler();
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc');
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 60);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 60.5);
 
         $return = $throttler->attempt();
 
@@ -42,7 +42,7 @@ class CacheThrottlerTest extends AbstractTestCase
         $throttler = $this->getThrottler();
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc');
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 60);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 60.5);
 
         $return = $throttler->hit();
 
@@ -57,7 +57,7 @@ class CacheThrottlerTest extends AbstractTestCase
     {
         $throttler = $this->getThrottler();
 
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 0, 60);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 0, 60.5);
 
         $return = $throttler->clear();
 
@@ -128,7 +128,7 @@ class CacheThrottlerTest extends AbstractTestCase
         $store = Mockery::mock(Store::class);
         $key = 'abc';
         $limit = 10;
-        $time = 60;
+        $time = 60.5;
 
         return new CacheThrottler($store, $key, $limit, $time);
     }

@@ -69,11 +69,11 @@ class Throttle
      *
      * @param mixed $data
      * @param int   $limit
-     * @param int   $time
+     * @param float $time
      *
      * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
      */
-    public function get($data, int $limit = 10, int $time = 60)
+    public function get($data, int $limit = 10, float $time = 60)
     {
         $transformed = $this->transformer->make($data)->transform($data, $limit, $time);
 

@@ -48,7 +48,7 @@ class DataTest extends AbstractTestBenchTestCase
     {
         $data = $this->getData();
 
-        $this->assertSame(321, $data->getTime());
+        $this->assertSame(321.0, $data->getTime());
     }
 
     public function testGetKey()
