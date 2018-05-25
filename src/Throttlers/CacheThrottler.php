@@ -155,7 +155,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
     public function ttl()
     {
         if (!$this->store instanceof RedisStore) {
-            throw new \LogicException('The ttl() method can only be called for Redis backed throttlers');
+            return -1;
         }
 
         return $this->store->connection()->ttl($this->computeRedisKey());
