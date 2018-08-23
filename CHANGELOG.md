@@ -2,6 +2,11 @@ CHANGE LOG
 ==========
 
 
+## V7.1 (23/08/2018)
+
+* Added Laravel 5.7 support
+
+
 # V7.0.1 (04/03/2018)
 
 * Fixed bug in new Redis implementation
