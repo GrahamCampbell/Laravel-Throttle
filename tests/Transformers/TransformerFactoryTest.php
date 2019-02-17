@@ -60,7 +60,7 @@ class TransformerFactoryTest extends AbstractTestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The data array does not provide the required ip and route information.');
 
-        $transformer->transform([])
+        $transformer->transform([]);
     }
 
     public function testError()
