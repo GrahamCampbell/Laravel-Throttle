@@ -55,11 +55,12 @@ class TransformerFactoryTest extends AbstractTestCase
     public function testEmptyArray()
     {
         $factory = new TransformerFactory();
+        $transformer = $factory->make([]);
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The data array does not provide the required ip and route information.');
 
-        $transformer = $factory->make([]);
+        $transformer->transform([])
     }
 
     public function testError()
@@ -69,6 +70,6 @@ class TransformerFactoryTest extends AbstractTestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('An array, or an instance of Illuminate\Http\Request was expected.');
 
-        $transformer = $factory->make(123);
+        $factory->make(123);
     }
 }
