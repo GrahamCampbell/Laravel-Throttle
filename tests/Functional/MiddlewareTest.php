@@ -41,7 +41,7 @@ class MiddlewareTest extends AbstractTestCase
     /**
      * @after
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->app->cache->driver('array')->flush();
     }
