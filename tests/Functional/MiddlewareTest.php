@@ -55,14 +55,13 @@ class MiddlewareTest extends AbstractTestCase
         $this->hit(10);
     }
 
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
-     */
     public function testBasicMiddlewareFailure()
     {
         $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class, function () {
             return 'Why herro there!';
         }]);
+
+        $this->expectException(TooManyRequestsHttpException::class);
 
         $this->hit(11);
     }
@@ -76,14 +75,13 @@ class MiddlewareTest extends AbstractTestCase
         $this->hit(5);
     }
 
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
-     */
     public function testCustomLimitFailure()
     {
         $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class.':5', function () {
             return 'Why herro there!';
         }]);
+
+        $this->expectException(TooManyRequestsHttpException::class);
 
         $this->hit(6);
     }
@@ -97,14 +95,13 @@ class MiddlewareTest extends AbstractTestCase
         $this->hit(3, 300);
     }
 
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
-     */
     public function testCustomTimeFailure()
     {
         $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class.':3,5', function () {
             return 'Why herro there!';
         }]);
+
+        $this->expectException(TooManyRequestsHttpException::class);
 
         $this->hit(4, 300);
     }
