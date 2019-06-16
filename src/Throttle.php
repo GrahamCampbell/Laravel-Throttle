@@ -37,14 +37,14 @@ class Throttle
     protected $throttlers = [];
 
     /**
-     * The factory instance.
+     * The throttle factory instance.
      *
      * @var \GrahamCampbell\Throttle\Factories\FactoryInterface
      */
     protected $factory;
 
     /**
-     * The factory instance.
+     * The transformer factory instance.
      *
      * @var \GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface
      */
@@ -95,7 +95,7 @@ class Throttle
     }
 
     /**
-     * Get the transformer instance.
+     * Get the transformer factory instance.
      *
      * @codeCoverageIgnore
      *
