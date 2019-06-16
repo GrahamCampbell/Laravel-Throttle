@@ -15,6 +15,7 @@ namespace GrahamCampbell\Tests\Throttle\Throttlers;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
+use GrahamCampbell\Throttle\Throttlers\LifetimeHelper;
 use Illuminate\Contracts\Cache\Store;
 use Mockery;
 
@@ -30,11 +31,9 @@ class CacheThrottlerTest extends AbstractTestCase
         $throttler = $this->getThrottler();
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc');
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 60);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, LifetimeHelper::isLegacy() ? 60 : 3600);
 
-        $return = $throttler->attempt();
-
-        $this->assertTrue($return);
+        $this->assertTrue($throttler->attempt());
     }
 
     public function testCountHit()
@@ -42,30 +41,20 @@ class CacheThrottlerTest extends AbstractTestCase
         $throttler = $this->getThrottler();
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc');
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 60);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, LifetimeHelper::isLegacy() ? 60 : 3600);
 
-        $return = $throttler->hit();
-
-        $this->assertInstanceOf(CacheThrottler::class, $return);
-
-        $return = $throttler->count();
-
-        $this->assertSame(1, $return);
+        $this->assertInstanceOf(CacheThrottler::class, $throttler->hit());
+        $this->assertSame(1, $throttler->count());
     }
 
     public function testCountClear()
     {
         $throttler = $this->getThrottler();
 
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 0, 60);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 0, LifetimeHelper::isLegacy() ? 60 : 3600);
 
-        $return = $throttler->clear();
-
-        $this->assertInstanceOf(CacheThrottler::class, $return);
-
-        $return = $throttler->count();
-
-        $this->assertSame(0, $return);
+        $this->assertInstanceOf(CacheThrottler::class, $throttler->clear());
+        $this->assertSame(0, $throttler->count());
     }
 
     public function testCountCheckTrue()
@@ -74,13 +63,8 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc');
 
-        $return = $throttler->count();
-
-        $this->assertSame(0, $return);
-
-        $return = $throttler->check();
-
-        $this->assertTrue($return);
+        $this->assertSame(0, $throttler->count());
+        $this->assertTrue($throttler->check());
     }
 
     public function testCountCheckEdge()
@@ -89,13 +73,8 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(9);
 
-        $return = $throttler->count();
-
-        $this->assertSame(9, $return);
-
-        $return = $throttler->check();
-
-        $this->assertTrue($return);
+        $this->assertSame(9, $throttler->count());
+        $this->assertTrue($throttler->check());
     }
 
     public function testCountCheckFalse()
@@ -104,13 +83,8 @@ class CacheThrottlerTest extends AbstractTestCase
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(10);
 
-        $return = $throttler->count();
-
-        $this->assertSame(10, $return);
-
-        $return = $throttler->check();
-
-        $this->assertFalse($return);
+        $this->assertSame(10, $throttler->count());
+        $this->assertFalse($throttler->check());
     }
 
     public function testIsCountable()

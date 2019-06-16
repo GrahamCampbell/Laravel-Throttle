@@ -106,7 +106,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
             $this->store->increment($this->key);
             $this->number++;
         } else {
-            $this->store->put($this->key, 1, $this->time);
+            $this->store->put($this->key, 1, LifetimeHelper::computeLifetime($this->time));
             $this->number = 1;
         }
 
@@ -122,7 +122,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
     {
         $this->number = 0;
 
-        $this->store->put($this->key, $this->number, $this->time);
+        $this->store->put($this->key, $this->number, LifetimeHelper::computeLifetime($this->time));
 
         return $this;
     }
