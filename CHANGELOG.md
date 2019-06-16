@@ -2,6 +2,11 @@ CHANGE LOG
 ==========
 
 
+## V7.3 (16/06/2019)
+
+* Fixed cache lifetime in Laravel 5.8
+
+
 ## V7.2 (10/03/2019)
 
 * Added Laravel 5.8 support
