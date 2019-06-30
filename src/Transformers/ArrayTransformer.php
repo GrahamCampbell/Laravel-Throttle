@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace GrahamCampbell\Throttle\Transformers;
 
 use GrahamCampbell\Throttle\Data;
+use Illuminate\Support\Arr;
 use InvalidArgumentException;
 
 /**
@@ -36,7 +37,7 @@ class ArrayTransformer implements TransformerInterface
      */
     public function transform($data, int $limit = 10, int $time = 60)
     {
-        if (($ip = array_get($data, 'ip')) && ($route = array_get($data, 'route'))) {
+        if (($ip = Arr::get($data, 'ip')) && ($route = Arr::get($data, 'route'))) {
             return new Data((string) $ip, (string) $route, (int) $limit, (int) $time);
         }
 
