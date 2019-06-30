@@ -2,6 +2,11 @@ CHANGE LOG
 ==========
 
 
+## V7.3.1 (Upcoming)
+
+* Avoid deprecated code
+
+
 ## V7.3 (16/06/2019)
 
 * Fixed cache lifetime in Laravel 5.8
