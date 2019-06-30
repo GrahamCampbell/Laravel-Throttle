@@ -2,7 +2,7 @@ CHANGE LOG
 ==========
 
 
-## V7.3.1 (Upcoming)
+## V7.3.1 (30/06/2019)
 
 * Avoid deprecated code
 
