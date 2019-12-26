@@ -3,7 +3,7 @@ Laravel Throttle
 
 Laravel Throttle was created by, and is maintained by [Graham Campbell](https://github.com/GrahamCampbell), and is a rate limiter for [Laravel 5](http://laravel.com). Feel free to check out the [change log](CHANGELOG.md), [releases](https://github.com/GrahamCampbell/Laravel-Throttle/releases), [security policy](https://github.com/GrahamCampbell/Laravel-Throttle/security/policy), [license](LICENSE), [code of conduct](.github/CODE_OF_CONDUCT.md), and [contribution guidelines](.github/CONTRIBUTING.md).
 
-![Laravel Throttle](https://cloud.githubusercontent.com/assets/2829600/4432295/c1211b62-468c-11e4-9453-eb23480c7674.PNG)
+![Banner](https://user-images.githubusercontent.com/2829600/71477509-693e3c80-27e2-11ea-8497-46b3a1c8f1f4.png)
 
 <p align="center">
 <a href="https://styleci.io/repos/15437427"><img src="https://styleci.io/repos/15437427/shield" alt="StyleCI Status"></img></a>
