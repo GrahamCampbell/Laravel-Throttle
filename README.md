@@ -1,7 +1,7 @@
 Laravel Throttle
 ================
 
-Laravel Throttle was created by, and is maintained by [Graham Campbell](https://github.com/GrahamCampbell), and is a rate limiter for [Laravel 5](http://laravel.com). Feel free to check out the [change log](CHANGELOG.md), [releases](https://github.com/GrahamCampbell/Laravel-Throttle/releases), [security policy](https://github.com/GrahamCampbell/Laravel-Throttle/security/policy), [license](LICENSE), [code of conduct](.github/CODE_OF_CONDUCT.md), and [contribution guidelines](.github/CONTRIBUTING.md).
+Laravel Throttle was created by, and is maintained by [Graham Campbell](https://github.com/GrahamCampbell), and is a rate limiter for [Laravel](http://laravel.com). Feel free to check out the [change log](CHANGELOG.md), [releases](https://github.com/GrahamCampbell/Laravel-Throttle/releases), [security policy](https://github.com/GrahamCampbell/Laravel-Throttle/security/policy), [license](LICENSE), [code of conduct](.github/CODE_OF_CONDUCT.md), and [contribution guidelines](.github/CONTRIBUTING.md).
 
 ![Banner](https://user-images.githubusercontent.com/2829600/71477509-693e3c80-27e2-11ea-8497-46b3a1c8f1f4.png)
 
@@ -17,7 +17,7 @@ Laravel Throttle was created by, and is maintained by [Graham Campbell](https://
 
 ## Installation
 
-Laravel Throttle requires [PHP](https://php.net) 7.1-7.4. This particular version supports Laravel 5.5-5.8 and 6 only.
+Laravel Throttle requires [PHP](https://php.net) 7.1-7.4. This particular version supports Laravel 5.5-7.
 
 To get the latest version, simply require the project using [Composer](https://getcomposer.org):
 
