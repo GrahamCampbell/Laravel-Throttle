@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\Throttle\Transformers;
+namespace GrahamCampbell\Throttle\Transformer;
 
 use GrahamCampbell\Throttle\Data;
 use Illuminate\Support\Arr;

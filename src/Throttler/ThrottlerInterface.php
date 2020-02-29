@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\Throttle\Throttlers;
+namespace GrahamCampbell\Throttle\Throttler;
 
 /**
  * This is the throttler interface class.

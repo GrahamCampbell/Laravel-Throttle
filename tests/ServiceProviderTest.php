@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace GrahamCampbell\Tests\Throttle;
 
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
-use GrahamCampbell\Throttle\Factories\CacheFactory;
-use GrahamCampbell\Throttle\Factories\FactoryInterface;
+use GrahamCampbell\Throttle\Factory\CacheFactory;
+use GrahamCampbell\Throttle\Factory\FactoryInterface;
 use GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware;
 use GrahamCampbell\Throttle\Throttle;
-use GrahamCampbell\Throttle\Transformers\TransformerFactory;
-use GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface;
+use GrahamCampbell\Throttle\Transformer\TransformerFactory;
+use GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface;
 
 /**
  * This is the service provider test class.

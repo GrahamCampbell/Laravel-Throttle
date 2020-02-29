@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\Throttle\Factories;
+namespace GrahamCampbell\Throttle\Factory;
 
 use GrahamCampbell\Throttle\Data;
-use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
+use GrahamCampbell\Throttle\Throttler\CacheThrottler;
 use Illuminate\Contracts\Cache\Repository;
 
 /**
@@ -48,7 +48,7 @@ class CacheFactory implements FactoryInterface
      *
      * @param \GrahamCampbell\Throttle\Data $data
      *
-     * @return \GrahamCampbell\Throttle\Throttlers\CacheThrottler
+     * @return \GrahamCampbell\Throttle\Throttler\CacheThrottler
      */
     public function make(Data $data)
     {

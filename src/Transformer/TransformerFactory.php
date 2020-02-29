@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\Throttle\Transformers;
+namespace GrahamCampbell\Throttle\Transformer;
 
 use Illuminate\Http\Request;
 use InvalidArgumentException;
@@ -30,7 +30,7 @@ class TransformerFactory implements TransformerFactoryInterface
      *
      * @throws \InvalidArgumentException
      *
-     * @return \GrahamCampbell\Throttle\Transformers\TransformerInterface
+     * @return \GrahamCampbell\Throttle\Transformer\TransformerInterface
      */
     public function make($data)
     {
