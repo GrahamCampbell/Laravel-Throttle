@@ -2,6 +2,11 @@ CHANGE LOG
 ==========
 
 
+## V8.0 (Upcoming)
+
+* Dropped Laravel 5
+
+
 ## V7.5 (25/01/2020)
 
 * Added Laravel 7 support
