@@ -42,7 +42,7 @@ class Data
     protected $limit;
 
     /**
-     * The expiration time.
+     * The expiration time in minutes.
      *
      * @var int
      */
@@ -104,7 +104,7 @@ class Data
     }
 
     /**
-     * Get the expiration time.
+     * Get the expiration time in minutes.
      *
      * @return int
      */

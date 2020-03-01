@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace GrahamCampbell\Throttle;
 
-use GrahamCampbell\Throttle\Factories\CacheFactory;
-use GrahamCampbell\Throttle\Factories\FactoryInterface;
-use GrahamCampbell\Throttle\Transformers\TransformerFactory;
-use GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface;
+use GrahamCampbell\Throttle\Factory\CacheFactory;
+use GrahamCampbell\Throttle\Factory\FactoryInterface;
+use GrahamCampbell\Throttle\Transformer\TransformerFactory;
+use GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;

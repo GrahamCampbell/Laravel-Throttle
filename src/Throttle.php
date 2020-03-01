@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace GrahamCampbell\Throttle;
 
-use GrahamCampbell\Throttle\Factories\FactoryInterface;
-use GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface;
+use GrahamCampbell\Throttle\Factory\FactoryInterface;
+use GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface;
 
 /**
  * This is the throttle class.
  *
  * @method bool attempt(array|\Illuminate\Http\Request $data, int $limit, int $time)
- * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface hit(array|\Illuminate\Http\Request $data, int $limit, int $time)
- * @method \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface clear(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method \GrahamCampbell\Throttle\Throttler\ThrottlerInterface hit(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method \GrahamCampbell\Throttle\Throttler\ThrottlerInterface clear(array|\Illuminate\Http\Request $data, int $limit, int $time)
  * @method int count(array|\Illuminate\Http\Request $data, int $limit, int $time)
  * @method bool check(array|\Illuminate\Http\Request $data, int $limit, int $time)
  *
@@ -32,29 +32,29 @@ class Throttle
     /**
      * The cached throttler instances.
      *
-     * @var \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface[]
+     * @var \GrahamCampbell\Throttle\Throttler\ThrottlerInterface[]
      */
     protected $throttlers = [];
 
     /**
      * The throttle factory instance.
      *
-     * @var \GrahamCampbell\Throttle\Factories\FactoryInterface
+     * @var \GrahamCampbell\Throttle\Factory\FactoryInterface
      */
     protected $factory;
 
     /**
      * The transformer factory instance.
      *
-     * @var \GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface
+     * @var \GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface
      */
     protected $transformer;
 
     /**
      * Create a new instance.
      *
-     * @param \GrahamCampbell\Throttle\Factories\FactoryInterface               $factory
-     * @param \GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface $transformer
+     * @param \GrahamCampbell\Throttle\Factory\FactoryInterface                $factory
+     * @param \GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface $transformer
      *
      * @return void
      */
@@ -71,7 +71,7 @@ class Throttle
      * @param int   $limit
      * @param int   $time
      *
-     * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
+     * @return \GrahamCampbell\Throttle\Throttler\ThrottlerInterface
      */
     public function get($data, int $limit = 10, int $time = 60)
     {
@@ -87,7 +87,7 @@ class Throttle
     /**
      * Get the cache instance.
      *
-     * @return \GrahamCampbell\Throttle\Factories\FactoryInterface
+     * @return \GrahamCampbell\Throttle\Factory\FactoryInterface
      */
     public function getFactory()
     {
@@ -97,9 +97,7 @@ class Throttle
     /**
      * Get the transformer factory instance.
      *
-     * @codeCoverageIgnore
-     *
-     * @return \GrahamCampbell\Throttle\Transformers\TransformerFactoryInterface
+     * @return \GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface
      */
     public function getTransformer()
     {

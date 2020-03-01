@@ -5,6 +5,7 @@ CHANGE LOG
 ## V8.0 (Upcoming)
 
 * Dropped Laravel 5
+* Moved around internals
 
 
 ## V7.5 (25/01/2020)

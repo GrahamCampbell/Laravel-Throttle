@@ -11,11 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\Tests\Throttle\Throttlers;
+namespace GrahamCampbell\Tests\Throttle\Throttler;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
-use GrahamCampbell\Throttle\Throttlers\CacheThrottler;
-use GrahamCampbell\Throttle\Throttlers\LifetimeHelper;
+use GrahamCampbell\Throttle\Throttler\CacheThrottler;
 use Illuminate\Contracts\Cache\Store;
 use Mockery;
 
@@ -31,7 +30,7 @@ class CacheThrottlerTest extends AbstractTestCase
         $throttler = $this->getThrottler();
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc');
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, LifetimeHelper::isLegacy() ? 60 : 3600);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 3600);
 
         $this->assertTrue($throttler->attempt());
     }
@@ -41,7 +40,7 @@ class CacheThrottlerTest extends AbstractTestCase
         $throttler = $this->getThrottler();
 
         $throttler->getStore()->shouldReceive('get')->once()->with('abc');
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, LifetimeHelper::isLegacy() ? 60 : 3600);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 3600);
 
         $this->assertInstanceOf(CacheThrottler::class, $throttler->hit());
         $this->assertSame(1, $throttler->count());
@@ -51,7 +50,7 @@ class CacheThrottlerTest extends AbstractTestCase
     {
         $throttler = $this->getThrottler();
 
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 0, LifetimeHelper::isLegacy() ? 60 : 3600);
+        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 0, 3600);
 
         $this->assertInstanceOf(CacheThrottler::class, $throttler->clear());
         $this->assertSame(0, $throttler->count());
@@ -99,11 +98,6 @@ class CacheThrottlerTest extends AbstractTestCase
 
     protected function getThrottler()
     {
-        $store = Mockery::mock(Store::class);
-        $key = 'abc';
-        $limit = 10;
-        $time = 60;
-
-        return new CacheThrottler($store, $key, $limit, $time);
+        return new CacheThrottler(Mockery::mock(Store::class), 'abc', 10, 3600);
     }
 }

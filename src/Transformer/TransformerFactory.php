@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\Throttle\Transformers;
+namespace GrahamCampbell\Throttle\Transformer;
 
 use Illuminate\Http\Request;
 use InvalidArgumentException;
@@ -30,7 +30,7 @@ class TransformerFactory implements TransformerFactoryInterface
      *
      * @throws \InvalidArgumentException
      *
-     * @return \GrahamCampbell\Throttle\Transformers\TransformerInterface
+     * @return \GrahamCampbell\Throttle\Transformer\TransformerInterface
      */
     public function make($data)
     {
@@ -42,6 +42,6 @@ class TransformerFactory implements TransformerFactoryInterface
             return new ArrayTransformer();
         }
 
-        throw new InvalidArgumentException('An array, or an instance of Illuminate\Http\Request was expected.');
+        throw new InvalidArgumentException(sprintf('An array, or an instance of %s was expected.', Request::class));
     }
 }

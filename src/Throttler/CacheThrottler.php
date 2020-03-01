@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\Throttle\Throttlers;
+namespace GrahamCampbell\Throttle\Throttler;
 
 use Countable;
 use Illuminate\Cache\RedisStore;
@@ -46,7 +46,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
     protected $limit;
 
     /**
-     * The expiration time.
+     * The expiration time in seconds.
      *
      * @var int
      */
@@ -106,7 +106,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
             $this->store->increment($this->key);
             $this->number++;
         } else {
-            $this->store->put($this->key, 1, LifetimeHelper::computeLifetime($this->time));
+            $this->store->put($this->key, 1, $this->time);
             $this->number = 1;
         }
 
@@ -122,7 +122,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
     {
         $this->number = 0;
 
-        $this->store->put($this->key, $this->number, LifetimeHelper::computeLifetime($this->time));
+        $this->store->put($this->key, $this->number, $this->time);
 
         return $this;
     }
@@ -178,7 +178,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
                'if v>1 then return v '.
                'else redis.call(\'setex\', KEYS[1], ARGV[1], 1) return 1 end';
 
-        $this->number = $this->store->connection()->eval($lua, 1, $this->computeRedisKey(), $this->time * 60);
+        $this->number = $this->store->connection()->eval($lua, 1, $this->computeRedisKey(), $this->time);
 
         return $this;
     }

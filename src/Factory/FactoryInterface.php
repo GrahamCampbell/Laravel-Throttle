@@ -11,23 +11,23 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\Throttle\Transformers;
+namespace GrahamCampbell\Throttle\Factory;
+
+use GrahamCampbell\Throttle\Data;
 
 /**
- * This is the transformer factory interface.
+ * This is the throttler factory interface.
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-interface TransformerFactoryInterface
+interface FactoryInterface
 {
     /**
-     * Make a new transformer instance.
+     * Make a new throttler instance.
      *
-     * @param mixed $data
+     * @param \GrahamCampbell\Throttle\Data $data
      *
-     * @throws \InvalidArgumentException
-     *
-     * @return \GrahamCampbell\Throttle\Transformers\TransformerInterface
+     * @return \GrahamCampbell\Throttle\Throttler\ThrottlerInterface
      */
-    public function make($data);
+    public function make(Data $data);
 }
