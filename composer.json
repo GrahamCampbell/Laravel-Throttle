@@ -36,9 +36,6 @@
         "preferred-install": "dist"
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "8.0-dev"
-        },
         "laravel": {
             "providers": [
                 "GrahamCampbell\\Throttle\\ThrottleServiceProvider"
