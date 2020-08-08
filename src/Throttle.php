@@ -19,11 +19,11 @@ use GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface;
 /**
  * This is the throttle class.
  *
- * @method bool attempt(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method bool                                                  attempt(array|\Illuminate\Http\Request $data, int $limit, int $time)
  * @method \GrahamCampbell\Throttle\Throttler\ThrottlerInterface hit(array|\Illuminate\Http\Request $data, int $limit, int $time)
  * @method \GrahamCampbell\Throttle\Throttler\ThrottlerInterface clear(array|\Illuminate\Http\Request $data, int $limit, int $time)
- * @method int count(array|\Illuminate\Http\Request $data, int $limit, int $time)
- * @method bool check(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method int                                                   count(array|\Illuminate\Http\Request $data, int $limit, int $time)
+ * @method bool                                                  check(array|\Illuminate\Http\Request $data, int $limit, int $time)
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
