@@ -6,6 +6,10 @@ Laravel Throttle was created by, and is maintained by [Graham Campbell](https://
 ![Banner](https://user-images.githubusercontent.com/2829600/71477509-693e3c80-27e2-11ea-8497-46b3a1c8f1f4.png)
 
 <p align="center">
+<a href="https://xscode.com/grahamcampbell/Laravel-Throttle"><img src="https://xscode.com/assets/promo-banner.svg" alt="Promo Banner"></img></a>
+</p>
+
+<p align="center">
 <a href="https://github.com/GrahamCampbell/Laravel-Throttle/actions?query=workflow%3ATests"><img src="https://img.shields.io/github/workflow/status/GrahamCampbell/Laravel-Throttle/Tests?label=Tests&style=flat-square" alt="Build Status"></img></a>
 <a href="https://github.styleci.io/repos/15437427"><img src="https://github.styleci.io/repos/15437427/shield" alt="StyleCI Status"></img></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen?style=flat-square" alt="Software License"></img></a>
