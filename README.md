@@ -33,7 +33,7 @@ Laravel Throttle requires [PHP](https://php.net) 7.2-8.0. This particular versio
 To get the latest version, simply require the project using [Composer](https://getcomposer.org):
 
 ```bash
-$ composer require graham-campbell/throttle:^8.1
+$ composer require "graham-campbell/throttle:^8.1"
 ```
 
 Once installed, if you are not using automatic package discovery, then you need to register the `GrahamCampbell\Throttle\ThrottleServiceProvider` service provider in your `config/app.php`.
