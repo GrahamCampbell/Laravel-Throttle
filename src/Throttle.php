@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Laravel Throttle.
  *
- * (c) Graham Campbell <graham@alt-three.com>
+ * (c) Graham Campbell <hello@gjcampbell.co.uk>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,7 +25,7 @@ use GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface;
  * @method int                                                   count(array|\Illuminate\Http\Request $data, int $limit, int $time)
  * @method bool                                                  check(array|\Illuminate\Http\Request $data, int $limit, int $time)
  *
- * @author Graham Campbell <graham@alt-three.com>
+ * @author Graham Campbell <hello@gjcampbell.co.uk>
  */
 class Throttle
 {
