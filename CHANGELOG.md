@@ -2,6 +2,12 @@ CHANGE LOG
 ==========
 
 
+## V8.1.1 (21/11/2021)
+
+* Provisional PHP 8.1 support
+* Updated package metadata
+
+
 ## V8.1 (14/08/2020)
 
 * Added Laravel 8 support
