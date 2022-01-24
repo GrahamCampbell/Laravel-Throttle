@@ -132,6 +132,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         if ($this->number !== null) {
