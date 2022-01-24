@@ -2,7 +2,7 @@ CHANGE LOG
 ==========
 
 
-## V8.2 (UPCOMING)
+## V8.2 (24/01/2022)
 
 * Added Laravel 9 support
 * Fixed PHP 8.1 support
