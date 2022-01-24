@@ -16,6 +16,7 @@ namespace GrahamCampbell\Tests\Throttle;
 use GrahamCampbell\Analyzer\AnalysisTrait;
 use Laravel\Lumen\Application;
 use PHPUnit\Framework\TestCase;
+use ReturnTypeWillChange;
 
 /**
  * This is the analysis test class.
@@ -47,6 +48,6 @@ class AnalysisTest extends TestCase
      */
     protected function getIgnored()
     {
-        return [Application::class];
+        return [Application::class, ReturnTypeWillChange::class];
     }
 }
