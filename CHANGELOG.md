@@ -2,6 +2,12 @@ CHANGE LOG
 ==========
 
 
+## V9.0 (UPGRADES)
+
+* Dropped PHP < 7.4
+* Dropped Laravel < 8
+
+
 ## V8.2 (24/01/2022)
 
 * Added Laravel 9 support

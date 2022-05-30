@@ -1,7 +1,7 @@
 Laravel Throttle
 ================
 
-Laravel Throttle was created by, and is maintained by [Graham Campbell](https://github.com/GrahamCampbell), and is a rate limiter for [Laravel](https://laravel.com). Feel free to check out the [change log](CHANGELOG.md), [releases](https://github.com/GrahamCampbell/Laravel-Throttle/releases), [security policy](https://github.com/GrahamCampbell/Laravel-Throttle/security/policy), [license](LICENSE), [code of conduct](.github/CODE_OF_CONDUCT.md), and [contribution guidelines](.github/CONTRIBUTING.md).
+Laravel Throttle was created by, and is maintained by [Graham Campbell](https://github.com/GrahamCampbell), and is a rate limiter for [Laravel](https://laravel.com/). Feel free to check out the [change log](CHANGELOG.md), [releases](https://github.com/GrahamCampbell/Laravel-Throttle/releases), [security policy](https://github.com/GrahamCampbell/Laravel-Throttle/security/policy), [license](LICENSE), [code of conduct](.github/CODE_OF_CONDUCT.md), and [contribution guidelines](.github/CONTRIBUTING.md).
 
 ![Banner](https://user-images.githubusercontent.com/2829600/71477509-693e3c80-27e2-11ea-8497-46b3a1c8f1f4.png)
 
@@ -16,7 +16,7 @@ Laravel Throttle was created by, and is maintained by [Graham Campbell](https://
 
 ## Installation
 
-Laravel Throttle requires [PHP](https://php.net) 7.2-8.1. This particular version supports Laravel 6-9.
+This version requires [PHP](https://www.php.net/) 7.4-8.1 and supports [Laravel](https://laravel.com/) 8-9.
 
 | Throttle | L5.1               | L5.2               | L5.3               | L5.4               | L5.5               | L5.6               | L5.7               | L5.8               | L6                 | L7                 | L8                 | L9                 |
 |----------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
@@ -25,11 +25,12 @@ Laravel Throttle requires [PHP](https://php.net) 7.2-8.1. This particular versio
 | 6.0      | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                |
 | 7.5      | :x:                | :x:                | :x:                | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                |
 | 8.2      | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| 9.0      | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :white_check_mark: | :white_check_mark: |
 
-To get the latest version, simply require the project using [Composer](https://getcomposer.org):
+To get the latest version, simply require the project using [Composer](https://getcomposer.org/):
 
 ```bash
-$ composer require "graham-campbell/throttle:^8.2"
+$ composer require "graham-campbell/throttle:^9.0"
 ```
 
 Once installed, if you are not using automatic package discovery, then you need to register the `GrahamCampbell\Throttle\ThrottleServiceProvider` service provider in your `config/app.php`.
