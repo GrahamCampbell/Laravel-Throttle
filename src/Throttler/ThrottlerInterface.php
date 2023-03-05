@@ -25,33 +25,33 @@ interface ThrottlerInterface
      *
      * @return bool
      */
-    public function attempt();
+    public function attempt(): bool;
 
     /**
      * Hit the throttle.
      *
      * @return $this
      */
-    public function hit();
+    public function hit(): self;
 
     /**
      * Clear the throttle.
      *
      * @return $this
      */
-    public function clear();
+    public function clear(): self;
 
     /**
      * Get the throttle hit count.
      *
      * @return int
      */
-    public function count();
+    public function count(): int;
 
     /**
      * Check the throttle.
      *
      * @return bool
      */
-    public function check();
+    public function check(): bool;
 }

@@ -15,6 +15,7 @@ namespace GrahamCampbell\Throttle\Http\Middleware;
 
 use Closure;
 use GrahamCampbell\Throttle\Throttle;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 /**
@@ -29,7 +30,7 @@ class ThrottleMiddleware
      *
      * @var \GrahamCampbell\Throttle\Throttle
      */
-    protected $throttle;
+    protected Throttle $throttle;
 
     /**
      * Create a new throttle middleware instance.
@@ -48,14 +49,14 @@ class ThrottleMiddleware
      *
      * @param \Illuminate\Http\Request $request
      * @param \Closure                 $next
-     * @param int                      $limit
-     * @param int                      $time
+     * @param int|string               $limit
+     * @param int|string               $time
      *
      * @throws \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $limit = 10, $time = 60)
+    public function handle(Request $request, Closure $next, $limit = 10, $time = 60)
     {
         if (!$this->throttle->attempt($request, (int) $limit, (int) $time)) {
             throw new TooManyRequestsHttpException($time * 60, 'Rate limit exceeded.');

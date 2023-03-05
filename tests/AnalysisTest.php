@@ -16,7 +16,6 @@ namespace GrahamCampbell\Tests\Throttle;
 use GrahamCampbell\Analyzer\AnalysisTrait;
 use Laravel\Lumen\Application;
 use PHPUnit\Framework\TestCase;
-use ReturnTypeWillChange;
 
 /**
  * This is the analysis test class.
@@ -32,7 +31,7 @@ class AnalysisTest extends TestCase
      *
      * @return string[]
      */
-    protected function getPaths()
+    protected static function getPaths(): array
     {
         return [
             realpath(__DIR__.'/../config'),
@@ -46,8 +45,8 @@ class AnalysisTest extends TestCase
      *
      * @return string[]
      */
-    protected function getIgnored()
+    protected static function getIgnored(): array
     {
-        return [Application::class, ReturnTypeWillChange::class];
+        return [Application::class];
     }
 }

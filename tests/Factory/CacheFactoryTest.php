@@ -28,11 +28,13 @@ use Mockery;
  */
 class CacheFactoryTest extends AbstractTestCase
 {
-    public function testMake()
+    public function testMake(): void
     {
-        $throttle = $this->getFactory();
+        $cache = Mockery::mock(Repository::class);
 
-        $throttle->getCache()->shouldReceive('getStore')
+        $cacheFactory = new CacheFactory($cache);
+
+        $cache->shouldReceive('getStore')
             ->once()->andReturn(Mockery::mock(Store::class));
 
         $data = Mockery::mock(Data::class);
@@ -40,15 +42,8 @@ class CacheFactoryTest extends AbstractTestCase
         $data->shouldReceive('getLimit')->once()->andReturn(246);
         $data->shouldReceive('getTime')->once()->andReturn(123);
 
-        $return = $throttle->make($data);
+        $return = $cacheFactory->make($data);
 
-        $this->assertInstanceOf(CacheThrottler::class, $return);
-    }
-
-    protected function getFactory()
-    {
-        $cache = Mockery::mock(Repository::class);
-
-        return new CacheFactory($cache);
+        self::assertInstanceOf(CacheThrottler::class, $return);
     }
 }

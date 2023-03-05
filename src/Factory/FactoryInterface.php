@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace GrahamCampbell\Throttle\Factory;
 
 use GrahamCampbell\Throttle\Data;
+use GrahamCampbell\Throttle\Throttler\ThrottlerInterface;
 
 /**
  * This is the throttler factory interface.
@@ -29,5 +30,5 @@ interface FactoryInterface
      *
      * @return \GrahamCampbell\Throttle\Throttler\ThrottlerInterface
      */
-    public function make(Data $data);
+    public function make(Data $data): ThrottlerInterface;
 }

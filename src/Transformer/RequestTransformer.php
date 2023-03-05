@@ -31,7 +31,7 @@ class RequestTransformer implements TransformerInterface
      *
      * @return \GrahamCampbell\Throttle\Data
      */
-    public function transform($data, int $limit = 10, int $time = 60)
+    public function transform($data, int $limit = 10, int $time = 60): Data
     {
         return new Data((string) $data->getClientIp(), (string) $data->path(), (int) $limit, (int) $time);
     }

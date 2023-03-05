@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace GrahamCampbell\Throttle\Transformer;
 
+use GrahamCampbell\Throttle\Data;
+
 /**
  * This is the transformer interface.
  *
@@ -29,5 +31,5 @@ interface TransformerInterface
      *
      * @return \GrahamCampbell\Throttle\Data
      */
-    public function transform($data, int $limit = 10, int $time = 60);
+    public function transform($data, int $limit = 10, int $time = 60): Data;
 }

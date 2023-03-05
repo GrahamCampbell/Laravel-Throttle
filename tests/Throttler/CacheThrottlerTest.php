@@ -25,79 +25,88 @@ use Mockery;
  */
 class CacheThrottlerTest extends AbstractTestCase
 {
-    public function testAttempt()
+    public function testAttempt(): void
     {
-        $throttler = $this->getThrottler();
+        $store = Mockery::mock(Store::class);
 
-        $throttler->getStore()->shouldReceive('get')->once()->with('abc');
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 3600);
+        $throttler = new CacheThrottler($store, 'abc', 10, 3600);
 
-        $this->assertTrue($throttler->attempt());
+        $store->shouldReceive('get')->once()->with('abc');
+        $store->shouldReceive('put')->once()->with('abc', 1, 3600);
+
+        self::assertTrue($throttler->attempt());
     }
 
-    public function testCountHit()
+    public function testCountHit(): void
     {
-        $throttler = $this->getThrottler();
+        $store = Mockery::mock(Store::class);
 
-        $throttler->getStore()->shouldReceive('get')->once()->with('abc');
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 1, 3600);
+        $throttler = new CacheThrottler($store, 'abc', 10, 3600);
 
-        $this->assertInstanceOf(CacheThrottler::class, $throttler->hit());
-        $this->assertSame(1, $throttler->count());
+        $store->shouldReceive('get')->once()->with('abc');
+        $store->shouldReceive('put')->once()->with('abc', 1, 3600);
+
+        self::assertInstanceOf(CacheThrottler::class, $throttler->hit());
+        self::assertSame(1, $throttler->count());
     }
 
-    public function testCountClear()
+    public function testCountClear(): void
     {
-        $throttler = $this->getThrottler();
+        $store = Mockery::mock(Store::class);
 
-        $throttler->getStore()->shouldReceive('put')->once()->with('abc', 0, 3600);
+        $throttler = new CacheThrottler($store, 'abc', 10, 3600);
 
-        $this->assertInstanceOf(CacheThrottler::class, $throttler->clear());
-        $this->assertSame(0, $throttler->count());
+        $store->shouldReceive('put')->once()->with('abc', 0, 3600);
+
+        self::assertInstanceOf(CacheThrottler::class, $throttler->clear());
+        self::assertSame(0, $throttler->count());
     }
 
-    public function testCountCheckTrue()
+    public function testCountCheckTrue(): void
     {
-        $throttler = $this->getThrottler();
+        $store = Mockery::mock(Store::class);
 
-        $throttler->getStore()->shouldReceive('get')->once()->with('abc');
+        $throttler = new CacheThrottler($store, 'abc', 10, 3600);
 
-        $this->assertSame(0, $throttler->count());
-        $this->assertTrue($throttler->check());
+        $store->shouldReceive('get')->once()->with('abc');
+
+        self::assertSame(0, $throttler->count());
+        self::assertTrue($throttler->check());
     }
 
-    public function testCountCheckEdge()
+    public function testCountCheckEdge(): void
     {
-        $throttler = $this->getThrottler();
+        $store = Mockery::mock(Store::class);
 
-        $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(9);
+        $throttler = new CacheThrottler($store, 'abc', 10, 3600);
 
-        $this->assertSame(9, $throttler->count());
-        $this->assertTrue($throttler->check());
+        $store->shouldReceive('get')->once()->with('abc')->andReturn(9);
+
+        self::assertSame(9, $throttler->count());
+        self::assertTrue($throttler->check());
     }
 
-    public function testCountCheckFalse()
+    public function testCountCheckFalse(): void
     {
-        $throttler = $this->getThrottler();
+        $store = Mockery::mock(Store::class);
 
-        $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(10);
+        $throttler = new CacheThrottler($store, 'abc', 10, 3600);
 
-        $this->assertSame(10, $throttler->count());
-        $this->assertFalse($throttler->check());
+        $store->shouldReceive('get')->once()->with('abc')->andReturn(10);
+
+        self::assertSame(10, $throttler->count());
+        self::assertFalse($throttler->check());
     }
 
-    public function testIsCountable()
+    public function testIsCountable(): void
     {
-        $throttler = $this->getThrottler();
+        $store = Mockery::mock(Store::class);
 
-        $throttler->getStore()->shouldReceive('get')->once()->with('abc')->andReturn(42);
+        $throttler = new CacheThrottler($store, 'abc', 10, 3600);
 
-        $this->assertInstanceOf('Countable', $throttler);
-        $this->assertCount(42, $throttler);
-    }
+        $store->shouldReceive('get')->once()->with('abc')->andReturn(42);
 
-    protected function getThrottler()
-    {
-        return new CacheThrottler(Mockery::mock(Store::class), 'abc', 10, 3600);
+        self::assertInstanceOf('Countable', $throttler);
+        self::assertCount(42, $throttler);
     }
 }

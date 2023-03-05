@@ -35,7 +35,7 @@ class ArrayTransformer implements TransformerInterface
      *
      * @return \GrahamCampbell\Throttle\Data
      */
-    public function transform($data, int $limit = 10, int $time = 60)
+    public function transform($data, int $limit = 10, int $time = 60): Data
     {
         if (($ip = Arr::get($data, 'ip')) && ($route = Arr::get($data, 'route'))) {
             return new Data((string) $ip, (string) $route, (int) $limit, (int) $time);

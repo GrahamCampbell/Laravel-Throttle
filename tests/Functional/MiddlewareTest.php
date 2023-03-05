@@ -31,7 +31,7 @@ class MiddlewareTest extends AbstractTestCase
      *
      * @return void
      */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         parent::getEnvironmentSetUp($app);
 
@@ -46,7 +46,7 @@ class MiddlewareTest extends AbstractTestCase
         $this->app->cache->driver('array')->flush();
     }
 
-    public function testBasicMiddlewareSuccess()
+    public function testBasicMiddlewareSuccess(): void
     {
         $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class, function () {
             return 'Why herro there!';
@@ -55,7 +55,7 @@ class MiddlewareTest extends AbstractTestCase
         $this->hit(10);
     }
 
-    public function testBasicMiddlewareFailure()
+    public function testBasicMiddlewareFailure(): void
     {
         $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class, function () {
             return 'Why herro there!';
@@ -66,7 +66,7 @@ class MiddlewareTest extends AbstractTestCase
         $this->hit(11);
     }
 
-    public function testCustomLimitSuccess()
+    public function testCustomLimitSuccess(): void
     {
         $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class.':5', function () {
             return 'Why herro there!';
@@ -75,7 +75,7 @@ class MiddlewareTest extends AbstractTestCase
         $this->hit(5);
     }
 
-    public function testCustomLimitFailure()
+    public function testCustomLimitFailure(): void
     {
         $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class.':5', function () {
             return 'Why herro there!';
@@ -86,7 +86,7 @@ class MiddlewareTest extends AbstractTestCase
         $this->hit(6);
     }
 
-    public function testCustomTimeSuccess()
+    public function testCustomTimeSuccess(): void
     {
         $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class.':3,5', function () {
             return 'Why herro there!';
@@ -95,7 +95,7 @@ class MiddlewareTest extends AbstractTestCase
         $this->hit(3, 300);
     }
 
-    public function testCustomTimeFailure()
+    public function testCustomTimeFailure(): void
     {
         $this->app->router->get('throttle-test-route', ['middleware' => ThrottleMiddleware::class.':3,5', function () {
             return 'Why herro there!';
@@ -106,7 +106,7 @@ class MiddlewareTest extends AbstractTestCase
         $this->hit(4, 300);
     }
 
-    protected function hit($times, $time = 3600)
+    private function hit(int $times, int $time = 3600): void
     {
         for ($i = 0; $i < $times - 1; $i++) {
             $this->wrappedCall('GET', 'throttle-test-route');
@@ -115,14 +115,14 @@ class MiddlewareTest extends AbstractTestCase
         try {
             $this->wrappedCall('GET', 'throttle-test-route');
         } catch (TooManyRequestsHttpException $e) {
-            $this->assertSame('Rate limit exceeded.', $e->getMessage());
-            $this->assertSame($time, $e->getHeaders()['Retry-After']);
+            self::assertSame('Rate limit exceeded.', $e->getMessage());
+            self::assertSame($time, $e->getHeaders()['Retry-After']);
 
             throw $e;
         }
     }
 
-    protected function wrappedCall($method, $uri)
+    private function wrappedCall(string $method, string $uri): void
     {
         $response = $this->call($method, $uri);
 
@@ -130,6 +130,6 @@ class MiddlewareTest extends AbstractTestCase
             throw $ex;
         }
 
-        $this->assertSame(200, $response->status());
+        self::assertSame(200, $response->status());
     }
 }

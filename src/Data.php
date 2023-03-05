@@ -25,35 +25,35 @@ class Data
      *
      * @var string
      */
-    protected $ip;
+    private string $ip;
 
     /**
      * The route.
      *
      * @var string
      */
-    protected $route;
+    private string $route;
 
     /**
      * The request limit.
      *
      * @var int
      */
-    protected $limit;
+    private int $limit;
 
     /**
      * The expiration time in minutes.
      *
      * @var int
      */
-    protected $time;
+    private int $time;
 
     /**
      * The unique key.
      *
-     * @var string
+     * @var ?string
      */
-    protected $key;
+    private ?string $key = null;
 
     /**
      * Create a new instance.
@@ -78,7 +78,7 @@ class Data
      *
      * @return string
      */
-    public function getIp()
+    public function getIp(): string
     {
         return $this->ip;
     }
@@ -88,7 +88,7 @@ class Data
      *
      * @return string
      */
-    public function getRoute()
+    public function getRoute(): string
     {
         return $this->route;
     }
@@ -98,7 +98,7 @@ class Data
      *
      * @return int
      */
-    public function getLimit()
+    public function getLimit(): int
     {
         return $this->limit;
     }
@@ -108,7 +108,7 @@ class Data
      *
      * @return int
      */
-    public function getTime()
+    public function getTime(): int
     {
         return $this->time;
     }
@@ -120,7 +120,7 @@ class Data
      *
      * @return string
      */
-    public function getKey()
+    public function getKey(): string
     {
         if (!$this->key) {
             $this->key = sha1($this->ip.$this->route);

@@ -34,7 +34,7 @@ class ThrottleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->setupConfig();
     }
@@ -44,7 +44,7 @@ class ThrottleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function setupConfig()
+    private function setupConfig(): void
     {
         $source = realpath($raw = __DIR__.'/../config/throttle.php') ?: $raw;
 
@@ -62,7 +62,7 @@ class ThrottleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->registerFactory();
         $this->registerTransformer();
@@ -74,9 +74,9 @@ class ThrottleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerFactory()
+    private function registerFactory(): void
     {
-        $this->app->singleton('throttle.factory', function (Container $app) {
+        $this->app->singleton('throttle.factory', function (Container $app): CacheFactory {
             $cache = $app->cache->driver($app->config->get('throttle.driver'));
 
             return new CacheFactory($cache);
@@ -91,9 +91,9 @@ class ThrottleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerTransformer()
+    private function registerTransformer(): void
     {
-        $this->app->singleton('throttle.transformer', function () {
+        $this->app->singleton('throttle.transformer', function (): TransformerFactory {
             return new TransformerFactory();
         });
 
@@ -106,9 +106,9 @@ class ThrottleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerThrottle()
+    private function registerThrottle(): void
     {
-        $this->app->singleton('throttle', function (Container $app) {
+        $this->app->singleton('throttle', function (Container $app): Throttle {
             $factory = $app['throttle.factory'];
             $transformer = $app['throttle.transformer'];
 
@@ -123,7 +123,7 @@ class ThrottleServiceProvider extends ServiceProvider
      *
      * @return string[]
      */
-    public function provides()
+    public function provides(): array
     {
         return [
             'throttle',

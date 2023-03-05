@@ -32,7 +32,7 @@ class TransformerFactory implements TransformerFactoryInterface
      *
      * @return \GrahamCampbell\Throttle\Transformer\TransformerInterface
      */
-    public function make($data)
+    public function make($data): TransformerInterface
     {
         if (is_object($data) && $data instanceof Request) {
             return new RequestTransformer();

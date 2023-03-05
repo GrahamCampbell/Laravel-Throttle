@@ -29,5 +29,5 @@ interface TransformerFactoryInterface
      *
      * @return \GrahamCampbell\Throttle\Transformer\TransformerInterface
      */
-    public function make($data);
+    public function make($data): TransformerInterface;
 }

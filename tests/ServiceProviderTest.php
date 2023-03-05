@@ -30,24 +30,24 @@ class ServiceProviderTest extends AbstractTestCase
 {
     use ServiceProviderTrait;
 
-    public function testCacheFactoryIsInjectable()
+    public function testCacheFactoryIsInjectable(): void
     {
         $this->assertIsInjectable(CacheFactory::class);
         $this->assertIsInjectable(FactoryInterface::class);
     }
 
-    public function testTransformerFactoryIsInjectable()
+    public function testTransformerFactoryIsInjectable(): void
     {
         $this->assertIsInjectable(TransformerFactory::class);
         $this->assertIsInjectable(TransformerFactoryInterface::class);
     }
 
-    public function testThrottleIsInjectable()
+    public function testThrottleIsInjectable(): void
     {
         $this->assertIsInjectable(Throttle::class);
     }
 
-    public function testMiddlewareIsInjectable()
+    public function testMiddlewareIsInjectable(): void
     {
         $this->assertIsInjectable(ThrottleMiddleware::class);
     }

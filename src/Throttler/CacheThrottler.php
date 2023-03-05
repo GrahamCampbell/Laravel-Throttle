@@ -22,42 +22,42 @@ use Illuminate\Contracts\Cache\Store;
  *
  * @author Graham Campbell <hello@gjcampbell.co.uk>
  */
-class CacheThrottler implements ThrottlerInterface, Countable
+final class CacheThrottler implements ThrottlerInterface, Countable
 {
     /**
      * The store instance.
      *
      * @var \Illuminate\Contracts\Cache\Store
      */
-    protected $store;
+    private Store $store;
 
     /**
      * The key.
      *
      * @var string
      */
-    protected $key;
+    private string $key;
 
     /**
      * The request limit.
      *
      * @var int
      */
-    protected $limit;
+    private int $limit;
 
     /**
      * The expiration time in seconds.
      *
      * @var int
      */
-    protected $time;
+    private int $time;
 
     /**
      * The number of requests.
      *
-     * @var int
+     * @var int|null
      */
-    protected $number;
+    private ?int $number = null;
 
     /**
      * Create a new instance.
@@ -82,7 +82,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
      *
      * @return bool
      */
-    public function attempt()
+    public function attempt(): bool
     {
         $response = $this->check();
 
@@ -96,13 +96,11 @@ class CacheThrottler implements ThrottlerInterface, Countable
      *
      * @return $this
      */
-    public function hit()
+    public function hit(): self
     {
         if ($this->store instanceof RedisStore) {
-            return $this->hitRedis();
-        }
-
-        if ($this->count()) {
+            $this->hitRedis();
+        } elseif ($this->count()) {
             $this->store->increment($this->key);
             $this->number++;
         } else {
@@ -118,7 +116,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
      *
      * @return $this
      */
-    public function clear()
+    public function clear(): self
     {
         $this->number = 0;
 
@@ -132,8 +130,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
-    public function count()
+    public function count(): int
     {
         if ($this->number !== null) {
             return $this->number;
@@ -153,35 +150,23 @@ class CacheThrottler implements ThrottlerInterface, Countable
      *
      * @return bool
      */
-    public function check()
+    public function check(): bool
     {
         return $this->count() < $this->limit;
     }
 
     /**
-     * Get the store instance.
-     *
-     * @return \Illuminate\Contracts\Cache\Store
-     */
-    public function getStore()
-    {
-        return $this->store;
-    }
-
-    /**
      * An atomic hit implementation for redis.
      *
-     * @return $this
+     * @return void
      */
-    protected function hitRedis()
+    private function hitRedis(): void
     {
         $lua = 'local v = redis.call(\'incr\', KEYS[1]) '.
                'if v>1 then return v '.
                'else redis.call(\'setex\', KEYS[1], ARGV[1], 1) return 1 end';
 
         $this->number = $this->store->connection()->eval($lua, 1, $this->computeRedisKey(), $this->time);
-
-        return $this;
     }
 
     /**
@@ -189,7 +174,7 @@ class CacheThrottler implements ThrottlerInterface, Countable
      *
      * @return string
      */
-    protected function computeRedisKey()
+    protected function computeRedisKey(): string
     {
         return $this->store->getPrefix().$this->key;
     }

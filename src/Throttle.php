@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace GrahamCampbell\Throttle;
 
 use GrahamCampbell\Throttle\Factory\FactoryInterface;
+use GrahamCampbell\Throttle\Throttler\ThrottlerInterface;
 use GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface;
 
 /**
@@ -34,21 +35,21 @@ class Throttle
      *
      * @var \GrahamCampbell\Throttle\Throttler\ThrottlerInterface[]
      */
-    protected $throttlers = [];
+    protected array $throttlers = [];
 
     /**
      * The throttle factory instance.
      *
      * @var \GrahamCampbell\Throttle\Factory\FactoryInterface
      */
-    protected $factory;
+    protected FactoryInterface $factory;
 
     /**
      * The transformer factory instance.
      *
      * @var \GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface
      */
-    protected $transformer;
+    protected TransformerFactoryInterface $transformer;
 
     /**
      * Create a new instance.
@@ -73,7 +74,7 @@ class Throttle
      *
      * @return \GrahamCampbell\Throttle\Throttler\ThrottlerInterface
      */
-    public function get($data, int $limit = 10, int $time = 60)
+    public function get($data, int $limit = 10, int $time = 60): ThrottlerInterface
     {
         $transformed = $this->transformer->make($data)->transform($data, $limit, $time);
 
@@ -82,26 +83,6 @@ class Throttle
         }
 
         return $this->throttlers[$key];
-    }
-
-    /**
-     * Get the cache instance.
-     *
-     * @return \GrahamCampbell\Throttle\Factory\FactoryInterface
-     */
-    public function getFactory()
-    {
-        return $this->factory;
-    }
-
-    /**
-     * Get the transformer factory instance.
-     *
-     * @return \GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface
-     */
-    public function getTransformer()
-    {
-        return $this->transformer;
     }
 
     /**

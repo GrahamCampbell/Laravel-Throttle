@@ -22,14 +22,14 @@ use Illuminate\Contracts\Cache\Repository;
  *
  * @author Graham Campbell <hello@gjcampbell.co.uk>
  */
-class CacheFactory implements FactoryInterface
+final class CacheFactory implements FactoryInterface
 {
     /**
      * The cache instance.
      *
      * @var \Illuminate\Contracts\Cache\Repository
      */
-    protected $cache;
+    private Repository $cache;
 
     /**
      * Create a new instance.
@@ -50,18 +50,8 @@ class CacheFactory implements FactoryInterface
      *
      * @return \GrahamCampbell\Throttle\Throttler\CacheThrottler
      */
-    public function make(Data $data)
+    public function make(Data $data): CacheThrottler
     {
         return new CacheThrottler($this->cache->getStore(), $data->getKey(), $data->getLimit(), $data->getTime() * 60);
-    }
-
-    /**
-     * Get the cache instance.
-     *
-     * @return \Illuminate\Contracts\Cache\Repository
-     */
-    public function getCache()
-    {
-        return $this->cache;
     }
 }

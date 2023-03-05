@@ -23,43 +23,38 @@ use GrahamCampbell\Throttle\Data;
  */
 class DataTest extends AbstractTestBenchTestCase
 {
-    public function testGetIp()
+    public function testGetIp(): void
     {
-        $data = $this->getData();
+        $data = new Data('127.0.0.1', 'https://google.co.uk/', 123, 321);
 
-        $this->assertSame('127.0.0.1', $data->getIp());
+        self::assertSame('127.0.0.1', $data->getIp());
     }
 
-    public function testGetRoute()
+    public function testGetRoute(): void
     {
-        $data = $this->getData();
+        $data = new Data('127.0.0.1', 'https://google.co.uk/', 123, 321);
 
-        $this->assertSame('https://google.co.uk/', $data->getRoute());
+        self::assertSame('https://google.co.uk/', $data->getRoute());
     }
 
-    public function testGetLimit()
+    public function testGetLimit(): void
     {
-        $data = $this->getData();
+        $data = new Data('127.0.0.1', 'https://google.co.uk/', 123, 321);
 
-        $this->assertSame(123, $data->getLimit());
+        self::assertSame(123, $data->getLimit());
     }
 
-    public function testGetTime()
+    public function testGetTime(): void
     {
-        $data = $this->getData();
+        $data = new Data('127.0.0.1', 'https://google.co.uk/', 123, 321);
 
-        $this->assertSame(321, $data->getTime());
+        self::assertSame(321, $data->getTime());
     }
 
-    public function testGetKey()
+    public function testGetKey(): void
     {
-        $data = $this->getData();
+        $data = new Data('127.0.0.1', 'https://google.co.uk/', 123, 321);
 
-        $this->assertSame('9fa39d579031694fbc8e2931aa354df18883e5f2', $data->getKey());
-    }
-
-    protected function getData()
-    {
-        return new Data('127.0.0.1', 'https://google.co.uk/', 123, 321);
+        self::assertSame('9fa39d579031694fbc8e2931aa354df18883e5f2', $data->getKey());
     }
 }

@@ -29,30 +29,30 @@ use Mockery;
  */
 class TransformerFactoryTest extends AbstractTestCase
 {
-    public function testRequest()
+    public function testRequest(): void
     {
         $factory = new TransformerFactory();
         $transformer = $factory->make($request = Mockery::mock(Request::class));
 
-        $this->assertInstanceOf(RequestTransformer::class, $transformer);
+        self::assertInstanceOf(RequestTransformer::class, $transformer);
 
         $request->shouldReceive('getClientIp')->once()->andReturn('123.123.123.123');
         $request->shouldReceive('path')->once()->andReturn('foobar');
 
-        $this->assertInstanceOf(Data::class, $transformer->transform($request, 123, 321));
+        self::assertInstanceOf(Data::class, $transformer->transform($request, 123, 321));
     }
 
-    public function testArray()
+    public function testArray(): void
     {
         $factory = new TransformerFactory();
         $transformer = $factory->make($array = ['ip' => 'abc', 'route' => 'qwerty']);
 
-        $this->assertInstanceOf(ArrayTransformer::class, $transformer);
+        self::assertInstanceOf(ArrayTransformer::class, $transformer);
 
-        $this->assertInstanceOf(Data::class, $transformer->transform($array, 123, 321));
+        self::assertInstanceOf(Data::class, $transformer->transform($array, 123, 321));
     }
 
-    public function testEmptyArray()
+    public function testEmptyArray(): void
     {
         $factory = new TransformerFactory();
         $transformer = $factory->make([]);
@@ -63,7 +63,7 @@ class TransformerFactoryTest extends AbstractTestCase
         $transformer->transform([]);
     }
 
-    public function testError()
+    public function testError(): void
     {
         $factory = new TransformerFactory();
 
