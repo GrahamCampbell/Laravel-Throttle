@@ -5,6 +5,7 @@ CHANGE LOG
 ## V10.1 (04/12/2023)
 
 * Added PHP 8.3 support
+* Fix edge case issues with Redis
 
 
 ## V10.0 (07/03/2023)
