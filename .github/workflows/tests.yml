@@ -64,7 +64,7 @@ jobs:
         with:
           timeout_minutes: 5
           max_attempts: 5
-          command: composer require "laravel/framework:^10.34.2" "phpunit/phpunit:^10.5.1" --no-update --no-interaction
+          command: composer require "laravel/framework:^10.34.2" "phpunit/phpunit:^10.4.2" --no-update --no-interaction
         if: "matrix.laravel == '10'"
 
       - name: Install PHP Dependencies
