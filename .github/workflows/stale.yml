@@ -1,0 +1,11 @@
+name: Stale
+
+on:
+  schedule:
+    - cron: '48 1 2-30/2 * *' # every even day at 01:48
+
+jobs:
+  stale:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/stale@v9
