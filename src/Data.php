@@ -21,35 +21,7 @@ namespace GrahamCampbell\Throttle;
 class Data
 {
     /**
-     * The ip.
-     *
-     * @var string
-     */
-    private string $ip;
-
-    /**
-     * The route.
-     *
-     * @var string
-     */
-    private string $route;
-
-    /**
-     * The request limit.
-     *
-     * @var int
-     */
-    private int $limit;
-
-    /**
-     * The expiration time in minutes.
-     *
-     * @var int
-     */
-    private int $time;
-
-    /**
-     * The unique key.
+     * The hash key.
      *
      * @var ?string
      */
@@ -65,12 +37,12 @@ class Data
      *
      * @return void
      */
-    public function __construct(string $ip, string $route, int $limit = 10, int $time = 60)
-    {
-        $this->ip = $ip;
-        $this->route = $route;
-        $this->limit = $limit;
-        $this->time = $time;
+    public function __construct(
+        private readonly string $ip,
+        private readonly string $route,
+        private readonly int $limit = 10,
+        private readonly int $time = 60,
+    ) {
     }
 
     /**
@@ -123,7 +95,7 @@ class Data
     public function getKey(): string
     {
         if (!$this->key) {
-            $this->key = sha1($this->ip.$this->route);
+            $this->key = hash('xxh128', $this->ip.$this->route);
         }
 
         return $this->key;

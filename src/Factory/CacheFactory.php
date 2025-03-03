@@ -25,22 +25,15 @@ use Illuminate\Contracts\Cache\Repository;
 final class CacheFactory implements FactoryInterface
 {
     /**
-     * The cache instance.
-     *
-     * @var \Illuminate\Contracts\Cache\Repository
-     */
-    private Repository $cache;
-
-    /**
      * Create a new instance.
      *
      * @param \Illuminate\Contracts\Cache\Repository $cache
      *
      * @return void
      */
-    public function __construct(Repository $cache)
-    {
-        $this->cache = $cache;
+    public function __construct(
+        private readonly Repository $cache,
+    ) {
     }
 
     /**

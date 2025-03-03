@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace GrahamCampbell\Throttle\Transformer;
 
 use GrahamCampbell\Throttle\Data;
+use Illuminate\Http\Request;
+use InvalidArgumentException;
 
 /**
  * This is the transformer interface.
@@ -29,7 +31,9 @@ interface TransformerInterface
      * @param int                            $limit
      * @param int                            $time
      *
+     * @throws InvalidArgumentException
+     *
      * @return \GrahamCampbell\Throttle\Data
      */
-    public function transform($data, int $limit = 10, int $time = 60): Data;
+    public function transform(array|Request $data, int $limit = 10, int $time = 60): Data;
 }

@@ -25,34 +25,6 @@ use Illuminate\Contracts\Cache\Store;
 final class CacheThrottler implements ThrottlerInterface, Countable
 {
     /**
-     * The store instance.
-     *
-     * @var \Illuminate\Contracts\Cache\Store
-     */
-    private Store $store;
-
-    /**
-     * The key.
-     *
-     * @var string
-     */
-    private string $key;
-
-    /**
-     * The request limit.
-     *
-     * @var int
-     */
-    private int $limit;
-
-    /**
-     * The expiration time in seconds.
-     *
-     * @var int
-     */
-    private int $time;
-
-    /**
      * The number of requests.
      *
      * @var int|null
@@ -69,12 +41,12 @@ final class CacheThrottler implements ThrottlerInterface, Countable
      *
      * @return void
      */
-    public function __construct(Store $store, string $key, int $limit, int $time)
-    {
-        $this->store = $store;
-        $this->key = $key;
-        $this->limit = $limit;
-        $this->time = $time;
+    public function __construct(
+        private readonly Store $store,
+        private readonly string $key,
+        private readonly int $limit,
+        private readonly int $time,
+    ) {
     }
 
     /**

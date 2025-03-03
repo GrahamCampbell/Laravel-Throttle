@@ -36,14 +36,7 @@ class MiddlewareTest extends AbstractTestCase
         parent::getEnvironmentSetUp($app);
 
         $app->config->set('throttle.driver', 'array');
-    }
-
-    /**
-     * @after
-     */
-    public function tearDown(): void
-    {
-        $this->app->cache->driver('array')->flush();
+        $app->cache->driver('array')->flush();
     }
 
     public function testBasicMiddlewareSuccess(): void

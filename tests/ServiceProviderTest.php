@@ -18,8 +18,8 @@ use GrahamCampbell\Throttle\Factory\CacheFactory;
 use GrahamCampbell\Throttle\Factory\FactoryInterface;
 use GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware;
 use GrahamCampbell\Throttle\Throttle;
-use GrahamCampbell\Throttle\Transformer\TransformerFactory;
-use GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface;
+use GrahamCampbell\Throttle\Transformer\Transformer;
+use GrahamCampbell\Throttle\Transformer\TransformerInterface;
 
 /**
  * This is the service provider test class.
@@ -36,10 +36,10 @@ class ServiceProviderTest extends AbstractTestCase
         $this->assertIsInjectable(FactoryInterface::class);
     }
 
-    public function testTransformerFactoryIsInjectable(): void
+    public function testTransformerIsInjectable(): void
     {
-        $this->assertIsInjectable(TransformerFactory::class);
-        $this->assertIsInjectable(TransformerFactoryInterface::class);
+        $this->assertIsInjectable(Transformer::class);
+        $this->assertIsInjectable(TransformerInterface::class);
     }
 
     public function testThrottleIsInjectable(): void

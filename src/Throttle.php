@@ -15,7 +15,8 @@ namespace GrahamCampbell\Throttle;
 
 use GrahamCampbell\Throttle\Factory\FactoryInterface;
 use GrahamCampbell\Throttle\Throttler\ThrottlerInterface;
-use GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface;
+use GrahamCampbell\Throttle\Transformer\TransformerInterface;
+use Illuminate\Http\Request;
 
 /**
  * This is the throttle class.
@@ -38,45 +39,31 @@ class Throttle
     protected array $throttlers = [];
 
     /**
-     * The throttle factory instance.
-     *
-     * @var \GrahamCampbell\Throttle\Factory\FactoryInterface
-     */
-    protected FactoryInterface $factory;
-
-    /**
-     * The transformer factory instance.
-     *
-     * @var \GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface
-     */
-    protected TransformerFactoryInterface $transformer;
-
-    /**
      * Create a new instance.
      *
-     * @param \GrahamCampbell\Throttle\Factory\FactoryInterface                $factory
-     * @param \GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface $transformer
+     * @param \GrahamCampbell\Throttle\Factory\FactoryInterface         $factory
+     * @param \GrahamCampbell\Throttle\Transformer\TransformerInterface $transformer
      *
      * @return void
      */
-    public function __construct(FactoryInterface $factory, TransformerFactoryInterface $transformer)
-    {
-        $this->factory = $factory;
-        $this->transformer = $transformer;
+    public function __construct(
+        protected readonly FactoryInterface $factory,
+        protected readonly TransformerInterface $transformer,
+    ) {
     }
 
     /**
      * Get a new throttler.
      *
-     * @param mixed $data
-     * @param int   $limit
-     * @param int   $time
+     * @param array|\Illuminate\Http\Request $data
+     * @param int                            $limit
+     * @param int                            $time
      *
      * @return \GrahamCampbell\Throttle\Throttler\ThrottlerInterface
      */
-    public function get($data, int $limit = 10, int $time = 60): ThrottlerInterface
+    public function get(array|Request $data, int $limit = 10, int $time = 60): ThrottlerInterface
     {
-        $transformed = $this->transformer->make($data)->transform($data, $limit, $time);
+        $transformed = $this->transformer->transform($data, $limit, $time);
 
         if (!array_key_exists($key = $transformed->getKey(), $this->throttlers)) {
             $this->throttlers[$key] = $this->factory->make($transformed);
@@ -93,7 +80,7 @@ class Throttle
      *
      * @return mixed
      */
-    public function __call(string $method, array $parameters)
+    public function __call(string $method, array $parameters): mixed
     {
         return $this->get(...$parameters)->$method();
     }

@@ -15,8 +15,8 @@ namespace GrahamCampbell\Throttle;
 
 use GrahamCampbell\Throttle\Factory\CacheFactory;
 use GrahamCampbell\Throttle\Factory\FactoryInterface;
-use GrahamCampbell\Throttle\Transformer\TransformerFactory;
-use GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface;
+use GrahamCampbell\Throttle\Transformer\Transformer;
+use GrahamCampbell\Throttle\Transformer\TransformerInterface;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
@@ -93,12 +93,12 @@ class ThrottleServiceProvider extends ServiceProvider
      */
     private function registerTransformer(): void
     {
-        $this->app->singleton('throttle.transformer', function (): TransformerFactory {
-            return new TransformerFactory();
+        $this->app->singleton('throttle.transformer', function (): Transformer {
+            return new Transformer();
         });
 
-        $this->app->alias('throttle.transformer', TransformerFactory::class);
-        $this->app->alias('throttle.transformer', TransformerFactoryInterface::class);
+        $this->app->alias('throttle.transformer', Transformer::class);
+        $this->app->alias('throttle.transformer', TransformerInterface::class);
     }
 
     /**

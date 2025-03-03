@@ -18,8 +18,7 @@ use GrahamCampbell\Throttle\Data;
 use GrahamCampbell\Throttle\Factory\FactoryInterface;
 use GrahamCampbell\Throttle\Throttle;
 use GrahamCampbell\Throttle\Throttler\ThrottlerInterface;
-use GrahamCampbell\Throttle\Transformer\ArrayTransformer;
-use GrahamCampbell\Throttle\Transformer\TransformerFactoryInterface;
+use GrahamCampbell\Throttle\Transformer\TransformerInterface;
 use Mockery;
 
 /**
@@ -37,12 +36,9 @@ class ThrottleTest extends AbstractTestBenchTestCase
 
         $throttler = Mockery::mock(ThrottlerInterface::class);
 
-        $trans = Mockery::mock(ArrayTransformer::class);
+        $transformer = Mockery::mock(TransformerInterface::class);
 
-        $transformer = Mockery::mock(TransformerFactoryInterface::class);
-
-        $transformer->shouldReceive('make')->with($data)->andReturn($trans);
-        $trans->shouldReceive('transform')->with($data, 12, 123)
+        $transformer->shouldReceive('transform')->with($data, 12, 123)
             ->andReturn($transformed = new Data('127.0.0.1', 'http://laravel.com/', 12, 123));
 
         $throttle = new Throttle($factory, $transformer);
@@ -61,12 +57,9 @@ class ThrottleTest extends AbstractTestBenchTestCase
 
         $throttler = Mockery::mock(ThrottlerInterface::class);
 
-        $trans = Mockery::mock(ArrayTransformer::class);
+        $transformer = Mockery::mock(TransformerInterface::class);
 
-        $transformer = Mockery::mock(TransformerFactoryInterface::class);
-
-        $transformer->shouldReceive('make')->with($data)->andReturn($trans);
-        $trans->shouldReceive('transform')->with($data, 12, 123)
+        $transformer->shouldReceive('transform')->with($data, 12, 123)
             ->andReturn($transformed = new Data('127.0.0.1', 'http://laravel.com/', 12, 123));
 
         $throttle = new Throttle($factory, $transformer);
@@ -88,12 +81,9 @@ class ThrottleTest extends AbstractTestBenchTestCase
 
         $throttler = Mockery::mock(ThrottlerInterface::class);
 
-        $trans = Mockery::mock(ArrayTransformer::class);
+        $transformer = Mockery::mock(TransformerInterface::class);
 
-        $transformer = Mockery::mock(TransformerFactoryInterface::class);
-
-        $transformer->shouldReceive('make')->with($data)->andReturn($trans);
-        $trans->shouldReceive('transform')->with($data, 12, 123)
+        $transformer->shouldReceive('transform')->with($data, 12, 123)
             ->andReturn($transformed = new Data('127.0.0.1', 'http://laravel.com/', 12, 123));
 
         $throttle = new Throttle($factory, $transformer);

@@ -15,30 +15,35 @@ namespace GrahamCampbell\Throttle\Transformer;
 
 use GrahamCampbell\Throttle\Data;
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use InvalidArgumentException;
 
 /**
- * This is the array transformer class.
+ * This is the transformer class.
  *
  * @author Graham Campbell <hello@gjcampbell.co.uk>
  */
-class ArrayTransformer implements TransformerInterface
+class Transformer implements TransformerInterface
 {
     /**
      * Transform the data into a new data instance.
      *
-     * @param array $data
-     * @param int   $limit
-     * @param int   $time
+     * @param array|\Illuminate\Http\Request $data
+     * @param int                            $limit
+     * @param int                            $time
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      *
      * @return \GrahamCampbell\Throttle\Data
      */
-    public function transform($data, int $limit = 10, int $time = 60): Data
+    public function transform(array|Request $data, int $limit = 10, int $time = 60): Data
     {
+        if (!is_array($data)) {
+            return new Data((string) $data->getClientIp(), (string) $data->path(), $limit, $time);
+        }
+
         if (($ip = Arr::get($data, 'ip')) && ($route = Arr::get($data, 'route'))) {
-            return new Data((string) $ip, (string) $route, (int) $limit, (int) $time);
+            return new Data((string) $ip, (string) $route, $limit, $time);
         }
 
         throw new InvalidArgumentException('The data array does not provide the required ip and route information.');

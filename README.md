@@ -16,19 +16,20 @@ Laravel Throttle was created by, and is maintained by [Graham Campbell](https://
 
 ## Installation
 
-This version requires [PHP](https://www.php.net/) 7.4-8.4 and supports [Laravel](https://laravel.com/) 8-11.
+This version requires [PHP](https://www.php.net/) 8.1-8.4 and supports [Laravel](https://laravel.com/) 10-12.
 
-| Throttle | L5.5               | L5.6               | L5.7               | L5.8               | L6                 | L7                 | L8                 | L9                 | L10                | L11                |
-|----------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
-| 7.5      | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                | :x:                |
-| 8.2      | :x:                | :x:                | :x:                | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                |
-| 9.0      | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :white_check_mark: | :white_check_mark: | :x:                | :x:                |
-| 10.3     | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Throttle | L5.5               | L5.6               | L5.7               | L5.8               | L6                 | L7                 | L8                 | L9                 | L10                | L11                | L12                |
+|----------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+| 7.5      | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                | :x:                | :x:                |
+| 8.2      | :x:                | :x:                | :x:                | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                |
+| 9.0      | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                |
+| 10.3     | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                |
+| 11.0     | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 To get the latest version, simply require the project using [Composer](https://getcomposer.org/):
 
 ```bash
-$ composer require "graham-campbell/throttle:^10.3"
+$ composer require "graham-campbell/throttle:^11.0"
 ```
 
 Once installed, if you are not using automatic package discovery, then you need to register the `GrahamCampbell\Throttle\ThrottleServiceProvider` service provider in your `config/app.php`.
@@ -103,7 +104,7 @@ This class implements `Factories\FactoryInterface` completely. This is the only 
 
 ##### Http\Middleware\ThrottleMiddleware
 
-You may put the `GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware` middleware in front of your routes to throttle them. The middleware can take up to two parameters. The two parameters are `limit` and `time`. It may be useful for you to take a look at the [source](https://github.com/GrahamCampbell/Laravel-Throttle/blob/10.3/src/Http/Middleware/ThrottleMiddleware.php) for this, read the [tests](https://github.com/GrahamCampbell/Laravel-Throttle/blob/10.3/tests/Functional/MiddlewareTest.php), or check out Laravel's [documentation](https://laravel.com/docs/11.x/middleware) if you need to.
+You may put the `GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware` middleware in front of your routes to throttle them. The middleware can take up to two parameters. The two parameters are `limit` and `time`. It may be useful for you to take a look at the [source](https://github.com/GrahamCampbell/Laravel-Throttle/blob/11.0/src/Http/Middleware/ThrottleMiddleware.php) for this, read the [tests](https://github.com/GrahamCampbell/Laravel-Throttle/blob/11.0/tests/Functional/MiddlewareTest.php), or check out Laravel's [documentation](https://laravel.com/docs/11.x/middleware) if you need to.
 
 ##### ThrottleServiceProvider
 

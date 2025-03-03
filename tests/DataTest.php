@@ -55,6 +55,6 @@ class DataTest extends AbstractTestBenchTestCase
     {
         $data = new Data('127.0.0.1', 'https://google.co.uk/', 123, 321);
 
-        self::assertSame('9fa39d579031694fbc8e2931aa354df18883e5f2', $data->getKey());
+        self::assertSame('9596b714513895796f1ce5aeaad8b74c', $data->getKey());
     }
 }

@@ -26,22 +26,15 @@ use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 class ThrottleMiddleware
 {
     /**
-     * The throttle instance.
-     *
-     * @var \GrahamCampbell\Throttle\Throttle
-     */
-    protected Throttle $throttle;
-
-    /**
      * Create a new throttle middleware instance.
      *
      * @param \GrahamCampbell\Throttle\Throttle $throttle
      *
      * @return void
      */
-    public function __construct(Throttle $throttle)
-    {
-        $this->throttle = $throttle;
+    public function __construct(
+        private readonly Throttle $throttle,
+    ) {
     }
 
     /**
@@ -56,7 +49,7 @@ class ThrottleMiddleware
      *
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $limit = 10, $time = 60)
+    public function handle(Request $request, Closure $next, int|string $limit = 10, int|string $time = 60): mixed
     {
         if (!$this->throttle->attempt($request, (int) $limit, (int) $time)) {
             throw new TooManyRequestsHttpException($time * 60, 'Rate limit exceeded.');
