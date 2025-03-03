@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace GrahamCampbell\Throttle\Transformer;
 
 use GrahamCampbell\Throttle\Data;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use InvalidArgumentException;
 
 /**

@@ -2,6 +2,14 @@ CHANGE LOG
 ==========
 
 
+## V11.0 (02/03/2025)
+
+* Support only PHP 8.1-8.4
+* Support only Laravel 10-12
+* Cleaned up transformer design
+* Switched to xxh128 for key hashing
+
+
 ## V10.3 (02/03/2025)
 
 * Added PHP 8.4 support
